@@ -1,0 +1,1263 @@
+import express from 'express';
+import path from 'path';
+import { GoogleGenAI, HarmCategory, HarmBlockThreshold } from '@google/genai';
+import dotenv from 'dotenv';
+import { createServer as createViteServer } from 'vite';
+import { normalizeNarrativeText, extractCleanStory } from './src/utils/narrativeSanitizer';
+import {
+  ADULT_SYSTEM_CONFIG,
+  getAddictionTierByValue,
+} from './src/data/adultSystemConfig';
+import { ADULT_NARRATIVE_DIRECTIVES } from './src/data/adultNarrativeDirectives';
+
+dotenv.config();
+
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+
+let geminiClient: GoogleGenAI | null = null;
+function getGemini(): GoogleGenAI {
+  if (!geminiClient) {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error('GEMINI_API_KEY가 설정되지 않았습니다. AI Studio 설정의 Secrets 패널에서 API 키를 확인해 주세요.');
+    }
+
+    geminiClient = new GoogleGenAI({
+      apiKey,
+      httpOptions: {
+        headers: {
+          'User-Agent': 'aistudio-build',
+        },
+      },
+    });
+  }
+
+  return geminiClient;
+}
+
+const GM_SYSTEM_INSTRUCTION = `당신은 플레이어의 자유 입력에 따라 세계를 진행하는 한국어 다크 판타지 텍스트 RPG 『판타지악』의 게임 마스터입니다.
+
+[언어 및 용어 출력 규칙 - 최우선]
+- 모든 사용자 대상 narrative와 대사는 반드시 자연스럽고 몰입감 있는 한국어로 출력하세요.
+- 내부 enum, 상태 ID, 이벤트 ID, JSON 키(예: PLAYER_TURN, ENEMY_TURN, VICTORY, DEFEAT, ITEM_GAINED, ITEM_LOST, UNAVAILABLE 등)를 narrative 본문에 노출하지 마세요.
+- 고유명사가 아닌 일반적인 영어 시스템 용어를 그대로 출력하지 말고 자연스러운 한국어로 번역 및 묘사하세요.
+
+[출력 방식]
+- 채팅 말풍선처럼 말하지 마세요.
+- "게임 마스터:" 같은 머리말을 붙이지 마세요.
+- 결과는 소설 본문처럼 바로 출력하세요.
+- 플레이어에게 다음 행동 선택지나 추천 행동 목록을 제시하지 마세요. 플레이어는 다음 행동을 직접 입력합니다.
+- 주인공과 NPC의 자연스러운 직접 대사는 본문 안에 포함할 수 있습니다.
+
+[주인공 및 외형 묘사 절대 규칙]
+1. 공식 인게임 이름과 캐릭터 프로필을 일관되게 사용하세요.
+2. [직접적인 신체 수치 묘사 금지]: 로그 서술(narrative) 시 키(cm 수치), 나이(숫자 세), 신체 치수, 스탯 숫자 등 구체적인 기계적/신체적 수치를 본문에 직접 나열하거나 언급하지 마세요. (예: "170cm의 키로", "18세의 나이에", "민첩 14의 몸놀림으로" 등 금지). 대신 인물의 체격(아담함/건장함/날렵함 등), 분위기, 눈빛, 억양, 표정, 감각과 같은 자연스러운 문학적 서술로만 표현하세요.
+3. [외형 및 기타 특징 연출 반영]: [PLAYER APPEARANCE]에 제공된 키, 체격, 머리, 눈, 종족 및 수인 특징, 기타 특징을 장면 연출의 참조값(상대와의 키 차이, 시선 높이, 좁은 공간 통과, 높은 곳에 손 뻗기, 체격 차이, 옷/장비 착용감, 흉터/특징 관찰 등)으로 자연스럽게 활용하세요.
+4. [사용자 입력 특징 최우선]: 플레이어가 직접 입력한 '기타 특징'(흉터, 신체 특성, 신체 장식, 행동 습관 등)은 AI가 임의로 생성한 묘사보다 절대적으로 우선하며, 이에 모순되는 외형(예: 흉터가 있는데 흉터 없는 얼굴로 묘사)을 절대로 생성하지 마세요.
+5. [외형 일관성 유지]: 설정된 외형은 매 장면마다 새로 만들어내지 말고 일관되게 유지하세요.
+6. 플레이어가 직접 입력한 대사는 바꾸지 마세요.
+7. 플레이어가 행동만 입력한 경우 저장된 speechStyle에 맞춰 짧은 주인공 대사를 자연스럽게 넣을 수 있습니다.
+8. 플레이어가 명시하지 않은 중대한 선택, 살해, 계약, 세력 가입, 동료 배신 등을 대신 결정하지 마세요.
+
+[전투 판정 규칙 - 필수 엄수]
+1. 전투는 실제 물리적 공격이나 명백한 적대 행위, 피할 수 없는 습격이 발생한 경우에만 시작하세요.
+2. 사회적 상호작용, 대화, 유혹, 로맨스, 협상, 거래, 관찰, 접근, 가벼운 장난 등의 행동을 절대 전투로 분류하지 마세요.
+3. 위험하거나 긴장된 분위기라는 이유만으로 startsCombat=true를 반환하거나 battleTrigger를 생성하지 마세요.
+4. 성인 관계 또는 성인 사회적 상호작용(성인 인카운터, 유혹, 스킨십, 절정, 음란한 대화, 관계 시도 등) 역시 그 자체로 절대 전투가 아닙니다.
+5. 상대가 명시적으로 칼을 뽑아 공격하거나, 플레이어가 명시적으로 살의를 품고 공격/도발한 경우가 아니라면 기본값은 무조건:
+   actionResult.startsCombat = false
+   battleTrigger = null
+   입니다.
+
+[로그]
+- 행동에 따른 환경 변화, 주인공의 반응과 대사, NPC/적의 반응과 대사, 결과와 다음 상황을 자연스럽게 이어 쓰세요.
+- 매번 억지로 긴 대사를 넣지 말고 장면에 맞게 사용하세요.
+- 게임 수치는 narrative 안에서 임의로 결정하지 말고 changes에만 제안하세요. 최종 적용은 게임 코드가 합니다.
+
+[세계와 종족]
+- 인간, 엘프, 수인과 수인 하위종족의 스탯, 패시브, 감각, NPC 반응, 세력 관계와 스토리 차이를 반영하세요.
+- 이 세계에서 수인은 법적·사회적 보호가 매우 약합니다. 따라서 수인 플레이어에게 차별, 검문, 착취, 부당한 계약, 위협, 권력 남용 같은 위험한 사회적 인카운터가 인간보다 자주 발생할 수 있습니다.
+- 엘프는 상대적으로 사회적 지위가 높거나 신비로운 존재로 취급되는 경우가 많아 그런 위험과 성인 관계 인카운터가 비교적 적게 발생합니다.
+- 단, 사회적 취약성을 성폭력이나 강제 성행위로 연결하지 마세요. 성적/성인 관계 이벤트가 발생한다면 반드시 성인 캐릭터들 사이의 합의된 상황으로만 처리하세요.
+
+[내부 인카운터 디렉터]
+- 매 요청에는 INTERNAL_ENCOUNTER_DIRECTOR가 제공될 수 있습니다.
+- 이것은 게임 내부용 정보이며 narrative에 변수명, 확률, 가중치, 내부 단계명을 절대 노출하지 마세요.
+- adultEncounterWindow가 CLOSED라면 그 턴에 새 성적/성인 관계 인카운터를 시작하지 마세요.
+- adultEncounterWindow가 OPEN이고 adultEligible이 true인 경우에만, 현재 장면과 개연성이 맞을 때 성인 관계/유혹/로맨스 계열 사건을 등장시킬 수 있습니다.
+- internalRaceCycleSignal이 HIGH인 경우 수인 성인 캐릭터의 성인 관계 인카운터 발생 가중치가 일시적으로 높아진 상태입니다. 이 내부 상태의 이름이나 생물학적 주기를 narrative에서 직접 언급하지 마세요. 필요하다면 감각이나 분위기의 미묘한 변화만 서술하세요.
+- adultEligible이 false이면 성적 인카운터, 성욕/음란도/감도 변화는 생성하지 마세요.
+
+[자원 및 다채로운 아이템 인카운터 규칙]
+- 화폐는 루피입니다.
+- 단순히 고정된 경험치와 루피만 반복해서 주지 말고, 플레이어의 탐험, 발견, 토벌, 채집, 거래, 수수께끼 해결, 유적 조사 등에 맞춰 세계관에 걸맞은 다채롭고 생생한 아이템을 적극적으로 지급(addItems)하세요.
+- [아이템 종류 및 예시]:
+  1. 소비 및 포션류: 『하급 회복약』, 『상급 붉은 회복약』, 『맑은 정신의 허브차』, 『성스러운 은빛 성수』, 『농축 마나 물약』, 『기적의 엘릭서』, 『달빛 이슬 포션』, 『해독초』, 『흑요석 활력제』, 『용기의 영약』
+  2. 전리품 및 연금 재료: 『질긴 늑대 가죽』, 『마수의 날카로운 송곳니』, 『빛나는 마나석 파편』, 『심연의 정수』, 『영혼석 조각』, 『고대 유적의 룬 파편』, 『마력 깃든 나뭇가지』, 『순은 주괴』, 『독주머니』
+  3. 유물 및 귀중품: 『봉인된 양피지 두루마리』, 『은장도』, 『매혹의 장미 향수』, 『낡은 보물지도』, 『타락의 성유』, 『수호의 아뮬렛』, 『암시장의 비밀 표식』
+- 아이템을 narrative에서 획득했다고 서술했다면 반드시 changes.addItems에 동일한 이름과 수량을 명시하세요.
+- hpDelta, sanityDelta, manaDelta, rupeeDelta, expGain, 아이템 변화(addItems, removeItems)는 사건에 맞게 제안할 수 있습니다.
+- 성인 상태가 활성화된 경우에만 desireDelta, lewdnessDelta, sensitivityDelta를 제안할 수 있습니다.
+- corruptionDelta는 일반적인 타락/오염 수치이므로 비성적 사건에서도 사용할 수 있습니다.
+- 관계 이벤트에 따른 확률적 미약 적용 여부와 수치는 게임 엔진이 별도로 판정합니다. 관계 이벤트만을 이유로 aphrodisiacDelta/addictionDelta를 임의로 추가하지 마세요.
+- aphrodisiacDelta/addictionDelta는 다른 독립적인 게임 효과가 명확히 정의된 경우에만 제안할 수 있습니다.
+- 수치 변화는 과도하게 크게 주지 말고 한 사건의 규모에 맞게 사용하세요.
+
+[게임 시간 흐름 및 행동 소요 시간 (timeDeltaMinutes) 규칙]
+- 일반적인 1회 기본 행동은 기본 15분이 소요됩니다. (지정하지 않으면 엔진이 기본 15분을 적용합니다.)
+- 플레이어가 행동에 시간을 명시했거나 긴 활동을 수행할 경우 'changes.timeDeltaMinutes'에 분(minute) 단위로 지정하세요.
+  예:
+  - "3시간 동안 기다린다/잠복한다" -> timeDeltaMinutes: 180
+  - "1시간 동안 훈련한다 / 책을 정독한다" -> timeDeltaMinutes: 60
+  - "30분 동안 가볍게 휴식한다" -> timeDeltaMinutes: 30
+  - "잠깐 5분 동안 살펴본다" -> timeDeltaMinutes: 5
+- 실제 시각 계산 및 날짜 변경은 게임 엔진이 전담하므로, AI는 시간/날짜를 직접 조작하지 않고 소요된 분(timeDeltaMinutes)만 반환하세요.
+
+[잠금 해제 및 문/상자 개방 행동 규칙]
+- 플레이어가 문, 상자, 보관함, 봉인, 자물쇠 등을 '열쇠로 연다', '자물쇠를딴다', '힘으로 부순다/연다', '마법으로 봉인을 푼다', '퀘스트/허가로 연다' 등의 행동을 입력했을 때:
+  1. 단순 USE_ITEM이나 임의의 아이템 소모보다 'lockAction' 객체를 최우선으로 생성하여 반환하세요.
+  2. method는 행동 방식에 맞춰 'KEY', 'LOCKPICK', 'FORCE', 'MAGIC', 'QUEST', 'NPC_PERMISSION' 중 하나를 정확히 지정하세요.
+  3. lockId는 현재 상황/장소에 알맞은 잠금장치 ID를 지정하세요 (예: iron_gate_01, ancient_chest_01, sealed_sanctuary_01 등).
+  4. keyItemId는 사용하려는 열쇠/도구 아이템 ID 또는 이름(있는 경우)을 지정하세요.
+  5. [중요 규칙]: Gemini가 잠금 해제의 성공/실패를 직접 단정하거나 임의로 결정하지 마세요. 열쇠나 도구를 changes.removeItems로 직접 차감하지 마세요. 실제 열쇠 보유 여부, 소모 여부, 스탯 판정 및 성공 여부는 게임 엔진(attemptUnlockLock)이 처리합니다. narrative에는 잠금을 열거나 해제하려는 시도와 동작 자체를 긴장감 있게 서술하세요.
+
+[주요 인물 및 지역 상호작용 규칙 (worldAction)]
+- 플레이어가 실제로 이름 있는 주요 인물(NPC)과 대화하거나 조우했을 때, 또는 새로운 장소/지역으로 이동했을 때만 선택적으로 'worldAction' 객체를 반환하세요.
+- type은 다음 세 가지 중 하나여야 합니다:
+  1. "TALK_CHARACTER": 이름 있는 인물과 대화를 나누었을 때 (characterId 또는 characterName 지정)
+  2. "MEET_CHARACTER": 이름 있는 인물과 처음 조우/대면했을 때 (characterId 또는 characterName 지정)
+  3. "ENTER_LOCATION": 특정 장소나 지역, 던전, 건물 등에 이동/진입했을 때 (location 명시)
+- [중요]: Gemini가 퀘스트 진행도나 완료 여부를 직접 변경하지 마세요. 게임 엔진이 worldAction을 수신하여 정식 GameEvent(CHARACTER_TALKED, CHARACTER_MET, LOCATION_ENTERED)를 디스패치하고 퀘스트 목표를 판정합니다.
+- 이름 없는 단순 행인, 일반 몬스터, 허공과의 독백에는 worldAction을 생성하지 마세요.
+
+[성인 관계 이벤트 내부 판정]
+- actionResult.relationshipEventOccurred는 이번 로그에서 성인 관계 이벤트가 실제로 성립했을 때만 true로 반환하세요.
+- 단순 대화, 호감 표현, 유혹, 접근, 분위기 형성만으로 true로 만들지 마세요.
+- 신체적 나이 18세 미만 캐릭터가 관련된 경우 반드시 false입니다.
+- 성인 관계 이벤트는 성인 캐릭터 사이의 합의된 상황에서만 성립할 수 있습니다.
+- relationshipEventOccurred는 내부 엔진 값이며 narrative에 시스템명이나 변수명으로 노출하지 마세요.
+
+[필수 JSON 출력 스키마]
+반드시 JSON 객체 하나만 출력하세요.
+
+{
+  "narrative": "플레이어에게 그대로 보여줄 소설형 한국어 본문",
+  "actionResult": {
+    "intent": "EXPLORE 또는 MOVE 또는 TALK 또는 SOCIAL 또는 ROMANCE 또는 ADULT_SOCIAL 또는 TRADE 또는 USE_ITEM 또는 COMBAT_ATTACK 또는 COMBAT_PROVOKE 또는 ESCAPE 또는 OTHER",
+    "startsCombat": false,
+    "hostileAction": false,
+    "forcedCombat": false,
+    "relationshipEventOccurred": false
+  },
+  "worldAction": {
+    "type": "TALK_CHARACTER 또는 MEET_CHARACTER 또는 ENTER_LOCATION",
+    "characterId": "선택적 인물ID (예: elena_swordmaster, sylvia_shadow_dancer 등)",
+    "characterName": "인물 이름 (예: 엘레나, 실비아 등)",
+    "location": "이동/진입한 지역명 (예: 발터 성채 주점, 달빛 오아시스 등)"
+  },
+  "lockAction": {
+    "lockId": "잠금장치ID",
+    "method": "KEY 또는 LOCKPICK 또는 FORCE 또는 MAGIC 또는 QUEST 또는 NPC_PERMISSION",
+    "keyItemId": "선택적 열쇠 아이템ID"
+  },
+  "changes": {
+    "hpDelta": 0,
+    "sanityDelta": 0,
+    "manaDelta": 0,
+    "rupeeDelta": 0,
+    "expGain": 0,
+    "timeDeltaMinutes": 15,
+    "desireDelta": 0,
+    "lewdnessDelta": 0,
+    "sensitivityDelta": 0,
+    "aphrodisiacDelta": 0,
+    "addictionDelta": 0,
+    "corruptionDelta": 0,
+    "clothingState": null,
+    "addItems": [
+      { "name": "아이템명", "quantity": 1 }
+    ],
+    "removeItems": [
+      { "name": "소실아이템명", "quantity": 1 }
+    ],
+    "battleTrigger": null
+  }
+}`;
+
+app.get('/api/health', (_req, res) => {
+  res.json({ status: 'ok', time: new Date().toISOString() });
+});
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+function isTransientError(error: any): boolean {
+  const msg = String(error?.message || error || '').toLowerCase();
+  const status = error?.status || error?.statusCode || error?.code;
+  return (
+    status === 503 ||
+    status === '503' ||
+    status === 429 ||
+    status === '429' ||
+    status === 'UNAVAILABLE' ||
+    msg.includes('503') ||
+    msg.includes('unavailable') ||
+    msg.includes('high demand') ||
+    msg.includes('resource exhausted') ||
+    msg.includes('overloaded') ||
+    msg.includes('temporarily unavailable')
+  );
+}
+
+function getEncounterDirector(playerState: any) {
+  const physicalAge = Number(playerState?.profile?.physicalAge ?? 0);
+  const adultEligible = physicalAge >= 18;
+  const race = String(playerState?.race || 'HUMAN');
+  const dialogueCount = Math.max(0, Number(playerState?.dialogueCount ?? 0));
+
+  // 내부적으로만 사용하는 수인 주기.
+  // 18로그 중 마지막 4로그가 활성 구간이며 UI/스토리에 이름을 직접 노출하지 않는다.
+  const cycleLength = 18;
+  const activeLength = 4;
+  const cyclePhase = dialogueCount % cycleLength;
+  const hiddenRaceCycleActive =
+    adultEligible && race === 'BEASTKIN' && cyclePhase >= cycleLength - activeLength;
+
+  let adultEncounterChance = 0;
+  if (adultEligible) {
+    if (race === 'ELF') adultEncounterChance = 0.05;
+    else if (race === 'BEASTKIN') adultEncounterChance = hiddenRaceCycleActive ? 0.34 : 0.18;
+    else adultEncounterChance = 0.1;
+  }
+
+  const socialRiskChance =
+    race === 'BEASTKIN' ? 0.32 : race === 'ELF' ? 0.06 : 0.12;
+
+  return {
+    adultEligible,
+    adultEncounterWindow:
+      adultEligible && Math.random() < adultEncounterChance ? 'OPEN' : 'CLOSED',
+    internalRaceCycleSignal: hiddenRaceCycleActive ? 'HIGH' : 'NORMAL',
+    socialRiskWindow: Math.random() < socialRiskChance ? 'OPEN' : 'CLOSED',
+    raceAdultEncounterBias:
+      race === 'BEASTKIN' ? 'HIGH' : race === 'ELF' ? 'LOW' : 'NORMAL',
+  };
+}
+
+// ============================================================
+// 성인 상태 연출 reference 파이프라인
+// ============================================================
+//
+// 실제 문장은 이 파일에 하드코딩하지 않습니다.
+// 사용자가 src/data/adultNarrativeDirectives.ts의 빈 문자열에 작성한 내용은
+// "최종 출력문"이 아니라 Gemini가 장면에 맞게 자유롭게 변형/조합할 참고자료입니다.
+
+type RelationshipAphrodisiacRoll = {
+  triggered: boolean;
+  amount: number;
+  addictionGain: number;
+};
+
+function randomIntInclusive(min: number, max: number): number {
+  const safeMin = Math.ceil(min);
+  const safeMax = Math.floor(max);
+
+  if (safeMax <= safeMin) return safeMin;
+
+  return Math.floor(
+    Math.random() * (safeMax - safeMin + 1)
+  ) + safeMin;
+}
+
+function rollRelationshipAphrodisiac(
+  playerState: any
+): RelationshipAphrodisiacRoll {
+  const physicalAge = Number(playerState?.profile?.physicalAge ?? 0);
+  const rule = ADULT_SYSTEM_CONFIG.aphrodisiac.relationshipInjection;
+
+  if (
+    physicalAge < ADULT_SYSTEM_CONFIG.adultPhysicalAge ||
+    !rule.enabled
+  ) {
+    return {
+      triggered: false,
+      amount: 0,
+      addictionGain: 0,
+    };
+  }
+
+  if (Math.random() >= rule.chance) {
+    return {
+      triggered: false,
+      amount: 0,
+      addictionGain: 0,
+    };
+  }
+
+  return {
+    triggered: true,
+    amount: randomIntInclusive(rule.minAmount, rule.maxAmount),
+    addictionGain: randomIntInclusive(
+      rule.addictionGainMin,
+      rule.addictionGainMax
+    ),
+  };
+}
+
+function getDirectiveForCueType(cueType: string): string {
+  switch (cueType) {
+    case 'DESIRE_INCREASE':
+      return ADULT_NARRATIVE_DIRECTIVES.desireIncrease;
+    case 'DESIRE_HIGH':
+      return ADULT_NARRATIVE_DIRECTIVES.desireHigh;
+    case 'LEWDNESS_INCREASE':
+      return ADULT_NARRATIVE_DIRECTIVES.lewdnessIncrease;
+    case 'LEWDNESS_HIGH':
+      return ADULT_NARRATIVE_DIRECTIVES.lewdnessHigh;
+    case 'SENSITIVITY_INCREASE':
+      return ADULT_NARRATIVE_DIRECTIVES.sensitivityIncrease;
+    case 'SENSITIVITY_DECREASE':
+      return ADULT_NARRATIVE_DIRECTIVES.sensitivityDecrease;
+    case 'SENSITIVITY_HIGH':
+      return ADULT_NARRATIVE_DIRECTIVES.sensitivityHigh;
+    case 'CORRUPTION_INCREASE':
+      return ADULT_NARRATIVE_DIRECTIVES.corruptionIncrease;
+    case 'CORRUPTION_TIER_UP':
+      return ADULT_NARRATIVE_DIRECTIVES.corruptionTierUp;
+    case 'APHRODISIAC_APPLIED':
+      return ADULT_NARRATIVE_DIRECTIVES.aphrodisiacApplied;
+    case 'APHRODISIAC_INTENSIFIED':
+      return ADULT_NARRATIVE_DIRECTIVES.aphrodisiacIntensified;
+    case 'APHRODISIAC_DECAY':
+      return ADULT_NARRATIVE_DIRECTIVES.aphrodisiacDecay;
+    case 'APHRODISIAC_CLEARED':
+      return ADULT_NARRATIVE_DIRECTIVES.aphrodisiacCleared;
+    case 'ADDICTION_INCREASE':
+      return ADULT_NARRATIVE_DIRECTIVES.addictionIncrease;
+    case 'ADDICTION_TIER_UP':
+      return ADULT_NARRATIVE_DIRECTIVES.addictionTierUp;
+    default:
+      return '';
+  }
+}
+
+function addNarrativeReference(
+  output: string[],
+  trigger: string,
+  reference: unknown
+) {
+  if (typeof reference !== 'string' || reference.trim().length === 0) {
+    return;
+  }
+
+  output.push(
+    `- 적용 조건: ${trigger}\n` +
+    `  사용자 작성 참고자료: ${reference.trim()}`
+  );
+}
+
+function getAdultNarrationDirective(
+  playerState: any,
+  encounterDirector: any,
+  relationshipRoll: RelationshipAphrodisiacRoll
+): string {
+  const physicalAge = Number(playerState?.profile?.physicalAge ?? 0);
+
+  if (physicalAge < ADULT_SYSTEM_CONFIG.adultPhysicalAge) {
+    return '';
+  }
+
+  const adultStatus = playerState?.adultStatus;
+  if (!adultStatus) return '';
+
+  const desire = Number(adultStatus.desire ?? 0);
+  const lewdness = Number(adultStatus.lewdness ?? 0);
+  const sensitivity = Number(adultStatus.sensitivity ?? 0);
+  const aphrodisiacLevel = Number(adultStatus.aphrodisiacLevel ?? 0);
+  const addiction = Number(adultStatus.addiction ?? 0);
+  const corruption = Number(playerState?.corruptionStatus?.corruption ?? 0);
+
+  const references: string[] = [];
+
+  // 현재 장면 및 현재 상태에 따른 지속 reference
+  if (encounterDirector?.adultEncounterWindow === 'OPEN') {
+    addNarrativeReference(
+      references,
+      '현재 장면이 성인 관계 장면으로 자연스럽게 진행될 필요가 있을 때',
+      ADULT_NARRATIVE_DIRECTIVES.generalAdultScene
+    );
+
+    addNarrativeReference(
+      references,
+      '성인 관계 이벤트가 이번 로그에서 실제로 성립했을 때',
+      ADULT_NARRATIVE_DIRECTIVES.relationshipEvent
+    );
+  }
+
+  if (desire >= 75) {
+    addNarrativeReference(
+      references,
+      '현재 성욕 상태가 높은 것이 장면상 의미가 있을 때',
+      ADULT_NARRATIVE_DIRECTIVES.desireHigh
+    );
+  }
+
+  if (lewdness >= 7) {
+    addNarrativeReference(
+      references,
+      '현재 음란도 상태가 높은 것이 장면상 의미가 있을 때',
+      ADULT_NARRATIVE_DIRECTIVES.lewdnessHigh
+    );
+  }
+
+  if (sensitivity >= 75) {
+    addNarrativeReference(
+      references,
+      '현재 감도 상태가 높은 것이 장면상 의미가 있을 때',
+      ADULT_NARRATIVE_DIRECTIVES.sensitivityHigh
+    );
+  }
+
+  if (aphrodisiacLevel > 0) {
+    addNarrativeReference(
+      references,
+      '현재 미약 상태가 활성화되어 있고 장면과 관련될 때',
+      ADULT_NARRATIVE_DIRECTIVES.aphrodisiacActive
+    );
+  }
+
+  if (addiction > 0) {
+    addNarrativeReference(
+      references,
+      '현재 중독 상태가 장면 또는 인물 반응과 관련될 때',
+      ADULT_NARRATIVE_DIRECTIVES.addictionActive
+    );
+  }
+
+  // 이번 응답에서 Gemini가 해당 delta를 제안하는 경우에만 적용할 reference
+  addNarrativeReference(
+    references,
+    '이번 응답의 changes.desireDelta가 양수인 경우에만',
+    ADULT_NARRATIVE_DIRECTIVES.desireIncrease
+  );
+
+  addNarrativeReference(
+    references,
+    '이번 응답의 changes.lewdnessDelta가 양수인 경우에만',
+    ADULT_NARRATIVE_DIRECTIVES.lewdnessIncrease
+  );
+
+  addNarrativeReference(
+    references,
+    '이번 응답의 changes.sensitivityDelta가 양수인 경우에만',
+    ADULT_NARRATIVE_DIRECTIVES.sensitivityIncrease
+  );
+
+  addNarrativeReference(
+    references,
+    '이번 응답의 changes.corruptionDelta가 양수인 경우에만',
+    ADULT_NARRATIVE_DIRECTIVES.corruptionIncrease
+  );
+
+  // 이전 엔진 처리에서 생긴 큐: 다음 정상 GM 로그 한 번에서만 소비
+  const queue = Array.isArray(playerState?.adultNarrativeQueue)
+    ? playerState.adultNarrativeQueue
+    : [];
+
+  for (const cue of queue) {
+    const reference = getDirectiveForCueType(String(cue?.type ?? ''));
+    if (!reference.trim()) continue;
+
+    const metadata: string[] = [];
+    if (typeof cue.previousValue === 'number') {
+      metadata.push(`이전값=${cue.previousValue}`);
+    }
+    if (typeof cue.currentValue === 'number') {
+      metadata.push(`현재값=${cue.currentValue}`);
+    }
+    if (typeof cue.amount === 'number') {
+      metadata.push(`변화량=${cue.amount}`);
+    }
+
+    addNarrativeReference(
+      references,
+      `이전 엔진 처리에서 ${String(cue.type)} 상태 변화가 발생했고 이번 장면에 자연스럽게 이어질 때${
+        metadata.length > 0 ? ` (${metadata.join(', ')})` : ''
+      }`,
+      reference
+    );
+  }
+
+  // 관계 이벤트에서 확률 판정에 성공한 경우.
+  // 실제 relationshipEventOccurred=true일 때만 장면과 수치가 함께 성립합니다.
+  if (relationshipRoll.triggered) {
+    addNarrativeReference(
+      references,
+      '이번 로그에서 성인 관계 이벤트가 실제 성립한 경우에만 미약 적용 사건을 함께 반영. 단순 대화/접근만으로는 사용하지 않음',
+      ADULT_NARRATIVE_DIRECTIVES.aphrodisiacInjectionEvent
+    );
+
+    addNarrativeReference(
+      references,
+      '위 미약 적용 사건이 실제 발생하고 기존 미약 수치가 0이었던 경우',
+      ADULT_NARRATIVE_DIRECTIVES.aphrodisiacApplied
+    );
+
+    if (aphrodisiacLevel > 0) {
+      addNarrativeReference(
+        references,
+        '위 미약 적용 사건이 실제 발생하고 이미 미약 상태가 활성화되어 있던 경우',
+        ADULT_NARRATIVE_DIRECTIVES.aphrodisiacIntensified
+      );
+    }
+
+    if (relationshipRoll.addictionGain > 0) {
+      addNarrativeReference(
+        references,
+        '위 미약 적용과 함께 중독 수치가 증가하는 경우',
+        ADULT_NARRATIVE_DIRECTIVES.addictionIncrease
+      );
+
+      const oldTier = getAddictionTierByValue(addiction);
+      const newTier = getAddictionTierByValue(
+        addiction + relationshipRoll.addictionGain
+      );
+
+      if (oldTier !== newTier) {
+        addNarrativeReference(
+          references,
+          '위 변화로 중독 단계가 상승하는 경우',
+          ADULT_NARRATIVE_DIRECTIVES.addictionTierUp
+        );
+      }
+    }
+  }
+
+  if (references.length === 0) {
+    return '';
+  }
+
+  return `
+[USER AUTHORED NARRATIVE REFERENCES - 내부 참고자료]
+
+아래의 "사용자 작성 참고자료"는 최종 출력 문장, 대사 원고, 고정 문구가 아닙니다.
+장면을 생성할 때 참고해야 하는 의미·분위기·반응·연출 방향입니다.
+
+반드시 다음 원칙으로 사용하세요.
+1. 참고자료의 문장을 원문 그대로 복사하거나 인용하지 마세요.
+2. 단어 순서와 문장 구조를 그대로 재현하지 마세요.
+3. 핵심 의도와 확정 설정만 유지한 채, 현재 등장인물/장소/행동/감정/직전 문맥에 맞는 새로운 표현으로 자유롭게 다시 작성하세요.
+4. 여러 참고자료가 동시에 적용된다면 자연스럽게 하나의 장면으로 조합할 수 있습니다.
+5. 장면 흐름에 따라 참고자료를 확장하거나 압축할 수 있습니다.
+6. 조건에 맞지 않거나 현재 장면에 불필요한 참고자료는 생략하세요.
+7. 참고자료에 없는 새로운 확정 설정을 임의로 만들어내지 마세요.
+8. 내부 수치, 변수명, cue 이름, reference 제목을 narrative에 노출하지 마세요.
+9. 캐릭터의 확정 설정 및 사용자의 현재 행동과 충돌하면 확정 설정/현재 행동을 우선하세요.
+10. 빈 문자열인 reference는 존재하지 않는 것으로 취급하세요.
+
+현재 내부 상태:
+- desire: ${desire}/100
+- lewdness: ${lewdness}/10
+- sensitivity: ${sensitivity}/100
+- aphrodisiac: ${aphrodisiacLevel}/100
+- addiction: ${addiction}/100
+- corruption: ${corruption}/10
+
+사용 가능한 참고자료:
+${references.join('\n\n')}
+`;
+}
+
+function buildPlayerAppearancePrompt(playerState: any): string {
+  const profile = playerState?.profile;
+  if (!profile) return '';
+
+  const lines: string[] = [];
+
+  // 이름
+  const name = (profile.inGameName || profile.name || playerState?.characterName || '').trim();
+  if (name) lines.push(`이름: ${name}`);
+
+  // 종족
+  const raceRaw = playerState?.race || profile.race || 'HUMAN';
+  let raceStr = '';
+  if (raceRaw === 'BEASTKIN') {
+    const beastType = profile.beastkinType || playerState?.beastkinType;
+    const beastTypeKr: Record<string, string> = {
+      CAT: '고양이',
+      FOX: '여우',
+      DOG: '개',
+      WOLF: '늑대',
+      BIRD: '조류',
+    };
+    raceStr = `수인${beastType && beastTypeKr[beastType] ? ` (${beastTypeKr[beastType]})` : ''}`;
+  } else if (raceRaw === 'ELF') {
+    raceStr = '엘프';
+  } else if (raceRaw === 'HUMAN') {
+    raceStr = '인간';
+  } else {
+    raceStr = String(raceRaw);
+  }
+  if (raceStr) lines.push(`종족: ${raceStr}`);
+
+  // 성별
+  if (profile.gender && String(profile.gender).trim()) {
+    lines.push(`성별: ${String(profile.gender).trim()}`);
+  }
+
+  // 신체적 나이
+  if (typeof profile.physicalAge === 'number' && profile.physicalAge > 0) {
+    lines.push(`신체적 나이: ${profile.physicalAge}세`);
+  }
+
+  // 키
+  if (typeof profile.height === 'number' && profile.height > 0) {
+    lines.push(`키: ${profile.height}cm`);
+  }
+
+  // 체격
+  if (profile.build) {
+    const buildMap: Record<string, string> = {
+      SMALL: '작은 체격',
+      AVERAGE: '보통 체격',
+      LARGE: '큰/건장한 체격',
+    };
+    const buildStr = buildMap[profile.build] || String(profile.build);
+    if (buildStr.trim()) lines.push(`체격: ${buildStr.trim()}`);
+  }
+
+  // 머리
+  const hairParts = [profile.hairColor, profile.hairStyle].filter(
+    (s) => typeof s === 'string' && s.trim() !== ''
+  );
+  if (hairParts.length > 0) {
+    lines.push(`머리: ${hairParts.join(' ')}`);
+  }
+
+  // 눈
+  if (profile.eyeColor && String(profile.eyeColor).trim()) {
+    lines.push(`눈: ${String(profile.eyeColor).trim()}`);
+  }
+
+  // 피부
+  if (profile.skinDescription && String(profile.skinDescription).trim()) {
+    lines.push(`피부: ${String(profile.skinDescription).trim()}`);
+  }
+
+  // 외형
+  if (profile.appearance && String(profile.appearance).trim()) {
+    lines.push(`외형: ${String(profile.appearance).trim()}`);
+  }
+
+  // 기타 특징
+  if (profile.features && String(profile.features).trim()) {
+    lines.push(`기타 특징: ${String(profile.features).trim()}`);
+  }
+
+  // 수인 세부 특징
+  if (raceRaw === 'BEASTKIN' && profile.beastFeatures) {
+    const bf = profile.beastFeatures;
+    const beastDetails: string[] = [];
+    if (profile.beastkinType === 'BIRD') {
+      if (bf.hasWings) {
+        const wingParts = [bf.wingColor, bf.wingDescription].filter((s) => s && s.trim());
+        beastDetails.push(`날개: ${wingParts.length > 0 ? wingParts.join(' ') : '있음'}`);
+      }
+      if (bf.furDescription && bf.furDescription.trim()) {
+        beastDetails.push(`깃털: ${bf.furDescription.trim()}`);
+      }
+    } else {
+      const earParts = [bf.earColor, bf.earDescription].filter((s) => s && s.trim());
+      if (earParts.length > 0) beastDetails.push(`귀: ${earParts.join(' ')}`);
+      const tailParts = [bf.tailColor, bf.tailDescription].filter((s) => s && s.trim());
+      if (tailParts.length > 0) beastDetails.push(`꼬리: ${tailParts.join(' ')}`);
+      if (bf.furDescription && bf.furDescription.trim()) {
+        beastDetails.push(`털: ${bf.furDescription.trim()}`);
+      }
+    }
+    if (beastDetails.length > 0) {
+      lines.push(`수인 세부 특징: ${beastDetails.join(', ')}`);
+    }
+  }
+
+  if (lines.length === 0) return '';
+
+  return `
+[PLAYER APPEARANCE]
+${lines.join('\n')}
+
+[외형 및 기타 특징 묘사 GM 연출 지침]
+- 키와 체격 연출: 키와 체격 수치("185cm", "18세")를 본문에 숫자로 직접 연호하지 마세요. 대신 장면 연출의 참조값(상대와의 키 차이, 시선 높이, 좁은 공간/문 통과, 높은 물체에 손 뻗기, 체격 차이, 옷/장비의 착용감 등)으로 장면에 자연스럽게 반영하세요. 매 로그마다 억지로 반복해서 서술할 필요는 없습니다.
+- 기타 특징 우선순위: 플레이어가 직접 입력한 '기타 특징'(흉터, 신체 특성, 행동 습관 등)은 AI가 임의로 만든 외형 서술보다 절대적으로 우선합니다. 플레이어 설정과 모순되는 외형(예: 흉터가 있는데 흉터 없는 얼굴로 서술)을 절대로 생성하지 마세요.
+- 외형 일관성: 키, 체격, 머리, 눈, 종족 및 수인 특징, 기타 특징을 매 장면마다 바꾸지 말고 일관되게 유지하세요.
+- 소설형 자연스러운 서술: 설정값을 그대로 낭독하지 말고 소설적 상황 및 연출 속에서 의미 있게 서술하세요.
+- 스탯 및 성인 시스템과의 분리: 키, 체격, 외형, 기타 특징은 문학적 연출용이며 기계적 전투 스탯(근력, 체력 등)이나 성인 수치를 변경하지 않습니다.`;
+}
+
+app.post('/api/rpg/action', async (req, res) => {
+  try {
+    const { action, history, playerState } = req.body;
+
+    if (!action || typeof action !== 'string' || !action.trim()) {
+      return res.status(400).json({ error: '플레이어의 행동을 입력해 주세요.' });
+    }
+
+    const ai = getGemini();
+    const contents: Array<{ role: string; parts: Array<{ text: string }> }> = [];
+
+    contents.push({
+      role: 'model',
+      parts: [
+        {
+          text: JSON.stringify({
+            narrative: '눈을 뜨자, 낯선 숲이었다. 나뭇가지 사이로 희미한 빛이 내려오고, 축축한 흙냄새와 풀벌레 소리가 주변을 채운다.',
+            changes: {
+              hpDelta: 0,
+              sanityDelta: 0,
+              manaDelta: 0,
+              rupeeDelta: 0,
+              expGain: 0,
+              desireDelta: 0,
+              lewdnessDelta: 0,
+              sensitivityDelta: 0,
+              aphrodisiacDelta: 0,
+              addictionDelta: 0,
+              corruptionDelta: 0,
+              clothingState: null,
+              addItems: [],
+              removeItems: [],
+            },
+          }),
+        },
+      ],
+    });
+
+    if (Array.isArray(history)) {
+      for (const item of history.slice(-10)) {
+        if (item && item.content && (item.role === 'user' || item.role === 'model')) {
+          contents.push({ role: item.role, parts: [{ text: item.content }] });
+        }
+      }
+    }
+
+    const profile = playerState?.profile;
+    const raceDisplay =
+      playerState?.race === 'BEASTKIN'
+        ? `수인 (${playerState.beastkinType || '기본'})`
+        : playerState?.race === 'ELF'
+          ? '엘프'
+          : '인간';
+
+    const appearanceSummary = buildPlayerAppearancePrompt(playerState);
+
+    let speechSummary = '';
+    if (profile?.speechStyle) {
+      const sp = profile.speechStyle;
+      speechSummary = `
+[주인공 말투]
+- 설명: ${sp.description || '자연스러운 말투'}
+- 톤: ${sp.tone || '자연스러움'}
+- 경어/반말: ${sp.politeness || '상황에 따름'}
+- 특징: ${Array.isArray(sp.quirks) ? sp.quirks.join(', ') : '없음'}
+- 예시: ${Array.isArray(sp.exampleLines) ? sp.exampleLines.map((line: string) => `“${line}”`).join(' / ') : '없음'}`;
+    }
+
+    const adultStatus = playerState?.adultStatus;
+    const specialStatusSummary = adultStatus
+      ? `
+[특수 상태]
+- 성욕: ${adultStatus.desire}/100
+- 음란도: ${adultStatus.lewdness}/10
+- 감도: ${adultStatus.sensitivity}/100
+- 미약: ${adultStatus.aphrodisiacLevel ?? 0}/100
+- 중독: ${adultStatus.addiction ?? 0}/100
+- 타락도: ${playerState?.corruptionStatus?.corruption ?? 0}/10`
+      : `
+[특수 상태]
+- 타락도: ${playerState?.corruptionStatus?.corruption ?? 0}/10
+- 성인 상태 수치: 비활성`;
+
+    const encounterDirector = getEncounterDirector(playerState);
+    const relationshipAphrodisiacRoll =
+      rollRelationshipAphrodisiac(playerState);
+
+    const adultNarrationDirective =
+      getAdultNarrationDirective(
+        playerState,
+        encounterDirector,
+        relationshipAphrodisiacRoll
+      );
+
+    const officialInGameName =
+      profile?.inGameName || playerState?.characterName || profile?.name || '모험가';
+
+    const currentHourStr = String(playerState.currentHour ?? 8).padStart(2, '0');
+    const currentMinStr = String(playerState.currentMinute ?? 0).padStart(2, '0');
+    const currentDay = playerState.dayCount || 1;
+    const currentTimeOfDay = playerState.timeOfDay || 'MORNING';
+
+    const playerStatusText = playerState
+      ? `
+[현재 플레이어 상태]
+- 공식 인게임 이름: ${officialInGameName}
+- 종족: ${raceDisplay}
+- 레벨: ${playerState.level} / EXP ${playerState.experience}
+- HP: ${playerState.hp}/${playerState.maxHp}
+- 정신력: ${playerState.sanity}/${playerState.maxSanity}
+- 마나: ${playerState.mana}/${playerState.maxMana}
+- 루피: ${playerState.rupees}
+- 스탯: 근력 ${playerState.stats?.strength}, 체력 ${playerState.stats?.vitality}, 민첩 ${playerState.stats?.agility}, 지능 ${playerState.stats?.intelligence}, 정신 ${playerState.stats?.spirit}, 행운 ${playerState.stats?.luck}
+- 패시브: ${(playerState.passives || []).join(', ') || '없음'}
+- 스토리 플래그: ${(playerState.storyFlags || []).join(', ') || '없음'}
+- 소지품: ${(playerState.inventory || []).map((i: any) => `${i.name}×${i.quantity}`).join(', ') || '없음'}
+${specialStatusSummary}
+${speechSummary}
+${appearanceSummary}
+
+[WORLD TIME - 현재 세계 시간]
+- 날짜/시간: Day ${currentDay} · ${currentHourStr}:${currentMinStr} (${currentTimeOfDay})
+- 시간대 묘사 지침: 주변 환경(하늘의 색/밝기, 마을/던전의 분위기, 상점/NPC의 활동 여부 등)에 자연스럽게 반영하세요. 단, 기계적으로 '현재 시각은 XX시 XX분이다'라고 반복 서술하지 마세요.
+
+${adultNarrationDirective}
+
+[INTERNAL_ENCOUNTER_DIRECTOR - 절대 narrative에 직접 노출하지 말 것]
+${JSON.stringify(encounterDirector)}`
+      : '';
+
+    contents.push({
+      role: 'user',
+      parts: [{ text: `[플레이어 입력]\n${action.trim()}\n${playerStatusText}` }],
+    });
+
+    const generateOptions = {
+      contents,
+      config: {
+        systemInstruction: GM_SYSTEM_INSTRUCTION,
+        temperature: 0.85,
+        topP: 0.95,
+        responseMimeType: 'application/json',
+        safetySettings: [
+          { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.OFF },
+          { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.OFF },
+          { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.OFF },
+          { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.OFF },
+          { category: HarmCategory.HARM_CATEGORY_CIVIC_INTEGRITY, threshold: HarmBlockThreshold.OFF },
+        ],
+      },
+    };
+
+    let response: any = null;
+    let lastError: any = null;
+
+    // 1차 시도: gemini-3.6-flash
+    try {
+      response = await ai.models.generateContent({
+        model: 'gemini-3.6-flash',
+        ...generateOptions,
+      });
+    } catch (err: any) {
+      lastError = err;
+      console.warn('Primary model (gemini-3.6-flash) attempt failed:', err?.message || err);
+
+      if (isTransientError(err)) {
+        await sleep(1500);
+        try {
+          response = await ai.models.generateContent({
+            model: 'gemini-3.6-flash',
+            ...generateOptions,
+          });
+        } catch (retryErr: any) {
+          lastError = retryErr;
+          console.warn('Primary model retry failed:', retryErr?.message || retryErr);
+        }
+      }
+    }
+
+    // 2차 폴백: gemini-2.5-flash
+    if (!response) {
+      try {
+        response = await ai.models.generateContent({
+          model: 'gemini-2.5-flash',
+          ...generateOptions,
+        });
+      } catch (fallbackErr: any) {
+        lastError = fallbackErr;
+        console.warn('Fallback model (gemini-2.5-flash) failed:', fallbackErr?.message || fallbackErr);
+      }
+    }
+
+    // 3차 폴백: gemini-3.5-flash-lite
+    if (!response) {
+      try {
+        response = await ai.models.generateContent({
+          model: 'gemini-3.5-flash-lite',
+          ...generateOptions,
+        });
+      } catch (fallbackErr2: any) {
+        lastError = fallbackErr2;
+        console.error('Final fallback model (gemini-3.5-flash-lite) failed:', fallbackErr2?.message || fallbackErr2);
+      }
+    }
+
+    if (!response) {
+      throw lastError || new Error('게임 마스터 응답을 생성하지 못했습니다.');
+    }
+
+    const fullText = response.text || '';
+    let parsed: any = null;
+
+    let jsonStr = fullText.trim();
+    if (jsonStr.startsWith('```json')) {
+      jsonStr = jsonStr.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
+    } else if (jsonStr.startsWith('```')) {
+      jsonStr = jsonStr.replace(/^```\s*/, '').replace(/```\s*$/, '').trim();
+    }
+
+    try {
+      const direct = JSON.parse(jsonStr);
+      if (typeof direct === 'string') {
+        try {
+          parsed = JSON.parse(direct);
+        } catch {
+          parsed = null;
+        }
+      } else if (direct && typeof direct === 'object') {
+        parsed = direct;
+      }
+    } catch {
+      // Substring slice search for outermost { ... }
+      const firstBrace = jsonStr.indexOf('{');
+      const lastBrace = jsonStr.lastIndexOf('}');
+      if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+        try {
+          parsed = JSON.parse(jsonStr.substring(firstBrace, lastBrace + 1));
+        } catch {
+          parsed = null;
+        }
+      }
+    }
+
+    // 1. 순수 스토리 추출 및 줄바꿈/이스케이프 정규화
+    let story = '';
+    if (parsed && typeof parsed === 'object') {
+      const rawNarrative = parsed.narrative || parsed.story || parsed.content || parsed.text;
+      if (typeof rawNarrative === 'string' && rawNarrative.trim()) {
+        story = normalizeNarrativeText(rawNarrative);
+      }
+    }
+
+    if (!story) {
+      story = extractCleanStory(fullText);
+    }
+
+    // 2. 구조화 상태 데이터 파싱 (내부용)
+    let changes: {
+      hpDelta: number;
+      sanityDelta: number;
+      manaDelta: number;
+      rupeeDelta: number;
+      expGain: number;
+      timeDeltaMinutes?: number;
+      desireDelta: number;
+      lewdnessDelta: number;
+      sensitivityDelta: number;
+      aphrodisiacDelta: number;
+      addictionDelta: number;
+      corruptionDelta: number;
+      clothingState?: 'CLOTHED' | 'PARTIAL' | 'NAKED';
+      addItems: Array<{ name: string; quantity: number }>;
+      removeItems: Array<{ name: string; quantity: number }>;
+      battleTrigger?: any;
+    } = {
+      hpDelta: 0,
+      sanityDelta: 0,
+      manaDelta: 0,
+      rupeeDelta: 0,
+      expGain: 0,
+      desireDelta: 0,
+      lewdnessDelta: 0,
+      sensitivityDelta: 0,
+      aphrodisiacDelta: 0,
+      addictionDelta: 0,
+      corruptionDelta: 0,
+      addItems: [] as Array<{ name: string; quantity: number }>,
+      removeItems: [] as Array<{ name: string; quantity: number }>,
+    };
+
+    let actionResult: any = {
+      intent: 'OTHER',
+      startsCombat: false,
+      hostileAction: false,
+      forcedCombat: false,
+      relationshipEventOccurred: false,
+    };
+
+    let lockAction: any = undefined;
+    let worldAction: {
+      type: 'TALK_CHARACTER' | 'MEET_CHARACTER' | 'ENTER_LOCATION';
+      characterId?: string;
+      characterName?: string;
+      location?: string;
+    } | undefined = undefined;
+
+    if (parsed && typeof parsed === 'object') {
+      if (parsed.worldAction && typeof parsed.worldAction === 'object') {
+        const rawType = String(parsed.worldAction.type || '').toUpperCase();
+        if (rawType === 'TALK_CHARACTER' || rawType === 'MEET_CHARACTER' || rawType === 'ENTER_LOCATION') {
+          worldAction = {
+            type: rawType as 'TALK_CHARACTER' | 'MEET_CHARACTER' | 'ENTER_LOCATION',
+            characterId: parsed.worldAction.characterId ? String(parsed.worldAction.characterId) : undefined,
+            characterName: parsed.worldAction.characterName ? String(parsed.worldAction.characterName) : undefined,
+            location: parsed.worldAction.location ? String(parsed.worldAction.location) : undefined,
+          };
+        }
+      }
+
+      if (parsed.actionResult && typeof parsed.actionResult === 'object') {
+        const validIntents = [
+          'EXPLORE', 'MOVE', 'TALK', 'SOCIAL', 'ROMANCE',
+          'ADULT_SOCIAL', 'TRADE', 'USE_ITEM', 'COMBAT_ATTACK',
+          'COMBAT_PROVOKE', 'ESCAPE', 'OTHER'
+        ];
+        const rawIntent = String(parsed.actionResult.intent || '').toUpperCase();
+        actionResult = {
+          intent: validIntents.includes(rawIntent) ? rawIntent : 'OTHER',
+          startsCombat: parsed.actionResult.startsCombat === true,
+          hostileAction: parsed.actionResult.hostileAction === true,
+          forcedCombat: parsed.actionResult.forcedCombat === true,
+          relationshipEventOccurred:
+            parsed.actionResult.relationshipEventOccurred === true,
+        };
+      }
+
+      if (parsed.lockAction && typeof parsed.lockAction === 'object') {
+        const validMethods = ['KEY', 'LOCKPICK', 'FORCE', 'MAGIC', 'QUEST', 'NPC_PERMISSION'];
+        const method = String(parsed.lockAction.method || '').toUpperCase();
+        if (parsed.lockAction.lockId && validMethods.includes(method)) {
+          lockAction = {
+            lockId: String(parsed.lockAction.lockId),
+            method: method as 'KEY' | 'LOCKPICK' | 'FORCE' | 'MAGIC' | 'QUEST' | 'NPC_PERMISSION',
+            keyItemId: parsed.lockAction.keyItemId ? String(parsed.lockAction.keyItemId) : undefined,
+          };
+        }
+      }
+
+      if (parsed.changes && typeof parsed.changes === 'object') {
+        let battleTrigger = undefined;
+
+        // 전투 안전장치: startsCombat이 true이고 적대적 행동/강제전투/공격/도발일 때만 battleTrigger 허용
+        const canStartCombat =
+          actionResult.startsCombat === true &&
+          (actionResult.hostileAction === true ||
+           actionResult.forcedCombat === true ||
+           actionResult.intent === 'COMBAT_ATTACK' ||
+           actionResult.intent === 'COMBAT_PROVOKE');
+
+        if (canStartCombat && parsed.changes.battleTrigger && typeof parsed.changes.battleTrigger === 'object') {
+          const bt = parsed.changes.battleTrigger;
+          battleTrigger = {
+            enemyTemplate: typeof bt.enemyTemplate === 'string' ? bt.enemyTemplate : 'wild_wolf',
+            enemyName: typeof bt.enemyName === 'string' ? bt.enemyName : undefined,
+            enemyLevel: Math.max(1, Math.min(99, Number(bt.enemyLevel) || 1)),
+            enemyTier: ['WEAK', 'NORMAL', 'ELITE', 'BOSS'].includes(bt.enemyTier) ? bt.enemyTier : 'NORMAL',
+            battlefield: bt.battlefield && typeof bt.battlefield === 'object' ? {
+              name: String(bt.battlefield.name || '전장'),
+              description: String(bt.battlefield.description || ''),
+              environmentType: bt.battlefield.environmentType || 'FOREST',
+            } : undefined,
+            canEscape: bt.canEscape !== false,
+          };
+        } else {
+          // 비전투 의도(대화, 유혹, 성인 관계, 탐험 등)일 경우 전투 트리거 완전 차단
+          actionResult.startsCombat = false;
+        }
+
+        changes = {
+          hpDelta: Number(parsed.changes.hpDelta) || 0,
+          sanityDelta: Number(parsed.changes.sanityDelta) || 0,
+          manaDelta: Number(parsed.changes.manaDelta) || 0,
+          rupeeDelta: Number(parsed.changes.rupeeDelta) || 0,
+          expGain: Math.max(0, Number(parsed.changes.expGain) || 0),
+          timeDeltaMinutes:
+            typeof parsed.changes.timeDeltaMinutes === 'number'
+              ? Math.min(1440, Math.max(1, Math.floor(parsed.changes.timeDeltaMinutes)))
+              : undefined,
+          desireDelta: Number(parsed.changes.desireDelta) || 0,
+          lewdnessDelta: Number(parsed.changes.lewdnessDelta) || 0,
+          sensitivityDelta: Number(parsed.changes.sensitivityDelta) || 0,
+          aphrodisiacDelta: Number(parsed.changes.aphrodisiacDelta) || 0,
+          addictionDelta: Number(parsed.changes.addictionDelta) || 0,
+          corruptionDelta: Number(parsed.changes.corruptionDelta) || 0,
+          clothingState:
+            ['CLOTHED', 'PARTIAL', 'NAKED'].includes(parsed.changes.clothingState)
+              ? parsed.changes.clothingState
+              : undefined,
+          addItems: Array.isArray(parsed.changes.addItems) ? parsed.changes.addItems : [],
+          removeItems: Array.isArray(parsed.changes.removeItems) ? parsed.changes.removeItems : [],
+          battleTrigger,
+        };
+      }
+    }
+
+    // 엔진 제어형 관계 미약 적용:
+    // Gemini가 발생 확률이나 수치를 직접 결정하지 않습니다.
+    const adultEligible =
+      Number(playerState?.profile?.physicalAge ?? 0) >=
+      ADULT_SYSTEM_CONFIG.adultPhysicalAge;
+
+    const relationshipOccurred =
+      actionResult.relationshipEventOccurred === true;
+
+    if (
+      adultEligible &&
+      relationshipOccurred &&
+      relationshipAphrodisiacRoll.triggered
+    ) {
+      changes.aphrodisiacDelta += relationshipAphrodisiacRoll.amount;
+      changes.addictionDelta += relationshipAphrodisiacRoll.addictionGain;
+    }
+
+    if (!story) {
+      story = '이야기가 계속 이어진다.';
+    }
+
+    res.json({ story, actionResult, changes, lockAction, worldAction, battleTrigger: changes.battleTrigger });
+  } catch (error: any) {
+    console.error('RPG Action Error:', error);
+    const errorMessage = error?.message || '알 수 없는 오류가 발생했습니다.';
+
+    if (errorMessage.includes('GEMINI_API_KEY')) {
+      return res.status(500).json({
+        error: 'Gemini API 키가 설정되지 않았습니다. AI Studio의 Settings > Secrets 메뉴에서 GEMINI_API_KEY를 등록해 주세요.',
+      });
+    }
+
+    res.status(500).json({
+      error: `게임 마스터와 통신하는 중 문제가 발생했습니다: ${errorMessage}`,
+    });
+  }
+});
+
+// 전투 중 자유입력 분석 API
+app.post('/api/battle/action', async (req, res) => {
+  try {
+    const { action, playerActor, enemies, battlefield, speechStyle } = req.body;
+
+    if (!action || typeof action !== 'string') {
+      return res.status(400).json({ error: '행동 입력이 비어있습니다.' });
+    }
+
+    const ai = getGemini();
+
+    const systemPrompt = `당신은 턴제 전투 중인 다크 판타지 RPG 『판타지악』의 전투 연출 심판관입니다.
+플레이어가 전투 도중 자유롭게 입력한 행동을 분석하여 상황 연출 문장, 주인공의 대사, 가장 유사한 스킬/효과 매핑을 JSON 형태로 반환하세요.
+
+[규칙]
+1. 절대 직접적인 수치(HP 숫자 등)를 계산하지 마세요. 수치는 게임 엔진이 계산합니다.
+2. 플레이어의 speechStyle에 어울리는 짧은 대사(speechLine)를 포함하세요.
+3. [직접적인 신체 수치 묘사 금지]: 로그 서술(narrative) 시 키(cm 수치), 나이(숫자 세), 신체 치수, 스탯 숫자 등 구체적인 기계적/신체적 수치를 본문에 직접 나열하거나 언급하지 마세요.
+4. actionType은 다음 중 하나로 분류하세요:
+   - "ATTACK": 공격적인 시도 (무기 휘두르기, 기습, 환경을 이용한 타격)
+   - "DEFEND": 방어/회피/엄폐 (탁자 뒤집기, 방패 세우기, 거리 벌리기)
+   - "DISTRACT": 교란/상태이상 (모래 뿌리기, 소음 내기, 시야 가리기)
+   - "ESCAPE": 도주 시도
+   - "SPECIAL": 기타 특수 행동
+5. suggestedSkillOrEffect는 "basic_attack", "throw_sand", "defend_stance", "first_aid" 중 하나를 제안하세요.
+
+[반환 JSON 포맷]
+{
+  "actionNarrative": "행동의 박진감 넘치는 묘사",
+  "speechLine": "주인공의 짧은 대사",
+  "actionType": "ATTACK" | "DEFEND" | "DISTRACT" | "ESCAPE" | "SPECIAL",
+  "suggestedSkillOrEffect": "basic_attack" | "throw_sand" | "defend_stance" | "first_aid"
+}`;
+
+    const promptText = `현재 전장: ${battlefield?.name || '전장'} (${battlefield?.description || ''})
+주인공: ${playerActor?.name || '모험가'} (체력: ${playerActor?.hp}/${playerActor?.maxHp})
+말투 설정: ${JSON.stringify(speechStyle || {})}
+마주한 적: ${(enemies || []).map((e: any) => `${e.name}(체력: ${e.hp}/${e.maxHp})`).join(', ')}
+
+플레이어의 자유 행동 입력: "${action}"`;
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.6-flash',
+      contents: [
+        { role: 'user', parts: [{ text: `${systemPrompt}\n\n${promptText}` }] },
+      ],
+      config: {
+        responseMimeType: 'application/json',
+        safetySettings: [
+          { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.OFF },
+          { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.OFF },
+          { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.OFF },
+          { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.OFF },
+          { category: HarmCategory.HARM_CATEGORY_CIVIC_INTEGRITY, threshold: HarmBlockThreshold.OFF },
+        ],
+      },
+    });
+
+    const text = response.text || '';
+    let parsed: any = {};
+    try {
+      let jsonStr = text.trim();
+      if (jsonStr.startsWith('```json')) {
+        jsonStr = jsonStr.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
+      } else if (jsonStr.startsWith('```')) {
+        jsonStr = jsonStr.replace(/^```\s*/, '').replace(/```\s*$/, '').trim();
+      }
+      parsed = JSON.parse(jsonStr);
+    } catch {
+      parsed = {
+        actionNarrative: `${playerActor?.name || '모험가'}이(가) 기민하게 행동을 전개했다: "${action}"`,
+        speechLine: '이걸로 끝낸다!',
+        actionType: 'ATTACK',
+        suggestedSkillOrEffect: 'basic_attack',
+      };
+    }
+
+    if (parsed && typeof parsed === 'object') {
+      if (typeof parsed.actionNarrative === 'string') {
+        parsed.actionNarrative = normalizeNarrativeText(parsed.actionNarrative);
+      }
+      if (typeof parsed.speechLine === 'string') {
+        parsed.speechLine = normalizeNarrativeText(parsed.speechLine);
+      }
+    }
+
+    res.json(parsed);
+  } catch (error: any) {
+    console.error('Battle Action Free-form Error:', error);
+    res.json({
+      actionNarrative: `순간적인 기지를 발휘하여 행동을 취했다.`,
+      speechLine: '틈을 놓치지 않겠어!',
+      actionType: 'ATTACK',
+      suggestedSkillOrEffect: 'basic_attack',
+    });
+  }
+});
+
+async function start() {
+  if (process.env.NODE_ENV !== 'production') {
+    const vite = await createViteServer({
+      server: { middlewareMode: true },
+      appType: 'spa',
+    });
+    app.use(vite.middlewares);
+  } else {
+    const distPath = path.join(process.cwd(), 'dist');
+    app.use(express.static(distPath));
+    app.get('*', (_req, res) => {
+      res.sendFile(path.join(distPath, 'index.html'));
+    });
+  }
+
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`판타지악 server running on port ${PORT}`);
+  });
+}
+
+start().catch((err) => {
+  console.error('Failed to start server:', err);
+});
