@@ -47,6 +47,12 @@ export const ADULT_SYSTEM_CONFIG = {
   addiction: {
     maxLevel: 100,
   },
+
+  // 영구 타락도는 매우 느리게 누적됩니다.
+  // payload/기생/현재 신체상태 영향은 effectiveCorruption에서 별도로 처리합니다.
+  permanentCorruption: {
+    maxGainPerLog: 0.5,
+  },
 } as const;
 
 export function getAddictionTierByValue(

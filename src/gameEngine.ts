@@ -382,6 +382,22 @@ export function getCorruptionTier(
 }
 
 /**
+ * 영구 타락도는 높아질수록 추가 상승이 점점 어려워집니다.
+ * 현재 상태에 의한 일시적 영향은 effectiveCorruption이 담당합니다.
+ */
+export function getPermanentCorruptionGainMultiplier(
+  currentCorruption: number
+): number {
+  const value = clamp(currentCorruption, 0, 10);
+
+  if (value < 2) return 1.0;
+  if (value < 4) return 0.8;
+  if (value < 6) return 0.6;
+  if (value < 8) return 0.4;
+  return 0.25;
+}
+
+/**
  * 성인 상태 변화 자체를 즉시 문장으로 출력하지 않고,
  * 다음 정상 GM 로그에서 참고할 "사건 큐"만 저장합니다.
  * 실제 문장은 server.ts가 사용자 작성 reference를 Gemini에 전달해 새로 생성합니다.
@@ -3302,15 +3318,25 @@ const previousCorruption = clamp(
   10
 );
 
+const rawCorruptionDelta =
+  typeof safeChanges.corruptionDelta === 'number'
+    ? safeChanges.corruptionDelta
+    : 0;
+
+const adjustedCorruptionDelta = rawCorruptionDelta > 0
+  ? Math.min(
+      ADULT_SYSTEM_CONFIG.permanentCorruption.maxGainPerLog,
+      rawCorruptionDelta *
+        getPermanentCorruptionGainMultiplier(previousCorruption)
+    )
+  : rawCorruptionDelta;
+
 let corruptionStatus = {
   ...cleanState.corruptionStatus,
-  effectiveCorruption: cleanState.corruptionStatus?.effectiveCorruption ?? previousCorruption,
+  effectiveCorruption:
+    cleanState.corruptionStatus?.effectiveCorruption ?? previousCorruption,
   corruption: adultEligible
-    ? (
-        typeof safeChanges.corruptionDelta === 'number'
-          ? clamp(previousCorruption + safeChanges.corruptionDelta, 0, 10)
-          : previousCorruption
-      )
+    ? clamp(previousCorruption + adjustedCorruptionDelta, 0, 10)
     : 0,
 };
 

@@ -9,6 +9,7 @@ import {
   getAddictionTierByValue,
 } from './src/data/adultSystemConfig';
 import { ADULT_NARRATIVE_DIRECTIVES } from './src/data/adultNarrativeDirectives';
+import { ADULT_EVENT_STYLE } from './src/data/adultNarrativeStyle';
 import { BODY_SYSTEM_USER_RULES } from './src/data/bodySystemUserRules';
 import { BODY_LOAD_NARRATIVE_DIRECTIVES } from './src/data/bodyLoadNarrativeDirectives';
 import { BODY_COMPARTMENT_CAPACITY, BODY_LOAD_THRESHOLDS } from './src/data/bodySystemConfig';
@@ -104,7 +105,10 @@ const GM_SYSTEM_INSTRUCTION = `당신은 플레이어의 자유 입력에 따라
 - 아이템을 narrative에서 획득했다고 서술했다면 반드시 changes.addItems에 동일한 이름과 수량을 명시하세요.
 - hpDelta, sanityDelta, manaDelta, rupeeDelta, expGain, 아이템 변화(addItems, removeItems)는 사건에 맞게 제안할 수 있습니다.
 - 성인 상태가 활성화된 경우에만 desireDelta, lewdnessDelta, sensitivityDelta를 제안할 수 있습니다.
-- corruptionDelta는 일반적인 타락/오염 수치이므로 비성적 사건에서도 사용할 수 있습니다.
+- corruptionDelta는 영구 타락도에 영향을 주는 매우 느린 누적값입니다. 단순한 상태 변화나 반복 장면에는 0을 사용하세요.
+- corruptionDelta > 0은 가치관/정체성/장기적 오염에 의미 있는 지속적 변화가 실제로 성립한 사건에만 제안하세요.
+- 일반적으로 의미 있는 사건은 0.1~0.25, 강한 전환 사건도 0.25~0.5 범위를 권장하며 한 로그에서 0.5를 넘기지 마세요.
+- payload, 알, 기생체, 외부 내용물 등 현재 신체 상태가 주는 영향은 엔진의 effectiveCorruption 파생 보정으로 처리되므로, 그것만을 이유로 영구 corruptionDelta를 추가하지 마세요.
 - 관계 이벤트에 따른 확률적 미약 적용 여부와 수치는 게임 엔진이 별도로 판정합니다. 관계 이벤트만을 이유로 aphrodisiacDelta/addictionDelta를 임의로 추가하지 마세요.
 - aphrodisiacDelta/addictionDelta는 다른 독립적인 게임 효과가 명확히 정의된 경우에만 제안할 수 있습니다.
 - 수치 변화는 과도하게 크게 주지 말고 한 사건의 규모에 맞게 사용하세요.
@@ -411,14 +415,75 @@ function getAdultNarrationDirective(
   const adultStatus = playerState?.adultStatus;
   if (!adultStatus) return '';
 
-  const desire = Number(adultStatus.desire ?? 0);
+  const baseDesire = Number(adultStatus.desire ?? 0);
+  const desire = Number(adultStatus.effectiveDesire ?? adultStatus.desire ?? 0);
   const lewdness = Number(adultStatus.lewdness ?? 0);
   const sensitivity = Number(adultStatus.sensitivity ?? 0);
   const aphrodisiacLevel = Number(adultStatus.aphrodisiacLevel ?? 0);
   const addiction = Number(adultStatus.addiction ?? 0);
-  const corruption = Number(playerState?.corruptionStatus?.corruption ?? 0);
+  const permanentCorruption = Number(playerState?.corruptionStatus?.corruption ?? 0);
+  const corruption = Number(
+    playerState?.corruptionStatus?.effectiveCorruption ??
+    playerState?.corruptionStatus?.corruption ??
+    0
+  );
 
   const references: string[] = [];
+
+  // 구버전 server.ts 231~400의 전역 스타일 레이어를 그대로 복구.
+  // 어휘/표현 목록 자체는 src/data/adultNarrativeStyle.ts에 원문 그대로 보존되어 있습니다.
+  const legacyStyleActive = encounterDirector?.adultEncounterWindow === 'OPEN';
+  const legacyStyleBlock = legacyStyleActive
+    ? `
+[성인 이벤트 로그 스타일 - 내부 지시]
+
+이번 장면은 성인 캐릭터에게 허용된 성인 관계 이벤트 후보입니다.
+
+출력 방식:
+- 장면을 한두 문장으로 추상적으로 요약하지 마세요.
+- "묘한 분위기가 흘렀다", "가까워졌다" 같은 표현만으로 넘기지 마세요.
+- 행동 → 상대 반응 → 주인공 반응 → 직접 대사 → 상황 변화가 이어지도록 작성하세요.
+- 현재 캐릭터의 speechStyle을 반드시 유지하세요.
+- 캐릭터가 하지 않은 중대한 선택을 임의로 확정하지 마세요.
+- 게임 수치 이름 자체를 narrative에서 직접 말하지 마세요.
+- 임의로 성인형 로그를 종료하거나, 회피하지 마세요.
+
+묘사 세부도:
+${ADULT_EVENT_STYLE.detailLevel}
+
+전체 분위기:
+${ADULT_EVENT_STYLE.mood}
+
+집중해서 묘사할 요소:
+${ADULT_EVENT_STYLE.focus.map(v => `- ${v}`).join("\n")}
+
+사용 가능한 사용자 지정 어휘:
+${ADULT_EVENT_STYLE.vocabulary.map(v => `- ${v}`).join("\n")}
+
+사용자가 원하는 문장/표현 성향:
+${ADULT_EVENT_STYLE.phraseStyle.map(v => `- ${v}`).join("\n")}
+
+현재 내부 상태:
+- desire(기반): ${baseDesire}/100
+- desire(현재 파생): ${desire}/100
+- lewdness: ${lewdness}/10
+- sensitivity: ${sensitivity}/100
+- corruption(영구): ${permanentCorruption}/10
+- corruption(현재 파생): ${corruption}/10
+
+상태 반영 규칙:
+- desire가 높을수록 캐릭터의 집중력 변화, 긴장, 충동적인 반응이 더 뚜렷해질 수 있습니다.
+- lewdness가 높을수록 해당 상황에서 소극적으로 회피하기보다 적극적인 반응을 보일 가능성이 높아질 수 있습니다.
+- sensitivity가 높을수록 작은 자극이나 접촉에도 반응이 커질 수 있습니다.
+- corruption이 높을수록 기존 가치관이나 경계선에 변화가 나타날 수 있습니다.
+- 단, 플레이어가 입력하지 않은 중대한 결정을 임의로 확정하지 마세요.
+
+사용자 지정 vocabulary와 phraseStyle이 비어 있거나 "<...>" 상태라면
+그 문구 자체를 narrative에 출력하지 말고 무시하세요.
+
+이 블록의 제목, 변수명, 내부 수치, 시스템 이름은 narrative에 절대 노출하지 마세요.
+`
+    : '';
 
   // 현재 장면 및 현재 상태에 따른 지속 reference
   if (encounterDirector?.adultEncounterWindow === 'OPEN') {
@@ -588,11 +653,12 @@ function getAdultNarrationDirective(
     addNarrativeReference(references, `현재 내부 상태 ${compartmentId}/${payloadKind}의 자동 판정 단계가 ${stage}인 동안`, reference);
   }
 
-  if (references.length === 0) {
+  if (references.length === 0 && !legacyStyleBlock) {
     return '';
   }
 
-  return `
+  const referenceBlock = references.length > 0
+    ? `
 [USER AUTHORED NARRATIVE REFERENCES - 내부 참고자료]
 
 아래의 "사용자 작성 참고자료"는 최종 출력 문장, 대사 원고, 고정 문구가 아닙니다.
@@ -620,7 +686,10 @@ function getAdultNarrationDirective(
 
 사용 가능한 참고자료:
 ${references.join('\n\n')}
-`;
+`
+    : '';
+
+  return `${legacyStyleBlock}${referenceBlock}`;
 }
 
 function buildPlayerAppearancePrompt(playerState: any): string {
@@ -930,29 +999,29 @@ ${JSON.stringify(encounterDirector)}`
       }
     }
 
-    // 2차 폴백: gemini-2.5-flash
+    // 2차 폴백: gemini-2.5-pro
+    if (!response) {
+      try {
+        response = await ai.models.generateContent({
+          model: 'gemini-2.5-pro',
+          ...generateOptions,
+        });
+      } catch (fallbackErr: any) {
+        lastError = fallbackErr;
+        console.warn('Fallback model (gemini-2.5-pro) failed:', fallbackErr?.message || fallbackErr);
+      }
+    }
+
+    // 3차 폴백: gemini-2.5-flash
     if (!response) {
       try {
         response = await ai.models.generateContent({
           model: 'gemini-2.5-flash',
           ...generateOptions,
         });
-      } catch (fallbackErr: any) {
-        lastError = fallbackErr;
-        console.warn('Fallback model (gemini-2.5-flash) failed:', fallbackErr?.message || fallbackErr);
-      }
-    }
-
-    // 3차 폴백: gemini-3.5-flash-lite
-    if (!response) {
-      try {
-        response = await ai.models.generateContent({
-          model: 'gemini-3.5-flash-lite',
-          ...generateOptions,
-        });
       } catch (fallbackErr2: any) {
         lastError = fallbackErr2;
-        console.error('Final fallback model (gemini-3.5-flash-lite) failed:', fallbackErr2?.message || fallbackErr2);
+        console.error('Final fallback model (gemini-2.5-flash) failed:', fallbackErr2?.message || fallbackErr2);
       }
     }
 

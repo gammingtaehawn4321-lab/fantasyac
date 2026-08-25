@@ -21,13 +21,13 @@ import {
   SlidersHorizontal,
   Feather,
   Clock,
+  FlaskConical,
+  Link2,
 } from 'lucide-react';
 import { PlayerState, getKoreanLabel } from '../types';
 import { getRequiredExp, formatGameTime } from '../gameEngine';
 import { getRaceDefinition, PASSIVE_DEFINITIONS } from '../data/raceData';
 import { COMBAT_CLASSES } from '../data/classes';
-import { BODY_STATUS_VISUALS, BLADDER_STATUS_VISUAL, BODY_COMPARTMENT_CAPACITY } from '../data/bodySystemConfig';
-import { getBodyLoadStage } from '../gameEngine';
 
 interface StatusModalProps {
   isOpen: boolean;
@@ -67,7 +67,7 @@ export function StatusModal({ isOpen, onClose, playerState, onOpenStats }: Statu
   const hasValidPortrait = Boolean(playerState.profile?.portraitUrl && !imageError);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/85 backdrop-blur-xs">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/85 backdrop-blur-xs animate-ui-pop-in">
       <div className="w-full max-w-3xl lg:max-w-4xl bg-stone-900 border border-stone-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90dvh]">
         {/* Header */}
         <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-stone-800 bg-stone-950/80">
@@ -423,13 +423,16 @@ export function StatusModal({ isOpen, onClose, playerState, onOpenStats }: Statu
                 <div className="flex items-center justify-between text-[11px]">
                   <span className="text-stone-400">타락도 (Corruption)</span>
                   <span className="font-mono font-bold text-rose-300">
-                    {playerState.corruptionStatus?.corruption ?? 0} / 10
+                    {playerState.corruptionStatus?.effectiveCorruption ?? playerState.corruptionStatus?.corruption ?? 0} / 10
+                    {(playerState.corruptionStatus?.effectiveCorruption ?? playerState.corruptionStatus?.corruption ?? 0) !== (playerState.corruptionStatus?.corruption ?? 0) && (
+                      <span className="ml-1 text-[9px] text-stone-500 font-normal">기초 {playerState.corruptionStatus?.corruption ?? 0}</span>
+                    )}
                   </span>
                 </div>
                 <div className="w-full h-1.5 bg-stone-900 rounded-full overflow-hidden border border-stone-800">
                   <div
                     className="h-full bg-rose-600 transition-all duration-300 rounded-full"
-                    style={{ width: `${Math.min(100, ((playerState.corruptionStatus?.corruption ?? 0) / 10) * 100)}%` }}
+                    style={{ width: `${Math.min(100, (((playerState.corruptionStatus?.effectiveCorruption ?? playerState.corruptionStatus?.corruption ?? 0)) / 10) * 100)}%` }}
                   />
                 </div>
 
@@ -438,13 +441,16 @@ export function StatusModal({ isOpen, onClose, playerState, onOpenStats }: Statu
                     <div className="flex items-center justify-between text-[11px]">
                       <span className="text-stone-400">성욕</span>
                       <span className="font-mono text-pink-300">
-                        {playerState.adultStatus.desire} / 100
+                        {playerState.adultStatus.effectiveDesire ?? playerState.adultStatus.desire} / 100
+                        {(playerState.adultStatus.effectiveDesire ?? playerState.adultStatus.desire) !== playerState.adultStatus.desire && (
+                          <span className="ml-1 text-[9px] text-stone-500">기초 {playerState.adultStatus.desire}</span>
+                        )}
                       </span>
                     </div>
                     <div className="w-full h-1.5 bg-stone-900 rounded-full overflow-hidden border border-stone-800">
                       <div
                         className="h-full bg-pink-500 transition-all duration-300 rounded-full"
-                        style={{ width: `${playerState.adultStatus.desire}%` }}
+                        style={{ width: `${Math.min(100, playerState.adultStatus.effectiveDesire ?? playerState.adultStatus.desire)}%` }}
                       />
                     </div>
 
@@ -457,6 +463,7 @@ export function StatusModal({ isOpen, onClose, playerState, onOpenStats }: Statu
                           {playerState.adultStatus.lewdness} / 10
                         </div>
                       </div>
+
                       <div className="p-2 bg-stone-900/80 rounded-lg border border-stone-800 text-[10px]">
                         <span className="text-stone-500 flex items-center gap-1">
                           <Gauge className="w-3 h-3 text-violet-400" /> 감도
@@ -465,38 +472,24 @@ export function StatusModal({ isOpen, onClose, playerState, onOpenStats }: Statu
                           {playerState.adultStatus.sensitivity} / 100
                         </div>
                       </div>
-                    </div>
-                  </div>
-                )}
 
-                {playerState.adultStatus && (
-                  <div className="pt-2 border-t border-stone-800/50 space-y-2">
-                    <div className="text-[10px] text-stone-500 font-medium">내부 상태</div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                      {(['COMPARTMENT_1','COMPARTMENT_2','COMPARTMENT_3'] as const).map((compartmentId) => {
-                        const visual = BODY_STATUS_VISUALS[compartmentId];
-                        const entries = (playerState.bodyPayloads ?? []).filter((p) => p.compartmentId === compartmentId);
-                        const total = entries.reduce((sum, p) => sum + p.amount, 0);
-                        const stage = getBodyLoadStage(total, compartmentId);
-                        return (
-                          <div key={compartmentId} className="rounded-lg border border-stone-800 bg-stone-900/70 overflow-hidden">
-                            <div className="w-full aspect-[4/3] bg-stone-950/80 border-b border-stone-800 flex items-center justify-center overflow-hidden">
-                              {visual.imageSrc ? <img src={visual.imageSrc} alt={visual.imageAlt || visual.label} className="w-full h-full object-cover" /> : <span className="text-[9px] text-stone-700">상태 이미지 영역</span>}
-                            </div>
-                            <div className="p-2 text-[9px] space-y-1">
-                              <div className="flex justify-between"><span className="text-stone-400">{visual.label || compartmentId}</span><span className="font-mono text-stone-300">{Math.round(total)}/{BODY_COMPARTMENT_CAPACITY[compartmentId]}</span></div>
-                              <div className="text-stone-500">단계: {stage}</div>
-                              {entries.map((entry) => <div key={entry.id} className="flex justify-between text-stone-500"><span>{entry.payloadKind}</span><span>{Math.round(entry.amount)}</span></div>)}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                    <div className="rounded-lg border border-stone-800 bg-stone-900/70 overflow-hidden">
-                      <div className="w-full aspect-[5/2] bg-stone-950/80 border-b border-stone-800 flex items-center justify-center overflow-hidden">
-                        {BLADDER_STATUS_VISUAL.imageSrc ? <img src={BLADDER_STATUS_VISUAL.imageSrc} alt={BLADDER_STATUS_VISUAL.imageAlt || BLADDER_STATUS_VISUAL.label} className="w-full h-full object-cover" /> : <span className="text-[9px] text-stone-700">상태 이미지 영역</span>}
+                      <div className="p-2 bg-stone-900/80 rounded-lg border border-stone-800 text-[10px]">
+                        <span className="text-stone-500 flex items-center gap-1">
+                          <FlaskConical className="w-3 h-3 text-fuchsia-400" /> 미약
+                        </span>
+                        <div className="font-mono text-fuchsia-200 font-bold mt-0.5">
+                          {playerState.adultStatus.aphrodisiacLevel ?? 0} / 100
+                        </div>
                       </div>
-                      <div className="p-2 text-[9px] flex justify-between"><span className="text-stone-400">{BLADDER_STATUS_VISUAL.label}</span><span className="font-mono text-stone-300">{Math.round(playerState.bladderStatus?.urge ?? 0)}/100</span></div>
+
+                      <div className="p-2 bg-stone-900/80 rounded-lg border border-stone-800 text-[10px]">
+                        <span className="text-stone-500 flex items-center gap-1">
+                          <Link2 className="w-3 h-3 text-amber-400" /> 중독
+                        </span>
+                        <div className="font-mono text-amber-200 font-bold mt-0.5">
+                          {playerState.adultStatus.addiction ?? 0} / 100
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}

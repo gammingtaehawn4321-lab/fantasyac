@@ -1,23 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import {
-  User,
   Activity,
-  Award,
+  Backpack,
+  BarChart2,
   Briefcase,
   Compass,
-  Users,
-  BarChart2,
   FileText,
-  Sparkles,
-  Shield,
-  Backpack,
-  Sword,
   Scroll,
+  Shield,
+  Sparkles,
   Tent,
-  ArrowLeft,
-  ChevronUp,
-  ChevronDown
+  Users,
+  WandSparkles,
+  Boxes,
 } from 'lucide-react';
 import { PlayerState, QuestProgress } from '../types';
 
@@ -25,6 +21,7 @@ interface CharacterFloatingMenuProps {
   playerState: PlayerState;
   onOpenStatus: () => void;
   onOpenStats: () => void;
+  onOpenInternalStatus: () => void;
   onOpenTalents: () => void;
   onOpenClass: () => void;
   onOpenProfessions: () => void;
@@ -35,12 +32,20 @@ interface CharacterFloatingMenuProps {
   onOpenCompanions: () => void;
 }
 
-type MenuCategory = 'root' | 'status' | 'growth' | 'bag' | 'adventure';
+type MenuCategory = 'status' | 'bag' | 'growth' | 'adventure' | null;
+
+const submenuMotion = {
+  initial: { opacity: 0, y: 8, scale: 0.98 },
+  animate: { opacity: 1, y: 0, scale: 1 },
+  exit: { opacity: 0, y: 6, scale: 0.98 },
+  transition: { duration: 0.16, ease: 'easeOut' },
+};
 
 export const CharacterFloatingMenu: React.FC<CharacterFloatingMenuProps> = ({
   playerState,
   onOpenStatus,
   onOpenStats,
+  onOpenInternalStatus,
   onOpenTalents,
   onOpenClass,
   onOpenProfessions,
@@ -50,415 +55,150 @@ export const CharacterFloatingMenu: React.FC<CharacterFloatingMenuProps> = ({
   onOpenCamp,
   onOpenCompanions,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState<MenuCategory>('root');
-  const menuContainerRef = useRef<HTMLDivElement>(null);
+  const [activeCategory, setActiveCategory] = useState<MenuCategory>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
 
-  // 활성화된 퀘스트 수 계산 (PlayerState.quests 기준)
-  const quests = playerState.quests || {};
-  const questList = Object.values(quests) as QuestProgress[];
-  const activeQuestCount = questList.filter(q => q.status === 'ACTIVE').length;
-  const offeredQuestCount = questList.filter(q => q.status === 'OFFERED').length;
-  const totalQuestAlert = activeQuestCount + offeredQuestCount;
-
-  // 미사용 스탯/재능 포인트 알림
+  const quests = Object.values(playerState.quests || {}) as QuestProgress[];
+  const activeQuestCount = quests.filter((q) => q.status === 'ACTIVE').length;
+  const offeredQuestCount = quests.filter((q) => q.status === 'OFFERED').length;
+  const questAlertCount = activeQuestCount + offeredQuestCount;
   const hasStatPoints = (playerState.statPoints || 0) > 0;
   const hasTalentPoints = (playerState.talentPoints || 0) > 0;
 
-  // 외부 클릭 시 메뉴 닫기
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuContainerRef.current && !menuContainerRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-        setCurrentCategory('root');
+    const onPointerDown = (event: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(event.target as Node)) {
+        setActiveCategory(null);
       }
     };
+    document.addEventListener('mousedown', onPointerDown);
+    return () => document.removeEventListener('mousedown', onPointerDown);
+  }, []);
 
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen]);
-
-  const toggleMenu = () => {
-    if (isOpen) {
-      setIsOpen(false);
-      setCurrentCategory('root');
-    } else {
-      setIsOpen(true);
-      setCurrentCategory('root');
-    }
+  const open = (cb: () => void) => {
+    setActiveCategory(null);
+    cb();
   };
 
-  const handleAction = (callback: () => void) => {
-    callback();
-    setIsOpen(false);
-    setCurrentCategory('root');
+  const toggle = (category: Exclude<MenuCategory, null>) => {
+    setActiveCategory((current) => (current === category ? null : category));
   };
 
-  // 개별 독립 플로팅 버튼 애니메이션 설정
-  const buttonVariants = {
-    hidden: { opacity: 0, y: 10, scale: 0.95 },
-    visible: (index: number) => ({
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.18,
-        delay: index * 0.03,
-        ease: 'easeOut'
-      }
-    }),
-    exit: {
-      opacity: 0,
-      y: 8,
-      scale: 0.95,
-      transition: { duration: 0.12, ease: 'easeIn' }
-    }
-  };
+  const rootButtonClass = (active: boolean) =>
+    `relative min-w-0 flex items-center justify-center gap-1 px-1.5 sm:px-3 py-2 rounded-xl border text-[10px] sm:text-xs font-semibold whitespace-nowrap transition-all active:scale-[0.97] ${
+      active
+        ? 'bg-amber-500/18 border-amber-500/60 text-amber-200 shadow-sm shadow-amber-950/40'
+        : 'bg-stone-950/85 border-stone-700/80 text-stone-300 hover:text-stone-100 hover:border-stone-500 hover:bg-stone-900'
+    }`;
+
+  const subButtonClass =
+    'flex items-center gap-2 px-3 py-2 rounded-xl bg-stone-950/95 hover:bg-stone-900 border border-stone-700/90 hover:border-amber-500/55 text-stone-200 text-xs font-semibold shadow-xl shadow-black/40 backdrop-blur-md transition-colors whitespace-nowrap';
 
   return (
-    <div id="character-floating-menu-root" ref={menuContainerRef} className="relative inline-block select-none z-30">
-      {/* 위쪽으로 펼쳐지는 독립 플로팅 버튼 컬렉션 */}
-      <div className="absolute bottom-full left-0 mb-2.5 flex flex-col-reverse gap-1.5 items-start pointer-events-none">
-        <AnimatePresence mode="wait">
-          {isOpen && currentCategory === 'root' && (
-            <div key="category-root" className="flex flex-col-reverse gap-1.5 pointer-events-auto">
-              {/* 상태 */}
-              <motion.button
-                id="floating-menu-btn-status"
-                custom={0}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => setCurrentCategory('status')}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <Activity className="w-3.5 h-3.5 text-rose-400" />
-                <span>상태</span>
-                {hasStatPoints && (
-                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse ml-0.5" />
-                )}
-              </motion.button>
+    <div ref={rootRef} className="relative z-30 w-full select-none">
+      <AnimatePresence mode="wait">
+        {activeCategory && (
+          <motion.div
+            key={activeCategory}
+            {...submenuMotion}
+            className="absolute bottom-full left-0 mb-2 flex flex-wrap gap-1.5 max-w-[min(94vw,660px)] p-1.5 rounded-2xl border border-stone-800/70 bg-stone-950/94 shadow-2xl shadow-black/50 backdrop-blur-xl"
+          >
+            {activeCategory === 'status' && (
+              <>
+                <button className={subButtonClass} onClick={() => open(onOpenStatus)}>
+                  <FileText className="w-3.5 h-3.5 text-stone-300" /> 기본
+                </button>
+                <button className={subButtonClass} onClick={() => open(onOpenEquipment)}>
+                  <Shield className="w-3.5 h-3.5 text-amber-400" /> 장비
+                </button>
+                <button className={subButtonClass} onClick={() => open(onOpenInternalStatus)}>
+                  <Boxes className="w-3.5 h-3.5 text-rose-300" /> 내부상태
+                </button>
+                <button className={subButtonClass} onClick={() => open(onOpenStats)}>
+                  <BarChart2 className="w-3.5 h-3.5 text-sky-300" /> 스탯 상세
+                  {hasStatPoints && <span className="text-[10px] text-amber-300">+{playerState.statPoints}</span>}
+                </button>
+              </>
+            )}
 
-              {/* 성장 */}
-              <motion.button
-                id="floating-menu-btn-growth"
-                custom={1}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => setCurrentCategory('growth')}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>성장</span>
-                {hasTalentPoints && (
-                  <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse ml-0.5" />
-                )}
-              </motion.button>
+            {activeCategory === 'bag' && (
+              <>
+                <button className={subButtonClass} onClick={() => open(onOpenInventory)}>
+                  <Backpack className="w-3.5 h-3.5 text-emerald-400" /> 인벤토리
+                </button>
+                <button className={subButtonClass} onClick={() => open(onOpenCamp)}>
+                  <Boxes className="w-3.5 h-3.5 text-amber-300" /> 야영지 보관함
+                </button>
+              </>
+            )}
 
-              {/* 가방 */}
-              <motion.button
-                id="floating-menu-btn-bag"
-                custom={2}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => setCurrentCategory('bag')}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <Backpack className="w-3.5 h-3.5 text-emerald-400" />
-                <span>가방</span>
-              </motion.button>
+            {activeCategory === 'growth' && (
+              <>
+                <button className={subButtonClass} onClick={() => open(onOpenTalents)}>
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400" /> 재능
+                  {hasTalentPoints && <span className="text-[10px] text-amber-300">+{playerState.talentPoints}</span>}
+                </button>
+                <button className={subButtonClass} onClick={() => open(onOpenClass)}>
+                  <Shield className="w-3.5 h-3.5 text-indigo-300" /> 전직
+                </button>
+                <button className={subButtonClass} onClick={() => open(onOpenProfessions)}>
+                  <Briefcase className="w-3.5 h-3.5 text-orange-300" /> 생활직업
+                </button>
+                <button
+                  className={`${subButtonClass} opacity-50 cursor-not-allowed`}
+                  title="스킬트리 UI는 다음 개편 단계에서 연결됩니다."
+                  disabled
+                >
+                  <WandSparkles className="w-3.5 h-3.5 text-violet-300" /> 스킬트리 · 준비중
+                </button>
+              </>
+            )}
 
-              {/* 모험 */}
-              <motion.button
-                id="floating-menu-btn-adventure"
-                custom={3}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => setCurrentCategory('adventure')}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <Compass className="w-3.5 h-3.5 text-indigo-400" />
-                <span>모험</span>
-                {totalQuestAlert > 0 && (
-                  <span className="px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-indigo-500 text-white leading-none">
-                    {activeQuestCount > 0 ? activeQuestCount : `+${offeredQuestCount}`}
-                  </span>
-                )}
-              </motion.button>
+            {activeCategory === 'adventure' && (
+              <>
+                <button className={subButtonClass} onClick={() => open(onOpenQuests)}>
+                  <Scroll className="w-3.5 h-3.5 text-amber-400" /> 퀘스트
+                  {questAlertCount > 0 && <span className="text-[10px] text-amber-300">{questAlertCount}</span>}
+                </button>
+                <button className={subButtonClass} onClick={() => open(onOpenCamp)}>
+                  <Tent className="w-3.5 h-3.5 text-emerald-400" /> 야영지
+                </button>
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-              {/* 동료 */}
-              <motion.button
-                id="floating-menu-btn-companions"
-                custom={4}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => handleAction(onOpenCompanions)}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <Users className="w-3.5 h-3.5 text-cyan-400" />
-                <span>동료</span>
-              </motion.button>
-            </div>
+      <div className="grid grid-cols-5 gap-1.5 w-full max-w-[560px] pb-0.5">
+        <button className={rootButtonClass(activeCategory === 'status')} onClick={() => toggle('status')}>
+          <Activity className="w-3.5 h-3.5 text-rose-300" /> 상태
+          {(hasStatPoints || Boolean(playerState.adultNarrativeQueue?.length)) && (
+            <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-amber-400" />
           )}
+        </button>
 
-          {/* 5. 상태 하위 메뉴 */}
-          {isOpen && currentCategory === 'status' && (
-            <div key="category-status" className="flex flex-col-reverse gap-1.5 pointer-events-auto">
-              <motion.button
-                id="floating-menu-btn-stats"
-                custom={0}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => handleAction(onOpenStats)}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <BarChart2 className="w-3.5 h-3.5 text-rose-400" />
-                <span>스탯</span>
-                {hasStatPoints && (
-                  <span className="px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-rose-500 text-white leading-none">
-                    +{playerState.statPoints}
-                  </span>
-                )}
-              </motion.button>
+        <button className={rootButtonClass(activeCategory === 'bag')} onClick={() => toggle('bag')}>
+          <Backpack className="w-3.5 h-3.5 text-emerald-400" /> 가방
+        </button>
 
-              <motion.button
-                id="floating-menu-btn-status-view"
-                custom={1}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => handleAction(onOpenStatus)}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <FileText className="w-3.5 h-3.5 text-zinc-300" />
-                <span>상태창</span>
-              </motion.button>
+        <button className={rootButtonClass(activeCategory === 'growth')} onClick={() => toggle('growth')}>
+          <Sparkles className="w-3.5 h-3.5 text-amber-400" /> 성장
+          {hasTalentPoints && <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-amber-400" />}
+        </button>
 
-              <motion.button
-                id="floating-menu-btn-back-status"
-                custom={2}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => setCurrentCategory('root')}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-950/85 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-600 text-zinc-400 hover:text-zinc-200 text-[11px] font-medium shadow backdrop-blur-md transition-colors"
-              >
-                <ArrowLeft className="w-3 h-3" />
-                <span>뒤로</span>
-              </motion.button>
-            </div>
+        <button className={rootButtonClass(activeCategory === 'adventure')} onClick={() => toggle('adventure')}>
+          <Compass className="w-3.5 h-3.5 text-indigo-300" /> 모험
+          {questAlertCount > 0 && (
+            <span className="ml-0.5 min-w-4 h-4 px-1 rounded-full bg-indigo-500 text-white text-[9px] flex items-center justify-center">
+              {questAlertCount}
+            </span>
           )}
+        </button>
 
-          {/* 6. 성장 하위 메뉴 */}
-          {isOpen && currentCategory === 'growth' && (
-            <div key="category-growth" className="flex flex-col-reverse gap-1.5 pointer-events-auto">
-              <motion.button
-                id="floating-menu-btn-talents"
-                custom={0}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => handleAction(onOpenTalents)}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>재능</span>
-                {hasTalentPoints && (
-                  <span className="px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-amber-500 text-black leading-none">
-                    +{playerState.talentPoints}
-                  </span>
-                )}
-              </motion.button>
-
-              <motion.button
-                id="floating-menu-btn-classes"
-                custom={1}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => handleAction(onOpenClass)}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <Shield className="w-3.5 h-3.5 text-indigo-400" />
-                <span>전직</span>
-              </motion.button>
-
-              <motion.button
-                id="floating-menu-btn-jobs"
-                custom={2}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => handleAction(onOpenProfessions)}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <Briefcase className="w-3.5 h-3.5 text-amber-300" />
-                <span>생활직업</span>
-              </motion.button>
-
-              <motion.button
-                id="floating-menu-btn-back-growth"
-                custom={3}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => setCurrentCategory('root')}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-950/85 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-600 text-zinc-400 hover:text-zinc-200 text-[11px] font-medium shadow backdrop-blur-md transition-colors"
-              >
-                <ArrowLeft className="w-3 h-3" />
-                <span>뒤로</span>
-              </motion.button>
-            </div>
-          )}
-
-          {/* 7. 가방 하위 메뉴 */}
-          {isOpen && currentCategory === 'bag' && (
-            <div key="category-bag" className="flex flex-col-reverse gap-1.5 pointer-events-auto">
-              <motion.button
-                id="floating-menu-btn-inventory-sub"
-                custom={0}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => handleAction(onOpenInventory)}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <Backpack className="w-3.5 h-3.5 text-emerald-400" />
-                <span>가방</span>
-              </motion.button>
-
-              <motion.button
-                id="floating-menu-btn-equipment"
-                custom={1}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => handleAction(onOpenEquipment)}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <Sword className="w-3.5 h-3.5 text-orange-400" />
-                <span>장비</span>
-              </motion.button>
-
-              <motion.button
-                id="floating-menu-btn-back-bag"
-                custom={2}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => setCurrentCategory('root')}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-950/85 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-600 text-zinc-400 hover:text-zinc-200 text-[11px] font-medium shadow backdrop-blur-md transition-colors"
-              >
-                <ArrowLeft className="w-3 h-3" />
-                <span>뒤로</span>
-              </motion.button>
-            </div>
-          )}
-
-          {/* 8. 모험 하위 메뉴 */}
-          {isOpen && currentCategory === 'adventure' && (
-            <div key="category-adventure" className="flex flex-col-reverse gap-1.5 pointer-events-auto">
-              <motion.button
-                id="floating-menu-btn-quests"
-                custom={0}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => handleAction(onOpenQuests)}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <Scroll className="w-3.5 h-3.5 text-amber-400" />
-                <span>퀘스트</span>
-                {activeQuestCount > 0 && (
-                  <span className="px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-amber-500 text-black leading-none">
-                    {activeQuestCount}
-                  </span>
-                )}
-                {offeredQuestCount > 0 && (
-                  <span className="px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-blue-500 text-white leading-none animate-pulse">
-                    +{offeredQuestCount}
-                  </span>
-                )}
-              </motion.button>
-
-              <motion.button
-                id="floating-menu-btn-camp"
-                custom={1}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => handleAction(onOpenCamp)}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/95 border border-zinc-700/80 hover:border-zinc-500 text-zinc-100 text-xs font-semibold shadow-lg shadow-black/40 backdrop-blur-md transition-colors"
-              >
-                <Tent className="w-3.5 h-3.5 text-emerald-400" />
-                <span>야영지</span>
-              </motion.button>
-
-              <motion.button
-                id="floating-menu-btn-back-adventure"
-                custom={2}
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                onClick={() => setCurrentCategory('root')}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-950/85 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-600 text-zinc-400 hover:text-zinc-200 text-[11px] font-medium shadow backdrop-blur-md transition-colors"
-              >
-                <ArrowLeft className="w-3 h-3" />
-                <span>뒤로</span>
-              </motion.button>
-            </div>
-          )}
-        </AnimatePresence>
+        <button className={rootButtonClass(false)} onClick={() => open(onOpenCompanions)}>
+          <Users className="w-3.5 h-3.5 text-cyan-300" /> 동료
+        </button>
       </div>
-
-      {/* 기본 [캐릭터] 버튼 */}
-      <button
-        id="character-floating-trigger-btn"
-        onClick={toggleMenu}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all shadow-md active:scale-95 ${
-          isOpen
-            ? 'bg-amber-600 text-zinc-950 border border-amber-400 shadow-amber-900/30'
-            : 'bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 hover:text-white shadow-black/40'
-        }`}
-      >
-        <User className={`w-3.5 h-3.5 ${isOpen ? 'text-zinc-950' : 'text-amber-400'}`} />
-        <span>캐릭터</span>
-        {isOpen ? (
-          <ChevronDown className="w-3 h-3 opacity-80" />
-        ) : (
-          <ChevronUp className="w-3 h-3 opacity-80" />
-        )}
-        {(hasStatPoints || hasTalentPoints || totalQuestAlert > 0) && !isOpen && (
-          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse ml-0.5" />
-        )}
-      </button>
     </div>
   );
 };

@@ -39,6 +39,7 @@ import { StatusHeader } from './components/StatusHeader';
 import { StoryLog } from './components/StoryLog';
 import { ActionInput } from './components/ActionInput';
 import { CharacterFloatingMenu } from './components/CharacterFloatingMenu';
+import { InternalStatusModal } from './components/InternalStatusModal';
 import { StatsModal } from './components/StatsModal';
 import { InventoryModal } from './components/InventoryModal';
 import { StatusModal } from './components/StatusModal';
@@ -134,6 +135,7 @@ export default function App() {
   const [isNewGameOpen, setIsNewGameOpen] = useState(false);
   const [isGameOverModalOpen, setIsGameOverModalOpen] = useState(false);
   const [isStatusOpen, setIsStatusOpen] = useState(false);
+  const [isInternalStatusOpen, setIsInternalStatusOpen] = useState(false);
   const [isStatsOpen, setIsStatsOpen] = useState(false);
   const [isTalentsOpen, setIsTalentsOpen] = useState(false);
   const [isClassOpen, setIsClassOpen] = useState(false);
@@ -708,6 +710,7 @@ export default function App() {
                 playerState={playerState}
                 onOpenStatus={() => setIsStatusOpen(true)}
                 onOpenStats={() => setIsStatsOpen(true)}
+                onOpenInternalStatus={() => setIsInternalStatusOpen(true)}
                 onOpenTalents={() => setIsTalentsOpen(true)}
                 onOpenClass={() => setIsClassOpen(true)}
                 onOpenProfessions={() => setIsProfessionsOpen(true)}
@@ -758,6 +761,13 @@ export default function App() {
           setIsStatusOpen(false);
           setIsStatsOpen(true);
         }}
+      />
+
+      {/* Internal Status Modal */}
+      <InternalStatusModal
+        isOpen={isInternalStatusOpen}
+        onClose={() => setIsInternalStatusOpen(false)}
+        playerState={playerState}
       />
 
       {/* Stats Modal */}
