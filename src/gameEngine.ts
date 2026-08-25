@@ -19,6 +19,8 @@ import {
   QuestProgress,
   AddictionTier,
   AdultNarrativeCue,
+  BodyPayloadEntry, BodyPayloadKind, BodyCompartmentId, BodyLoadStage,
+  BodyPayloadChange, PartnerClassification, ParasiteState,
 } from './types';
 import { getRaceDefinition } from './data/raceData';
 import {
@@ -58,6 +60,7 @@ import {
   getAddictionTierByValue,
   getCorruptionTierByValue,
 } from './data/adultSystemConfig';
+import { BODY_COMPARTMENT_CAPACITY, BODY_LOAD_THRESHOLDS, BODY_PAYLOAD_EFFECTS, BODY_DERIVED_EFFECT_CAPS, BODY_COMPARTMENT_EFFECT_WEIGHTS, BLADDER_CONFIG, INSERTED_PARASITE_EMISSION_DEFAULT } from './data/bodySystemConfig';
 
 export const SAVE_KEY = 'AI_TEXT_RPG_SAVE_DATA_V1';
 
@@ -285,7 +288,12 @@ export function advanceGameTime(
     timeOfDay: nextTimeOfDay,
   };
 
-  return applyAdultTimeProgress(nextState, safeMinutes);
+  let progressedState = applyAdultTimeProgress(nextState, safeMinutes);
+  progressedState = applyBodyPayloadTimeProgress(progressedState, safeMinutes);
+  progressedState = applyParasiteTimeProgress(progressedState, safeMinutes);
+  progressedState = applyBladderTimeProgress(progressedState, safeMinutes);
+  progressedState = applyPregnancyTimeProgress(progressedState, safeMinutes);
+  return recalculateAdultDerivedStatus(progressedState);
 }
 
 /**
@@ -495,6 +503,163 @@ export function calculateCurrentLewdness(
   );
 }
 
+export function getBodyLoadStage(amount: number, compartmentId: BodyCompartmentId): BodyLoadStage {
+  const capacity = Math.max(1, BODY_COMPARTMENT_CAPACITY[compartmentId]);
+  const ratio = Math.max(0, amount) / capacity;
+  return BODY_LOAD_THRESHOLDS.find((entry) => ratio >= entry.minRatio)?.stage ?? 'EMPTY';
+}
+
+export function calculateBodyPayloadDerivedEffects(state: PlayerState) {
+  let desire = 0, lewdness = 0, corruption = 0, sensitivity = 0;
+  for (const payload of state.bodyPayloads ?? []) {
+    const capacity = Math.max(1, BODY_COMPARTMENT_CAPACITY[payload.compartmentId]);
+    const load = Math.min(1.25, Math.max(0, payload.amount) / capacity);
+    const effect = BODY_PAYLOAD_EFFECTS[payload.payloadKind];
+    const weight = BODY_COMPARTMENT_EFFECT_WEIGHTS[payload.compartmentId];
+    desire += effect.desire * load * weight.desire;
+    lewdness += effect.lewdness * load * weight.lewdness;
+    corruption += effect.corruption * load * weight.corruption;
+    sensitivity += effect.sensitivity * load * weight.sensitivity;
+  }
+  return {
+    desire: Math.min(BODY_DERIVED_EFFECT_CAPS.desire, desire),
+    lewdness: Math.min(BODY_DERIVED_EFFECT_CAPS.lewdness, lewdness),
+    corruption: Math.min(BODY_DERIVED_EFFECT_CAPS.corruption, corruption),
+    sensitivity: Math.min(BODY_DERIVED_EFFECT_CAPS.sensitivity, sensitivity),
+  };
+}
+
+export function applyBodyPayloadChanges(state: PlayerState, changes: BodyPayloadChange[] = []): PlayerState {
+  let payloads = [...(state.bodyPayloads ?? [])];
+  for (const change of changes) {
+    if (!change || !['COMPARTMENT_1','COMPARTMENT_2','COMPARTMENT_3'].includes(change.compartmentId)) continue;
+    if (!['STANDARD_FLUID','INSECTOID_SECRETION','URINE','EGG','PARASITE','OTHER'].includes(change.payloadKind)) continue;
+    const amount = Math.max(0, Number(change.amount) || 0);
+    const keyMatch = (p: BodyPayloadEntry) => p.compartmentId === change.compartmentId && p.payloadKind === change.payloadKind && (p.sourceSpeciesId ?? '') === (change.sourceSpeciesId ?? '');
+    const index = payloads.findIndex(keyMatch);
+    const current = index >= 0 ? payloads[index].amount : 0;
+    const nextAmount = change.operation === 'SET' ? amount : change.operation === 'REMOVE' ? Math.max(0, current - amount) : current + amount;
+    if (index >= 0) {
+      if (nextAmount <= 0) payloads.splice(index, 1);
+      else payloads[index] = { ...payloads[index], amount: nextAmount, elapsedMinutes: change.operation === 'ADD' ? 0 : payloads[index].elapsedMinutes };
+    } else if (change.operation !== 'REMOVE' && nextAmount > 0) {
+      payloads.push({ id: `payload_${Date.now()}_${Math.random().toString(36).slice(2,8)}`, compartmentId: change.compartmentId, payloadKind: change.payloadKind, amount: nextAmount, sourceId: change.sourceId, sourceSpeciesId: change.sourceSpeciesId, elapsedMinutes: 0 });
+    }
+    if ((change.payloadKind === 'EGG' || change.payloadKind === 'PARASITE') && change.operation === 'ADD' && amount > 0 && change.compartmentId !== 'COMPARTMENT_3') {
+      const mode = change.parasiteMode ?? (change.payloadKind === 'PARASITE' ? 'INSERTED' : 'INTERNAL');
+      const parasite: ParasiteState = {
+        id: `parasite_${Date.now()}_${Math.random().toString(36).slice(2,8)}`,
+        speciesId: change.sourceSpeciesId || 'unknown_species', mode,
+        originCompartmentId: change.compartmentId, compartmentId: mode === 'INSERTED' ? change.compartmentId : undefined,
+        currentRegion: mode === 'INTERNAL' ? 'ENTRY_REGION' : undefined,
+        count: Math.max(1, Math.round(amount)), elapsedMinutes: 0, incubationMinutes: change.payloadKind === 'EGG' ? 1440 : 720,
+        stage: 'DORMANT', removable: true,
+        emissionProgressMinutes: 0,
+        emissionIntervalMinutes: mode === 'INSERTED' ? INSERTED_PARASITE_EMISSION_DEFAULT.intervalMinutes : undefined,
+        emissionAmount: mode === 'INSERTED' ? INSERTED_PARASITE_EMISSION_DEFAULT.amountPerInterval : undefined,
+      };
+      state = { ...state, parasiteStates: [...(state.parasiteStates ?? []), parasite] };
+    }
+  }
+  return recalculateAdultDerivedStatus({ ...state, bodyPayloads: payloads });
+}
+
+export function applyBodyPayloadTimeProgress(state: PlayerState, elapsedMinutes: number): PlayerState {
+  const minutes = Math.max(0, Math.floor(elapsedMinutes));
+  if (!minutes) return state;
+  const bodyPayloads = (state.bodyPayloads ?? []).map((p) => ({
+    ...p, elapsedMinutes: (p.elapsedMinutes ?? 0) + minutes,
+    amount: Math.max(0, p.amount - Math.max(0, p.decayPerHour ?? 0) * minutes / 60),
+  })).filter((p) => p.amount > 0.001);
+  return { ...state, bodyPayloads };
+}
+
+export function applyParasiteTimeProgress(state: PlayerState, elapsedMinutes: number): PlayerState {
+  const minutes = Math.max(0, Math.floor(elapsedMinutes));
+  if (!minutes) return state;
+  let next = { ...state, parasiteStates: [...(state.parasiteStates ?? [])] };
+  const updated: ParasiteState[] = [];
+  for (const p of next.parasiteStates) {
+    const elapsed = (p.elapsedMinutes ?? 0) + minutes;
+    const ratio = p.incubationMinutes > 0 ? elapsed / p.incubationMinutes : 1;
+    const stage = ratio >= 1 ? 'MATURE' : ratio >= 0.25 ? 'DEVELOPING' : 'DORMANT';
+    let emissionProgressMinutes = (p.emissionProgressMinutes ?? 0) + minutes;
+    if (p.mode === 'INSERTED' && p.compartmentId && p.emissionIntervalMinutes && p.emissionAmount) {
+      const ticks = Math.floor(emissionProgressMinutes / p.emissionIntervalMinutes);
+      emissionProgressMinutes %= p.emissionIntervalMinutes;
+      if (ticks > 0) next = applyBodyPayloadChanges(next, [{ operation: 'ADD', compartmentId: p.compartmentId, payloadKind: 'INSECTOID_SECRETION', amount: ticks * p.emissionAmount * Math.max(1, p.count), sourceId: p.id, sourceSpeciesId: p.speciesId }]);
+    }
+    updated.push({ ...p, elapsedMinutes: elapsed, stage, emissionProgressMinutes });
+  }
+  return { ...next, parasiteStates: updated };
+}
+
+export function applyBladderTimeProgress(state: PlayerState, elapsedMinutes: number): PlayerState {
+  const minutes = Math.max(0, Math.floor(elapsedMinutes));
+  const current = state.bladderStatus ?? { amount: 0, capacity: BLADDER_CONFIG.capacity, urge: 0, productionPerMinute: BLADDER_CONFIG.productionPerMinute };
+  if (!minutes) return state;
+  const amount = Math.min(current.capacity, current.amount + current.productionPerMinute * minutes);
+  return { ...state, bladderStatus: { ...current, amount, urge: clamp((amount / Math.max(1,current.capacity)) * 100, 0, 100) } };
+}
+
+export function voidBladder(state: PlayerState): PlayerState {
+  const current = state.bladderStatus;
+  if (!current) return state;
+  return { ...state, bladderStatus: { ...current, amount: 0, urge: 0 } };
+}
+
+export function resolveReflexRelease(state: PlayerState, category: 'HUMANOID' | 'ABERRANT'): PlayerState {
+  const chance = BLADDER_CONFIG.reflexChanceByPartnerCategory[category];
+  return Math.random() < chance ? voidBladder(state) : state;
+}
+
+export function resolveChildSpecies(parentA: PartnerClassification, parentB: PartnerClassification): string | undefined {
+  if (!parentA.speciesId || !parentB.speciesId) return undefined;
+  const aAberrant = parentA.category === 'ABERRANT';
+  const bAberrant = parentB.category === 'ABERRANT';
+  if (aAberrant && !bAberrant) return parentA.speciesId;
+  if (!aAberrant && bAberrant) return parentB.speciesId;
+  if (parentA.speciesId === parentB.speciesId) return parentA.speciesId;
+  return Math.random() < 0.5 ? parentA.speciesId : parentB.speciesId;
+}
+
+export function startPregnancy(
+  state: PlayerState,
+  parentA: PartnerClassification,
+  parentB: PartnerClassification,
+  gestationMinutes = 40320
+): PlayerState {
+  if (!isAdultStatusEligible(state) || state.pregnancy?.active) return state;
+  // 번식 경로는 성인 지성체 분류만 사용. 비지성/군체/불명은 별도 생태 시스템으로 처리한다.
+  if (parentA.sapience !== 'SAPIENT' || parentB.sapience !== 'SAPIENT') return state;
+  const childSpeciesId = resolveChildSpecies(parentA, parentB);
+  if (!childSpeciesId) return state;
+  return {
+    ...state,
+    pregnancy: {
+      active: true,
+      parentASpeciesId: parentA.speciesId,
+      parentBSpeciesId: parentB.speciesId,
+      childSpeciesId,
+      startedAtDay: state.dayCount,
+      startedAtHour: state.currentHour,
+      startedAtMinute: state.currentMinute,
+      elapsedMinutes: 0,
+      gestationMinutes: Math.max(1, Math.floor(gestationMinutes)),
+      stage: 'EARLY',
+    },
+  };
+}
+
+export function applyPregnancyTimeProgress(state: PlayerState, elapsedMinutes: number): PlayerState {
+  const p = state.pregnancy;
+  if (!p?.active) return state;
+  const elapsed = Math.min(p.gestationMinutes, p.elapsedMinutes + Math.max(0, Math.floor(elapsedMinutes)));
+  const ratio = p.gestationMinutes > 0 ? elapsed / p.gestationMinutes : 1;
+  const stage = ratio >= 1 ? 'READY' : ratio >= .75 ? 'LATE' : ratio >= .4 ? 'MID' : 'EARLY';
+  return { ...state, pregnancy: { ...p, elapsedMinutes: elapsed, stage } };
+}
+
 export function recalculateAdultDerivedStatus(
   state: PlayerState
 ): PlayerState {
@@ -507,6 +672,7 @@ export function recalculateAdultDerivedStatus(
   }
 
   const current = state.adultStatus;
+  const payloadEffects = calculateBodyPayloadDerivedEffects(state);
 
   const desire = clamp(
     current.desire ?? 0,
@@ -541,15 +707,16 @@ export function recalculateAdultDerivedStatus(
   const adultStatus = {
     ...current,
     desire,
+    effectiveDesire: clamp(desire + payloadEffects.desire, 0, 100),
     baseLewdness,
     lewdness: 0,
     baseSensitivity,
-    sensitivity: calculateSensitivity(
+    sensitivity: clamp(calculateSensitivity(
       baseSensitivity,
       state.tattoos,
       state.restraints,
       aphrodisiacLevel
-    ),
+    ) + payloadEffects.sensitivity, 0, 100),
     sensitivityDecayProgressMinutes: Math.max(
       0,
       Math.floor(current.sensitivityDecayProgressMinutes ?? 0)
@@ -568,8 +735,15 @@ export function recalculateAdultDerivedStatus(
     adultStatus,
   };
 
-  nextState.adultStatus!.lewdness =
-    calculateCurrentLewdness(nextState, baseLewdness);
+  nextState.adultStatus!.lewdness = clamp(
+    calculateCurrentLewdness(nextState, baseLewdness) + payloadEffects.lewdness,
+    0, 10
+  );
+  nextState.corruptionStatus = {
+    ...(nextState.corruptionStatus ?? { corruption: 0, effectiveCorruption: 0 }),
+    corruption: clamp(nextState.corruptionStatus?.corruption ?? 0, 0, 10),
+    effectiveCorruption: clamp((nextState.corruptionStatus?.corruption ?? 0) + payloadEffects.corruption, 0, 10),
+  };
 
   return nextState;
 }
@@ -1070,6 +1244,7 @@ export function createNewPlayerState(
       fullProfile.physicalAge >= 18
         ? {
             desire: 0,
+            effectiveDesire: 0,
             baseLewdness: 0,
             lewdness: 0,
             baseSensitivity: 0,
@@ -1081,10 +1256,14 @@ export function createNewPlayerState(
             clothingState: 'CLOTHED',
           }
         : undefined,
-    corruptionStatus: { corruption: 0 },
+    corruptionStatus: { corruption: 0, effectiveCorruption: 0 },
     tattoos: [],
     restraints: [],
     adultNarrativeQueue: [],
+    bodyPayloads: [],
+    parasiteStates: [],
+    bladderStatus: { amount: 0, capacity: BLADDER_CONFIG.capacity, urge: 0, productionPerMinute: BLADDER_CONFIG.productionPerMinute },
+    pregnancy: undefined,
     dialogueCount: 0,
     inventory: [
       { name: '수련생의 강철검', quantity: 1, description: '단단하게 벼려진 기본 강철 장검', equipmentId: 'apprentice_sword' },
@@ -3125,6 +3304,7 @@ const previousCorruption = clamp(
 
 let corruptionStatus = {
   ...cleanState.corruptionStatus,
+  effectiveCorruption: cleanState.corruptionStatus?.effectiveCorruption ?? previousCorruption,
   corruption: adultEligible
     ? (
         typeof safeChanges.corruptionDelta === 'number'
@@ -3142,6 +3322,7 @@ if (adultEligible) {
   if (!adultStatus) {
     adultStatus = {
       desire: 0,
+      effectiveDesire: 0,
       baseLewdness: 0,
       lewdness: 0,
       baseSensitivity: 0,
@@ -3232,6 +3413,17 @@ if (adultEligible) {
     adultStatus,
     corruptionStatus,
   };
+
+  if (Array.isArray(safeChanges.bodyPayloadChanges) && safeChanges.bodyPayloadChanges.length > 0) {
+    nextState = applyBodyPayloadChanges(nextState, safeChanges.bodyPayloadChanges);
+  }
+  if (safeChanges.bladderVoidRequested === true) nextState = voidBladder(nextState);
+  if (safeChanges.customReflexTriggerOccurred === true && safeChanges.partnerCategory) {
+    nextState = resolveReflexRelease(nextState, safeChanges.partnerCategory);
+  }
+  if (safeChanges.pregnancyRequest) {
+    nextState = startPregnancy(nextState, safeChanges.pregnancyRequest.parentA, safeChanges.pregnancyRequest.parentB, safeChanges.pregnancyRequest.gestationMinutes);
+  }
 
   nextState =
     recalculateAdultDerivedStatus(nextState);
@@ -3410,6 +3602,7 @@ export function loadGameData(): { playerState: PlayerState; messages: GameMessag
       const migratedAdultStatus = adultEligible
         ? {
             desire: clamp(Number(p.adultStatus?.desire ?? 0), 0, 100),
+            effectiveDesire: clamp(Number(p.adultStatus?.effectiveDesire ?? p.adultStatus?.desire ?? 0), 0, 100),
             baseLewdness: clamp(
               Number(p.adultStatus?.baseLewdness ?? p.adultStatus?.lewdness ?? 0),
               0,
@@ -3449,9 +3642,8 @@ export function loadGameData(): { playerState: PlayerState; messages: GameMessag
         : undefined;
 
       const migratedCorruptionStatus = {
-        corruption: adultEligible
-          ? clamp(Number(p.corruptionStatus?.corruption ?? 0), 0, 10)
-          : 0,
+        corruption: adultEligible ? clamp(Number(p.corruptionStatus?.corruption ?? 0), 0, 10) : 0,
+        effectiveCorruption: adultEligible ? clamp(Number(p.corruptionStatus?.effectiveCorruption ?? p.corruptionStatus?.corruption ?? 0), 0, 10) : 0,
       };
 
       const migratedAdultNarrativeQueue: AdultNarrativeCue[] =
@@ -3511,6 +3703,15 @@ export function loadGameData(): { playerState: PlayerState; messages: GameMessag
         tattoos: Array.isArray(p.tattoos) ? p.tattoos : [],
         restraints: Array.isArray(p.restraints) ? p.restraints : [],
         adultNarrativeQueue: migratedAdultNarrativeQueue,
+        bodyPayloads: Array.isArray(p.bodyPayloads) ? p.bodyPayloads : [],
+        parasiteStates: Array.isArray(p.parasiteStates) ? p.parasiteStates : [],
+        bladderStatus: p.bladderStatus && typeof p.bladderStatus === 'object' ? {
+          amount: clamp(Number(p.bladderStatus.amount ?? 0), 0, Number(p.bladderStatus.capacity ?? BLADDER_CONFIG.capacity)),
+          capacity: Math.max(1, Number(p.bladderStatus.capacity ?? BLADDER_CONFIG.capacity)),
+          urge: clamp(Number(p.bladderStatus.urge ?? 0), 0, 100),
+          productionPerMinute: Math.max(0, Number(p.bladderStatus.productionPerMinute ?? BLADDER_CONFIG.productionPerMinute)),
+        } : { amount: 0, capacity: BLADDER_CONFIG.capacity, urge: 0, productionPerMinute: BLADDER_CONFIG.productionPerMinute },
+        pregnancy: p.pregnancy?.active ? p.pregnancy : undefined,
         dialogueCount: Math.max(0, Number(p.dialogueCount ?? 0)),
         inventory,
       };

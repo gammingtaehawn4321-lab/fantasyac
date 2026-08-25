@@ -291,6 +291,82 @@ export interface CharacterProfile {
 // =========================
 // 특수 상태 시스템
 // =========================
+
+export type PartnerCategory = 'HUMANOID' | 'ABERRANT';
+export type SapienceType = 'SAPIENT' | 'INSTINCTIVE' | 'HIVE' | 'UNKNOWN';
+export type BodyCompartmentId = 'COMPARTMENT_1' | 'COMPARTMENT_2' | 'COMPARTMENT_3';
+export type BodyPayloadKind = 'STANDARD_FLUID' | 'INSECTOID_SECRETION' | 'URINE' | 'EGG' | 'PARASITE' | 'OTHER';
+export type BodyLoadStage = 'EMPTY' | 'TRACE' | 'LOW' | 'MEDIUM' | 'HIGH' | 'SATURATED';
+export type ParasiteMode = 'INSERTED' | 'INTERNAL';
+export type ParasiteStage = 'DORMANT' | 'DEVELOPING' | 'MATURE' | 'RESOLVING';
+export type InternalParasiteRegion = 'ENTRY_REGION' | 'ABDOMINAL_REGION' | 'SYSTEMIC' | 'CUSTOM';
+
+export interface PartnerClassification {
+  category: PartnerCategory;
+  sapience: SapienceType;
+  speciesId?: string;
+  aberrantSubtype?: string;
+}
+
+export interface BodyPayloadEntry {
+  id: string;
+  compartmentId: BodyCompartmentId;
+  payloadKind: BodyPayloadKind;
+  amount: number;
+  sourceId?: string;
+  sourceSpeciesId?: string;
+  elapsedMinutes: number;
+  decayPerHour?: number;
+}
+
+export interface ParasiteState {
+  id: string;
+  speciesId: string;
+  mode: ParasiteMode;
+  originCompartmentId?: BodyCompartmentId;
+  compartmentId?: BodyCompartmentId;
+  currentRegion?: InternalParasiteRegion;
+  count: number;
+  elapsedMinutes: number;
+  incubationMinutes: number;
+  stage: ParasiteStage;
+  removable: boolean;
+  emissionProgressMinutes?: number;
+  emissionIntervalMinutes?: number;
+  emissionAmount?: number;
+}
+
+export interface BladderStatus {
+  amount: number;
+  capacity: number;
+  urge: number;
+  productionPerMinute: number;
+}
+
+export type PregnancyStage = 'NONE' | 'EARLY' | 'MID' | 'LATE' | 'READY';
+export interface PregnancyState {
+  active: boolean;
+  parentASpeciesId?: string;
+  parentBSpeciesId?: string;
+  childSpeciesId?: string;
+  startedAtDay: number;
+  startedAtHour: number;
+  startedAtMinute: number;
+  elapsedMinutes: number;
+  gestationMinutes: number;
+  stage: PregnancyStage;
+}
+
+export interface BodyPayloadChange {
+  operation: 'ADD' | 'REMOVE' | 'SET';
+  compartmentId: BodyCompartmentId;
+  payloadKind: BodyPayloadKind;
+  amount: number;
+  sourceId?: string;
+  sourceSpeciesId?: string;
+  parasiteMode?: ParasiteMode;
+}
+
 export type ClothingState =
   | 'CLOTHED'
   | 'PARTIAL'
@@ -343,7 +419,8 @@ export interface AdultStatus {
   // 성욕
   // =========================
 
-  desire: number; // 0 ~ 100
+  desire: number; // 0 ~ 100, 저장되는 기반값
+  effectiveDesire: number; // payload/미약 등 현재 보정을 반영한 파생값
 
 
   // =========================
@@ -395,6 +472,7 @@ export interface AdultStatus {
 }
 export interface CorruptionStatus {
   corruption: number;      // 0 ~ 10, 영구 누적
+  effectiveCorruption: number; // 현재 payload 보정 포함 파생값
 }
 export interface Tattoo {
   id: string;
@@ -586,6 +664,11 @@ restraints: Restraint[];
 // 다음 GM 로그에서 소비할 연출 이벤트
 adultNarrativeQueue: AdultNarrativeCue[];
 
+bodyPayloads: BodyPayloadEntry[];
+parasiteStates: ParasiteState[];
+bladderStatus: BladderStatus;
+pregnancy?: PregnancyState;
+
 dialogueCount: number;
 }
 
@@ -615,6 +698,18 @@ clothingState?: ClothingState;
 
 // 타락도
 corruptionDelta?: number;
+
+// 구조화된 체내 상태 변화 (Gemini 판정 -> 엔진 검증/적용)
+bodyPayloadChanges?: BodyPayloadChange[];
+bladderVoidRequested?: boolean;
+partnerCategory?: PartnerCategory;
+customReflexTriggerOccurred?: boolean;
+
+pregnancyRequest?: {
+  parentA: PartnerClassification;
+  parentB: PartnerClassification;
+  gestationMinutes?: number;
+};
 
   // 전투 발생 제안
   battleTrigger?: BattleTriggerInfo;

@@ -9,6 +9,9 @@ import {
   getAddictionTierByValue,
 } from './src/data/adultSystemConfig';
 import { ADULT_NARRATIVE_DIRECTIVES } from './src/data/adultNarrativeDirectives';
+import { BODY_SYSTEM_USER_RULES } from './src/data/bodySystemUserRules';
+import { BODY_LOAD_NARRATIVE_DIRECTIVES } from './src/data/bodyLoadNarrativeDirectives';
+import { BODY_COMPARTMENT_CAPACITY, BODY_LOAD_THRESHOLDS } from './src/data/bodySystemConfig';
 
 dotenv.config();
 
@@ -140,6 +143,20 @@ const GM_SYSTEM_INSTRUCTION = `당신은 플레이어의 자유 입력에 따라
 - 성인 관계 이벤트는 성인 캐릭터 사이의 합의된 상황에서만 성립할 수 있습니다.
 - relationshipEventOccurred는 내부 엔진 값이며 narrative에 시스템명이나 변수명으로 노출하지 마세요.
 
+[구조화된 체내 상태 판정]
+- 장면의 문장을 사후 키워드 검색하지 말고, narrative를 생성하는 동시에 sceneState.payloadEvents 배열을 구조화해 반환하세요.
+- targetCompartment는 COMPARTMENT_1 / COMPARTMENT_2 / COMPARTMENT_3 중 하나만 사용하세요.
+- payloadKind는 STANDARD_FLUID / INSECTOID_SECRETION / URINE / EGG / PARASITE / OTHER 중 하나만 사용하세요.
+- EGG/PARASITE는 COMPARTMENT_1 또는 COMPARTMENT_2에서만 허용됩니다.
+- parasiteMode는 INSERTED / INTERNAL 중 하나입니다.
+- 실제 구획 의미와 판정 조건은 아래 사용자 규칙을 참고하되, 규칙 원문이나 내부 ID를 narrative에 노출하지 마세요.
+- 파생 성욕/음란도/현재 타락도/감도는 AI가 수치로 정하지 않습니다. 엔진이 payload 양으로 자동 계산합니다.
+- sceneState.partnerCategory는 HUMANOID / ABERRANT 중 하나 또는 null입니다.
+- sceneState.customReflexTriggerOccurred는 아래 사용자 반사 규칙이 이번 장면에서 성립했는지만 true/false로 판정합니다. 실제 확률은 엔진이 처리합니다.
+
+[사용자 구획/판정 규칙 - 내부 참고]
+${JSON.stringify(BODY_SYSTEM_USER_RULES, null, 2)}
+
 [필수 JSON 출력 스키마]
 반드시 JSON 객체 하나만 출력하세요.
 
@@ -162,6 +179,28 @@ const GM_SYSTEM_INSTRUCTION = `당신은 플레이어의 자유 입력에 따라
     "lockId": "잠금장치ID",
     "method": "KEY 또는 LOCKPICK 또는 FORCE 또는 MAGIC 또는 QUEST 또는 NPC_PERMISSION",
     "keyItemId": "선택적 열쇠 아이템ID"
+  },
+  "sceneState": {
+    "partnerCategory": null,
+    "customReflexTriggerOccurred": false,
+    "pregnancyEvent": {
+      "occurred": false,
+      "parentA": { "category": "HUMANOID", "sapience": "SAPIENT", "speciesId": null },
+      "parentB": { "category": "HUMANOID", "sapience": "SAPIENT", "speciesId": null }
+    },
+    "payloadEvents": [
+      {
+        "occurred": false,
+        "targetCompartment": null,
+        "payloadKind": null,
+        "amount": 0,
+        "sourceId": null,
+        "sourceSpeciesId": null,
+        "sourceSex": null,
+        "parasiteMode": null,
+        "confidence": 0
+      }
+    ]
   },
   "changes": {
     "hpDelta": 0,
@@ -535,6 +574,20 @@ function getAdultNarrationDirective(
     }
   }
 
+  // 현재 payload 양 단계별 사용자 작성 특수 연출 참고자료
+  const payloads = Array.isArray(playerState?.bodyPayloads) ? playerState.bodyPayloads : [];
+  for (const payload of payloads) {
+    const compartmentId = payload?.compartmentId as keyof typeof BODY_LOAD_NARRATIVE_DIRECTIVES;
+    const payloadKind = payload?.payloadKind as keyof (typeof BODY_LOAD_NARRATIVE_DIRECTIVES)[keyof typeof BODY_LOAD_NARRATIVE_DIRECTIVES];
+    if (!BODY_LOAD_NARRATIVE_DIRECTIVES[compartmentId]?.[payloadKind]) continue;
+    const capacity = Math.max(1, Number(BODY_COMPARTMENT_CAPACITY[compartmentId] ?? 100));
+    const ratio = Math.max(0, Number(payload.amount) || 0) / capacity;
+    const stage = BODY_LOAD_THRESHOLDS.find((entry) => ratio >= entry.minRatio)?.stage ?? 'EMPTY';
+    if (stage === 'EMPTY') continue;
+    const reference = (BODY_LOAD_NARRATIVE_DIRECTIVES[compartmentId][payloadKind] as any)[stage];
+    addNarrativeReference(references, `현재 내부 상태 ${compartmentId}/${payloadKind}의 자동 판정 단계가 ${stage}인 동안`, reference);
+  }
+
   if (references.length === 0) {
     return '';
   }
@@ -768,12 +821,14 @@ app.post('/api/rpg/action', async (req, res) => {
     const specialStatusSummary = adultStatus
       ? `
 [특수 상태]
-- 성욕: ${adultStatus.desire}/100
+- 성욕(기반): ${adultStatus.desire}/100
+- 현재 성욕(파생): ${adultStatus.effectiveDesire ?? adultStatus.desire}/100
 - 음란도: ${adultStatus.lewdness}/10
 - 감도: ${adultStatus.sensitivity}/100
 - 미약: ${adultStatus.aphrodisiacLevel ?? 0}/100
 - 중독: ${adultStatus.addiction ?? 0}/100
-- 타락도: ${playerState?.corruptionStatus?.corruption ?? 0}/10`
+- 영구 타락도: ${playerState?.corruptionStatus?.corruption ?? 0}/10
+- 현재 타락도(파생): ${playerState?.corruptionStatus?.effectiveCorruption ?? playerState?.corruptionStatus?.corruption ?? 0}/10`
       : `
 [특수 상태]
 - 타락도: ${playerState?.corruptionStatus?.corruption ?? 0}/10
@@ -970,6 +1025,11 @@ ${JSON.stringify(encounterDirector)}`
       addItems: Array<{ name: string; quantity: number }>;
       removeItems: Array<{ name: string; quantity: number }>;
       battleTrigger?: any;
+      bodyPayloadChanges: any[];
+      bladderVoidRequested?: boolean;
+      partnerCategory?: 'HUMANOID' | 'ABERRANT';
+      customReflexTriggerOccurred?: boolean;
+      pregnancyRequest?: any;
     } = {
       hpDelta: 0,
       sanityDelta: 0,
@@ -984,6 +1044,7 @@ ${JSON.stringify(encounterDirector)}`
       corruptionDelta: 0,
       addItems: [] as Array<{ name: string; quantity: number }>,
       removeItems: [] as Array<{ name: string; quantity: number }>,
+      bodyPayloadChanges: [],
     };
 
     let actionResult: any = {
@@ -1030,6 +1091,43 @@ ${JSON.stringify(encounterDirector)}`
           relationshipEventOccurred:
             parsed.actionResult.relationshipEventOccurred === true,
         };
+      }
+
+      if (parsed.sceneState && typeof parsed.sceneState === 'object') {
+        const sceneState = parsed.sceneState;
+        const partnerCategory = ['HUMANOID','ABERRANT'].includes(sceneState.partnerCategory) ? sceneState.partnerCategory : undefined;
+        changes.partnerCategory = partnerCategory;
+        changes.customReflexTriggerOccurred = sceneState.customReflexTriggerOccurred === true;
+        if (sceneState.pregnancyEvent?.occurred === true) {
+          const pa = sceneState.pregnancyEvent.parentA;
+          const pb = sceneState.pregnancyEvent.parentB;
+          const validCategory = (v: any) => ['HUMANOID','ABERRANT'].includes(v);
+          const validSapience = (v: any) => ['SAPIENT','INSTINCTIVE','HIVE','UNKNOWN'].includes(v);
+          if (pa && pb && validCategory(pa.category) && validCategory(pb.category) && validSapience(pa.sapience) && validSapience(pb.sapience) && pa.speciesId && pb.speciesId) {
+            changes.pregnancyRequest = {
+              parentA: { category: pa.category, sapience: pa.sapience, speciesId: String(pa.speciesId) },
+              parentB: { category: pb.category, sapience: pb.sapience, speciesId: String(pb.speciesId) },
+            };
+          }
+        }
+        const validCompartments = ['COMPARTMENT_1','COMPARTMENT_2','COMPARTMENT_3'];
+        const validKinds = ['STANDARD_FLUID','INSECTOID_SECRETION','URINE','EGG','PARASITE','OTHER'];
+        const events = Array.isArray(sceneState.payloadEvents) ? sceneState.payloadEvents : [];
+        changes.bodyPayloadChanges = events.flatMap((event: any) => {
+          if (!event || event.occurred !== true) return [];
+          const compartmentId = String(event.targetCompartment || '');
+          const payloadKind = String(event.payloadKind || '');
+          if (!validCompartments.includes(compartmentId) || !validKinds.includes(payloadKind)) return [];
+          if ((payloadKind === 'EGG' || payloadKind === 'PARASITE') && compartmentId === 'COMPARTMENT_3') return [];
+          const amount = Math.min(100, Math.max(0, Number(event.amount) || 0));
+          if (amount <= 0) return [];
+          return [{
+            operation: 'ADD', compartmentId, payloadKind, amount,
+            sourceId: event.sourceId ? String(event.sourceId) : undefined,
+            sourceSpeciesId: event.sourceSpeciesId ? String(event.sourceSpeciesId) : undefined,
+            parasiteMode: ['INSERTED','INTERNAL'].includes(event.parasiteMode) ? event.parasiteMode : undefined,
+          }];
+        });
       }
 
       if (parsed.lockAction && typeof parsed.lockAction === 'object') {
@@ -1097,6 +1195,10 @@ ${JSON.stringify(encounterDirector)}`
           addItems: Array.isArray(parsed.changes.addItems) ? parsed.changes.addItems : [],
           removeItems: Array.isArray(parsed.changes.removeItems) ? parsed.changes.removeItems : [],
           battleTrigger,
+          bodyPayloadChanges: changes.bodyPayloadChanges,
+          partnerCategory: changes.partnerCategory,
+          customReflexTriggerOccurred: changes.customReflexTriggerOccurred,
+          pregnancyRequest: changes.pregnancyRequest,
         };
       }
     }

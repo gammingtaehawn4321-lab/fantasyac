@@ -26,6 +26,8 @@ import { PlayerState, getKoreanLabel } from '../types';
 import { getRequiredExp, formatGameTime } from '../gameEngine';
 import { getRaceDefinition, PASSIVE_DEFINITIONS } from '../data/raceData';
 import { COMBAT_CLASSES } from '../data/classes';
+import { BODY_STATUS_VISUALS, BLADDER_STATUS_VISUAL, BODY_COMPARTMENT_CAPACITY } from '../data/bodySystemConfig';
+import { getBodyLoadStage } from '../gameEngine';
 
 interface StatusModalProps {
   isOpen: boolean;
@@ -463,6 +465,38 @@ export function StatusModal({ isOpen, onClose, playerState, onOpenStats }: Statu
                           {playerState.adultStatus.sensitivity} / 100
                         </div>
                       </div>
+                    </div>
+                  </div>
+                )}
+
+                {playerState.adultStatus && (
+                  <div className="pt-2 border-t border-stone-800/50 space-y-2">
+                    <div className="text-[10px] text-stone-500 font-medium">내부 상태</div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                      {(['COMPARTMENT_1','COMPARTMENT_2','COMPARTMENT_3'] as const).map((compartmentId) => {
+                        const visual = BODY_STATUS_VISUALS[compartmentId];
+                        const entries = (playerState.bodyPayloads ?? []).filter((p) => p.compartmentId === compartmentId);
+                        const total = entries.reduce((sum, p) => sum + p.amount, 0);
+                        const stage = getBodyLoadStage(total, compartmentId);
+                        return (
+                          <div key={compartmentId} className="rounded-lg border border-stone-800 bg-stone-900/70 overflow-hidden">
+                            <div className="w-full aspect-[4/3] bg-stone-950/80 border-b border-stone-800 flex items-center justify-center overflow-hidden">
+                              {visual.imageSrc ? <img src={visual.imageSrc} alt={visual.imageAlt || visual.label} className="w-full h-full object-cover" /> : <span className="text-[9px] text-stone-700">상태 이미지 영역</span>}
+                            </div>
+                            <div className="p-2 text-[9px] space-y-1">
+                              <div className="flex justify-between"><span className="text-stone-400">{visual.label || compartmentId}</span><span className="font-mono text-stone-300">{Math.round(total)}/{BODY_COMPARTMENT_CAPACITY[compartmentId]}</span></div>
+                              <div className="text-stone-500">단계: {stage}</div>
+                              {entries.map((entry) => <div key={entry.id} className="flex justify-between text-stone-500"><span>{entry.payloadKind}</span><span>{Math.round(entry.amount)}</span></div>)}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="rounded-lg border border-stone-800 bg-stone-900/70 overflow-hidden">
+                      <div className="w-full aspect-[5/2] bg-stone-950/80 border-b border-stone-800 flex items-center justify-center overflow-hidden">
+                        {BLADDER_STATUS_VISUAL.imageSrc ? <img src={BLADDER_STATUS_VISUAL.imageSrc} alt={BLADDER_STATUS_VISUAL.imageAlt || BLADDER_STATUS_VISUAL.label} className="w-full h-full object-cover" /> : <span className="text-[9px] text-stone-700">상태 이미지 영역</span>}
+                      </div>
+                      <div className="p-2 text-[9px] flex justify-between"><span className="text-stone-400">{BLADDER_STATUS_VISUAL.label}</span><span className="font-mono text-stone-300">{Math.round(playerState.bladderStatus?.urge ?? 0)}/100</span></div>
                     </div>
                   </div>
                 )}
