@@ -197,7 +197,7 @@ export function InternalStatusModal({ isOpen, onClose, playerState }: InternalSt
                   <article key={compartmentId} className="overflow-hidden rounded-xl border border-stone-800 bg-stone-900/55 shadow-sm">
                     <div className="aspect-[4/3] bg-stone-950 border-b border-stone-800 flex items-center justify-center overflow-hidden">
                       {visual.imageSrc ? (
-                        <img src={visual.imageSrc} alt={visual.imageAlt || visual.label || '상태 이미지'} className="w-full h-full object-cover" />
+                        <img src={visual.imageSrc} alt={visual.imageAlt || visual.label || '상태 이미지'} className="w-full h-full object-contain object-center p-2" />
                       ) : (
                         <div className="text-center px-4">
                           <Boxes className="w-7 h-7 mx-auto text-stone-800 mb-2" />
@@ -243,7 +243,7 @@ export function InternalStatusModal({ isOpen, onClose, playerState }: InternalSt
             <div className="grid grid-cols-1 md:grid-cols-[220px_1fr]">
               <div className="min-h-[120px] md:min-h-[150px] bg-stone-950 border-b md:border-b-0 md:border-r border-stone-800 flex items-center justify-center overflow-hidden">
                 {BLADDER_STATUS_VISUAL.imageSrc ? (
-                  <img src={BLADDER_STATUS_VISUAL.imageSrc} alt={BLADDER_STATUS_VISUAL.imageAlt || BLADDER_STATUS_VISUAL.label} className="w-full h-full object-cover" />
+                  <img src={BLADDER_STATUS_VISUAL.imageSrc} alt={BLADDER_STATUS_VISUAL.imageAlt || BLADDER_STATUS_VISUAL.label} className="w-full h-full object-contain object-center p-2" />
                 ) : (
                   <div className="text-center"><Droplets className="w-7 h-7 mx-auto text-stone-800 mb-2" /><span className="text-[10px] text-stone-700">방광 상태 이미지 영역</span></div>
                 )}

@@ -66,9 +66,9 @@ export const INSERTED_PARASITE_EMISSION_DEFAULT = {
 };
 
 export const BODY_STATUS_VISUALS = {
-  COMPARTMENT_1: { label: '미지정 부위 1', imageSrc: '', imageAlt: '' },
-  COMPARTMENT_2: { label: '미지정 부위 2', imageSrc: '', imageAlt: '' },
-  COMPARTMENT_3: { label: '미지정 부위 3', imageSrc: '', imageAlt: '' },
+  COMPARTMENT_1: { label: '보지', imageSrc: '', imageAlt: '' },
+  COMPARTMENT_2: { label: '항문', imageSrc: '', imageAlt: '' },
+  COMPARTMENT_3: { label: '구강', imageSrc: '', imageAlt: '' },
 } as const;
 
 export const BLADDER_STATUS_VISUAL = {

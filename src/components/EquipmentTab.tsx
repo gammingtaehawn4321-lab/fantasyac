@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PlayerState } from '../types';
+import { AdaptiveCharacterImage } from './AdaptiveCharacterImage';
 import {
   EquipmentSlot,
   EQUIPMENT_DATABASE,
@@ -363,27 +364,13 @@ export const EquipmentTab: React.FC<EquipmentTabProps> = ({
 
           {/* 중앙: 캐릭터 초상화 (Portrait) */}
           <div className="col-span-4 flex flex-col items-center justify-center px-1">
-            <div className="w-full aspect-[3/4] max-h-[360px] rounded-2xl bg-stone-950 border border-stone-800/90 overflow-hidden relative shadow-xl flex items-center justify-center group">
-              {hasValidPortrait ? (
-                <>
-                  <img
-                    src={playerState.profile?.portraitUrl}
-                    alt={playerState.characterName || '캐릭터'}
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                    referrerPolicy="no-referrer"
-                    onError={() => setPortraitError(true)}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[11px]">
-                    <span className="px-2 py-0.5 rounded-md bg-stone-900/90 border border-stone-700/80 text-stone-200 font-medium backdrop-blur-xs">
-                      {playerState.characterClass || '모험가'}
-                    </span>
-                    <span className="px-2 py-0.5 rounded-md bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold backdrop-blur-xs">
-                      Lv.{playerState.level}
-                    </span>
-                  </div>
-                </>
-              ) : (
+            <AdaptiveCharacterImage
+              src={hasValidPortrait ? playerState.profile?.portraitUrl : undefined}
+              alt={playerState.characterName || '캐릭터'}
+              onError={() => setPortraitError(true)}
+              maxHeight="max-h-[360px]"
+              containerClassName="shadow-xl"
+              fallbackIcon={
                 <div className="flex flex-col items-center justify-center p-4 text-center space-y-2 text-stone-500">
                   <div className="w-14 h-14 rounded-full bg-stone-900 border border-stone-800 flex items-center justify-center">
                     <UserRound className="w-7 h-7 text-stone-500" />
@@ -395,8 +382,22 @@ export const EquipmentTab: React.FC<EquipmentTabProps> = ({
                     <p className="text-[10px] text-stone-500">Lv.{playerState.level}</p>
                   </div>
                 </div>
+              }
+            >
+              {hasValidPortrait && (
+                <>
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[11px] z-10">
+                    <span className="px-2 py-0.5 rounded-md bg-stone-900/90 border border-stone-700/80 text-stone-200 font-medium backdrop-blur-xs">
+                      {playerState.characterClass || '모험가'}
+                    </span>
+                    <span className="px-2 py-0.5 rounded-md bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold backdrop-blur-xs">
+                      Lv.{playerState.level}
+                    </span>
+                  </div>
+                </>
               )}
-            </div>
+            </AdaptiveCharacterImage>
           </div>
 
           {/* 우측 슬롯 컬럼 (망토 및 장신구 계열: 망토, 귀걸이, 팔찌, 반지1, 반지2) */}
@@ -419,23 +420,12 @@ export const EquipmentTab: React.FC<EquipmentTabProps> = ({
         {/* 모바일 화면 (반응형 그리드): 캐릭터 이미지 상단 + 슬롯 그리드 */}
         <div className="md:hidden space-y-4">
           {/* 캐릭터 초상화 (모바일) */}
-          <div className="w-full aspect-[16/9] max-h-[180px] rounded-xl bg-stone-950 border border-stone-800 overflow-hidden relative flex items-center justify-center">
-            {hasValidPortrait ? (
-              <>
-                <img
-                  src={playerState.profile?.portraitUrl}
-                  alt={playerState.characterName || '캐릭터'}
-                  className="w-full h-full object-cover object-top"
-                  referrerPolicy="no-referrer"
-                  onError={() => setPortraitError(true)}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[11px]">
-                  <span className="font-bold text-stone-200">{playerState.characterName || '모험가'}</span>
-                  <span className="text-amber-400 font-semibold">Lv.{playerState.level}</span>
-                </div>
-              </>
-            ) : (
+          <AdaptiveCharacterImage
+            src={hasValidPortrait ? playerState.profile?.portraitUrl : undefined}
+            alt={playerState.characterName || '캐릭터'}
+            onError={() => setPortraitError(true)}
+            maxHeight="max-h-[280px]"
+            fallbackIcon={
               <div className="flex items-center gap-3 p-3 text-stone-400">
                 <UserRound className="w-6 h-6 text-stone-500" />
                 <div>
@@ -443,8 +433,18 @@ export const EquipmentTab: React.FC<EquipmentTabProps> = ({
                   <div className="text-[10px] text-stone-400">Lv.{playerState.level} {playerState.characterClass}</div>
                 </div>
               </div>
+            }
+          >
+            {hasValidPortrait && (
+              <>
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[11px] z-10">
+                  <span className="font-bold text-stone-200">{playerState.characterName || '모험가'}</span>
+                  <span className="text-amber-400 font-semibold">Lv.{playerState.level}</span>
+                </div>
+              </>
             )}
-          </div>
+          </AdaptiveCharacterImage>
 
           {/* 무기 2종 */}
           <div className="space-y-1">

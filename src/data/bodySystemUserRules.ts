@@ -5,9 +5,9 @@
  */
 export const BODY_SYSTEM_USER_RULES = {
   compartments: {
-    COMPARTMENT_1: '보지(음부) 관련',
-    COMPARTMENT_2: '애널(항문) 관련',
-    COMPARTMENT_3: '구강(입) 관련',
+    COMPARTMENT_1: '보지(음부)에 사정당할 경우',
+    COMPARTMENT_2: '애널(항문)에 사정당할 경우',
+    COMPARTMENT_3: '구강(입)에 사정당할 경우',
   },
 
   // 어떤 장면에서 범용 반사 배출 판정을 실행할지 자연어로 작성.

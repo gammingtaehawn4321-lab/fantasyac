@@ -35,3 +35,25 @@ body,
   .animate-ui-soft-pulse { animation: ui-soft-pulse 900ms ease-out 1; }
   .touch-target { min-height: 44px; min-width: 44px; }
 }
+
+@layer utilities {
+  .ui-modal-surface {
+    background: rgba(12, 10, 9, .98);
+    border: 1px solid rgb(41 37 36);
+    border-radius: 1rem;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, .48);
+  }
+  .ui-section-surface {
+    background: rgba(28, 25, 23, .5);
+    border: 1px solid rgba(68, 64, 60, .8);
+    border-radius: .875rem;
+  }
+  @media (max-width: 640px) {
+    .ui-mobile-full-modal {
+      width: 100%;
+      max-width: none;
+      max-height: calc(100dvh - 12px);
+      border-radius: .875rem;
+    }
+  }
+}

@@ -85,14 +85,14 @@ export const CharacterFloatingMenu: React.FC<CharacterFloatingMenuProps> = ({
   };
 
   const rootButtonClass = (active: boolean) =>
-    `relative min-w-0 flex items-center justify-center gap-1 px-1.5 sm:px-3 py-2 rounded-xl border text-[10px] sm:text-xs font-semibold whitespace-nowrap transition-all active:scale-[0.97] ${
+    `relative min-w-0 min-h-[42px] sm:min-h-[44px] flex items-center justify-center gap-1 px-1 sm:px-3 py-2 rounded-xl border text-[9px] min-[390px]:text-[10px] sm:text-xs font-semibold whitespace-nowrap transition-all active:scale-[0.97] ${
       active
         ? 'bg-amber-500/18 border-amber-500/60 text-amber-200 shadow-sm shadow-amber-950/40'
         : 'bg-stone-950/85 border-stone-700/80 text-stone-300 hover:text-stone-100 hover:border-stone-500 hover:bg-stone-900'
     }`;
 
   const subButtonClass =
-    'flex items-center gap-2 px-3 py-2 rounded-xl bg-stone-950/95 hover:bg-stone-900 border border-stone-700/90 hover:border-amber-500/55 text-stone-200 text-xs font-semibold shadow-xl shadow-black/40 backdrop-blur-md transition-colors whitespace-nowrap';
+    'min-h-[40px] flex items-center gap-2 px-3 py-2 rounded-xl bg-stone-950/95 hover:bg-stone-900 border border-stone-700/90 hover:border-amber-500/55 text-stone-200 text-xs font-semibold shadow-xl shadow-black/40 backdrop-blur-md transition-colors whitespace-nowrap';
 
   return (
     <div ref={rootRef} className="relative z-30 w-full select-none">
@@ -169,7 +169,7 @@ export const CharacterFloatingMenu: React.FC<CharacterFloatingMenuProps> = ({
         )}
       </AnimatePresence>
 
-      <div className="grid grid-cols-5 gap-1.5 w-full max-w-[560px] pb-0.5">
+      <div className="grid grid-cols-5 gap-1 sm:gap-1.5 w-full max-w-[600px] pb-0.5">
         <button className={rootButtonClass(activeCategory === 'status')} onClick={() => toggle('status')}>
           <Activity className="w-3.5 h-3.5 text-rose-300" /> 상태
           {(hasStatPoints || Boolean(playerState.adultNarrativeQueue?.length)) && (

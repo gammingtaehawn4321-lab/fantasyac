@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AdaptiveCharacterImage } from './AdaptiveCharacterImage';
 import {
   X,
   Shield,
@@ -106,29 +107,15 @@ export function StatusModal({ isOpen, onClose, playerState, onOpenStats }: Statu
         <div className="p-4 sm:p-6 overflow-y-auto space-y-5 text-xs custom-scrollbar">
           {/* Top Overview: Portrait & Core Status Grid */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-start">
-            {/* Left: Character Portrait Panel (3:4 ratio prioritized) */}
+            {/* Left: Character Portrait Panel */}
             <div className="md:col-span-5 lg:col-span-4 flex flex-col items-center">
-              <div className="w-full max-w-[260px] md:max-w-none aspect-[3/4] rounded-xl bg-stone-950 border border-stone-800/90 overflow-hidden relative shadow-lg flex items-center justify-center group">
-                {hasValidPortrait ? (
-                  <>
-                    <img
-                      src={playerState.profile?.portraitUrl}
-                      alt={playerState.characterName || '캐릭터 초상화'}
-                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                      referrerPolicy="no-referrer"
-                      onError={() => setImageError(true)}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[11px]">
-                      <span className="px-2 py-0.5 rounded-md bg-stone-900/90 border border-stone-700/80 text-stone-200 font-medium backdrop-blur-xs">
-                        {raceDef.subName || raceDef.name}
-                      </span>
-                      <span className="px-2 py-0.5 rounded-md bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold backdrop-blur-xs">
-                        Lv.{playerState.level}
-                      </span>
-                    </div>
-                  </>
-                ) : (
+              <AdaptiveCharacterImage
+                src={hasValidPortrait ? playerState.profile?.portraitUrl : undefined}
+                alt={playerState.characterName || '캐릭터 초상화'}
+                onError={() => setImageError(true)}
+                maxHeight="max-h-[380px]"
+                containerClassName="shadow-lg max-w-[260px] md:max-w-none"
+                fallbackIcon={
                   <div className="flex flex-col items-center justify-center p-6 text-center space-y-3">
                     <div className="w-16 h-16 rounded-full bg-stone-900 border border-stone-800 flex items-center justify-center text-stone-500 shadow-inner">
                       <UserRound className="w-8 h-8 text-stone-500" />
@@ -140,8 +127,22 @@ export function StatusModal({ isOpen, onClose, playerState, onOpenStats }: Statu
                       <p className="text-[11px] text-stone-500">등록된 캐릭터 이미지 없음</p>
                     </div>
                   </div>
+                }
+              >
+                {hasValidPortrait && (
+                  <>
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[11px] z-10">
+                      <span className="px-2 py-0.5 rounded-md bg-stone-900/90 border border-stone-700/80 text-stone-200 font-medium backdrop-blur-xs">
+                        {raceDef.subName || raceDef.name}
+                      </span>
+                      <span className="px-2 py-0.5 rounded-md bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold backdrop-blur-xs">
+                        Lv.{playerState.level}
+                      </span>
+                    </div>
+                  </>
                 )}
-              </div>
+              </AdaptiveCharacterImage>
             </div>
 
             {/* Right: Character Info & Core Resources */}

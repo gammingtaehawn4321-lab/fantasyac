@@ -809,8 +809,8 @@ export default function App() {
 
       {/* 13슬롯 장비 관리 모달 (캐릭터 페이퍼돌) */}
       {isEquipmentOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-xs animate-fade-in">
-          <div className="relative w-full max-w-5xl bg-stone-900 border border-stone-800 rounded-2xl overflow-hidden max-h-[92vh] flex flex-col shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-sm animate-ui-pop-in">
+          <div className="relative w-full max-w-5xl bg-stone-900 border border-stone-800 rounded-2xl overflow-hidden max-h-[92dvh] flex flex-col shadow-2xl">
             <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-stone-800 bg-stone-950/80">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center">
@@ -848,15 +848,15 @@ export default function App() {
 
       {/* 생활 전문 직업 모달 */}
       {isProfessionsOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-          <div className="relative w-full max-w-4xl bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden max-h-[90vh] flex flex-col shadow-2xl">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 bg-zinc-900/60">
-              <h2 className="text-sm font-bold text-zinc-100 flex items-center gap-2">
-                <span>🔨</span> 6대 생활 전문 직업 및 제작
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-sm animate-ui-pop-in">
+          <div className="relative w-full max-w-4xl bg-stone-950 border border-stone-800 rounded-2xl overflow-hidden max-h-[92dvh] flex flex-col shadow-2xl">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-stone-800 bg-stone-950/80">
+              <h2 className="text-sm font-bold text-stone-100 flex items-center gap-2">
+                6대 생활 전문 직업 및 제작
               </h2>
               <button
                 onClick={() => setIsProfessionsOpen(false)}
-                className="p-1 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
+                className="p-1 rounded-lg text-stone-400 hover:text-stone-100 hover:bg-zinc-800"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -873,15 +873,15 @@ export default function App() {
 
       {/* 야영지 모달 */}
       {isCampOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-          <div className="relative w-full max-w-4xl bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden max-h-[90vh] flex flex-col shadow-2xl">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 bg-zinc-900/60">
-              <h2 className="text-sm font-bold text-zinc-100 flex items-center gap-2">
-                <span>⛺</span> 모닥불 야영지 & 시설 증축
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-sm animate-ui-pop-in">
+          <div className="relative w-full max-w-4xl bg-stone-950 border border-stone-800 rounded-2xl overflow-hidden max-h-[92dvh] flex flex-col shadow-2xl">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-stone-800 bg-stone-950/80">
+              <h2 className="text-sm font-bold text-stone-100 flex items-center gap-2">
+                모닥불 야영지 & 시설 증축
               </h2>
               <button
                 onClick={() => setIsCampOpen(false)}
-                className="p-1 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
+                className="p-1 rounded-lg text-stone-400 hover:text-stone-100 hover:bg-zinc-800"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -903,15 +903,15 @@ export default function App() {
 
       {/* 동료 관리 모달 */}
       {isCompanionsOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-          <div className="relative w-full max-w-4xl bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden max-h-[90vh] flex flex-col shadow-2xl">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 bg-zinc-900/60">
-              <h2 className="text-sm font-bold text-zinc-100 flex items-center gap-2">
-                <span>👥</span> 파티 동행자 관리 & 전투 전술
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-sm animate-ui-pop-in">
+          <div className="relative w-full max-w-4xl bg-stone-950 border border-stone-800 rounded-2xl overflow-hidden max-h-[92dvh] flex flex-col shadow-2xl">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-stone-800 bg-stone-950/80">
+              <h2 className="text-sm font-bold text-stone-100 flex items-center gap-2">
+                파티 동행자 관리 & 전투 전술
               </h2>
               <button
                 onClick={() => setIsCompanionsOpen(false)}
-                className="p-1 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
+                className="p-1 rounded-lg text-stone-400 hover:text-stone-100 hover:bg-zinc-800"
               >
                 <X className="w-5 h-5" />
               </button>
