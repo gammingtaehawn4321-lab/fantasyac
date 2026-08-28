@@ -1,0 +1,84 @@
+# 지하 몬스터 연계 장비 20종
+
+각 장비는 해당 몬스터의 실제 전리품 테이블과 연결되며 개별 SVG 삽화를 가진다.
+
+- **암거 촉수검** — MAIN_HAND / T6 / ELITE
+  - 원본 몬스터: 왕도 암거 촉수체
+  - 삽화: `/assets/equipment/underground/ug_tentacle_sewer_sword.svg`
+  - 설명: 왕도 암거 촉수체의 탄성 조직과 폐광 철편을 함께 벼린 한손검.
+- **심근 덩굴환** — MAIN_HAND / T6 / ELITE
+  - 원본 몬스터: 심근 촉수덩굴
+  - 삽화: `/assets/equipment/underground/ug_tentacle_root_chakram.svg`
+  - 설명: 심근 촉수덩굴을 환형 날에 엮어 만든 유연한 차크람.
+- **심공 촉수장** — MAIN_HAND / T7 / ELITE
+  - 원본 몬스터: 청색 심공 촉수체
+  - 삽화: `/assets/equipment/underground/ug_tentacle_bluehole_staff.svg`
+  - 설명: 청색 심공 촉수체의 압력핵을 봉입한 수중 마도 지팡이.
+- **사암 촉수갑주** — CHEST / T7 / ELITE
+  - 원본 몬스터: 사암 심층 촉수체
+  - 삽화: `/assets/equipment/underground/ug_tentacle_sand_chest.svg`
+  - 설명: 건조 촉수편과 사암판을 층층이 겹친 중갑.
+- **빙맥 촉수반지** — RING_1 / T8 / ELITE
+  - 원본 몬스터: 빙맥 촉수체
+  - 삽화: `/assets/equipment/underground/ug_tentacle_ice_ring.svg`
+  - 설명: 빙맥 촉수체의 얼어붙은 조직을 고리처럼 굳힌 반지.
+- **철턱 채굴대검** — MAIN_HAND / T7 / ELITE
+  - 원본 몬스터: 철턱 굴벌레
+  - 삽화: `/assets/equipment/underground/ug_ironjaw_greatsword.svg`
+  - 설명: 철턱 굴벌레의 톱니턱을 대검날로 가공한 중량 무기.
+- **녹갑 흉갑** — CHEST / T7 / ELITE
+  - 원본 몬스터: 녹슨 갑충
+  - 삽화: `/assets/equipment/underground/ug_rust_carabid_chest.svg`
+  - 설명: 녹슨 갑충의 광철갑을 이어 붙인 흉갑.
+- **등불낭 귀걸이** — EARRING / T9 / LEGENDARY
+  - 원본 몬스터: 등불 바퀴군체
+  - 삽화: `/assets/equipment/underground/ug_lantern_roach_earring.svg`
+  - 설명: 등불 바퀴군체의 발광낭을 결정틀에 봉인한 귀걸이.
+- **뿌리낫 쌍단도** — MAIN_HAND / T7 / ELITE
+  - 원본 몬스터: 뿌리잠복 사마귀
+  - 삽화: `/assets/equipment/underground/ug_root_mantis_daggers.svg`
+  - 설명: 뿌리잠복 사마귀의 한 쌍 낫을 손잡이에 이식한 단도.
+- **균사 공명목걸이** — NECKLACE / T7 / ELITE
+  - 원본 몬스터: 균사 베짱이
+  - 삽화: `/assets/equipment/underground/ug_mycelium_cricket_necklace.svg`
+  - 설명: 균사 베짱이의 공명날개를 겹쳐 만든 목걸이.
+- **여왕철 방패** — OFF_HAND / T9 / LEGENDARY
+  - 원본 몬스터: 강철개미 병정
+  - 삽화: `/assets/equipment/underground/ug_iron_ant_shield.svg`
+  - 설명: 강철개미 병정의 여왕철편을 겹쳐 만든 육각 방패.
+- **수맥 갑각장화** — BOOTS / T7 / ELITE
+  - 원본 몬스터: 수맥 잠수딱정벌레
+  - 삽화: `/assets/equipment/underground/ug_diver_beetle_boots.svg`
+  - 설명: 수맥 잠수딱정벌레의 방수갑각으로 만든 경량 장화.
+- **청동 쌍집게창** — MAIN_HAND / T8 / ELITE
+  - 원본 몬스터: 청동 집게벌레
+  - 삽화: `/assets/equipment/underground/ug_bronze_earwig_spear.svg`
+  - 설명: 청동 집게벌레의 쌍집게를 창끝으로 맞물린 장창.
+- **심공 압력망토** — CLOAK / T10 / LEGENDARY
+  - 원본 몬스터: 심공 수서벌레
+  - 삽화: `/assets/equipment/underground/ug_abyss_waterbug_cloak.svg`
+  - 설명: 심공 수서벌레의 압력낭 막을 여러 겹 가공한 짙은 망토.
+- **흑유리 절단장갑** — GLOVES / T8 / ELITE
+  - 원본 몬스터: 흑유리 바퀴
+  - 삽화: `/assets/equipment/underground/ug_obsidian_roach_gloves.svg`
+  - 설명: 흑유리 바퀴의 날개판을 손등과 손가락에 겹친 절단 장갑.
+- **여왕수지 팔찌** — BRACELET / T8 / ELITE
+  - 원본 몬스터: 광맥 흰개미군체
+  - 삽화: `/assets/equipment/underground/ug_ore_termite_bracelet.svg`
+  - 설명: 광맥 흰개미군체의 여왕수지를 광물가루와 굳힌 팔찌.
+- **왕지네 분절각반** — LEGS / T10 / LEGENDARY
+  - 원본 몬스터: 협곡 왕지네
+  - 삽화: `/assets/equipment/underground/ug_chasm_centipede_legs.svg`
+  - 설명: 협곡 왕지네의 분절 갑각을 관절식으로 이어 붙인 각반.
+- **빙정 갑충투구** — HEAD / T8 / ELITE
+  - 원본 몬스터: 빙정 딱정벌레
+  - 삽화: `/assets/equipment/underground/ug_crystal_beetle_helm.svg`
+  - 설명: 빙정 딱정벌레의 투명갑각을 안면 보호구로 세공한 투구.
+- **냉광 나방망토** — CLOAK / T8 / ELITE
+  - 원본 몬스터: 설동굴 나방
+  - 삽화: `/assets/equipment/underground/ug_cave_moth_cloak.svg`
+  - 설명: 설동굴 나방의 냉광날개를 여러 겹 이어 만든 가벼운 망토.
+- **빙사 여왕지팡이** — MAIN_HAND / T11 / LEGENDARY
+  - 원본 몬스터: 서리굴 거미여왕
+  - 삽화: `/assets/equipment/underground/ug_frost_spider_staff.svg`
+  - 설명: 서리굴 거미여왕의 빙사낭과 결정 다리를 엮어 만든 심층 지팡이.

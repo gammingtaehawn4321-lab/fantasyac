@@ -1,0 +1,35 @@
+{
+  "checks": 1823,
+  "monsterCount": 90,
+  "raceCounts": {
+    "ABERRANT": 66,
+    "HUMANOID": 24
+  },
+  "subtypeCounts": {
+    "BEAST": 14,
+    "HUMAN": 21,
+    "SLIME": 6,
+    "INSECTOID": 9,
+    "PLANTLIKE": 7,
+    "AQUATIC": 9,
+    "PARASITIC": 3,
+    "ELEMENTAL": 4,
+    "AERIAL": 8,
+    "CONSTRUCT": 6,
+    "BEASTKIN_BIRD": 2,
+    "BEASTKIN_FOX": 1
+  },
+  "regionCounts": {
+    "GRANDIA": 15,
+    "FOREZIN": 15,
+    "SEIRE": 15,
+    "SANTIMAC": 15,
+    "PROSTI": 15,
+    "SCROZE": 15
+  },
+  "sectors": 30,
+  "terrainSectorCombos": 54,
+  "worldTiles": 2483,
+  "equipmentCount": 400,
+  "lootProfiles": 90
+}

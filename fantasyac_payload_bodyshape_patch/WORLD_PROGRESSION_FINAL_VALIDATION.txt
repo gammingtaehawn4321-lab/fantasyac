@@ -1,0 +1,69 @@
+FANTASYAC v1 — Progression / World / Hex Map Final Validation
+Date: 2026-08-27
+
+[PASS] Core TypeScript compile
+- Independently compiled:
+  src/types.ts
+  src/data/classes/index.ts
+  src/data/skills/index.ts
+  src/data/progression/*
+  src/data/world/*
+- Result: 0 TypeScript errors.
+
+[PASS] Core runtime assertions: 55 / 55
+Validated:
+- 6 world regions exist: GRANDIA / SEIRE / FOREZIN / SANTIMAC / PROSTI / SCROZE
+- UNDERGROUND is disabled and contains 0 Hex tiles
+- Total Hex tiles: 1,655
+  - SURFACE: 609
+  - UNDERWATER: 77
+  - DEEP_SEA: 45
+  - SKY: 609
+  - CELESTIAL: 315
+- SKY floating land: 127 / 609 = 20.9% (target ~1/5)
+- SHORTEST / FASTEST / SAFEST routing all resolve between tested surface regions
+- Human cannot enter underwater without access
+- MERFOLK can enter underwater
+- Prosti summit natural gate reaches SKY without navigation equipment
+- Free SKY movement requires navigation tools or another valid access method
+- Sky map + compass + telescope unlock free sky access
+- Abella resolves to a different celestial Hex across tested days
+- YETI / MERFOLK / BIRD beastkin start-region rules are valid
+- Lv.5 basic class quest auto-creates
+- Basic class selection grants basic active/passive skills
+- Basic active mastery reaches Lv.20
+- Advanced active unlock requirement works
+- Lv.20 advanced class quest and evolution work
+- Passive awakening duplicate-copy behavior works at Lv.20
+- Advanced passive synthesis consumes required duplicate copies
+- Unique passive gate requires advanced passives Lv.20
+- Unique passive success flow works
+- Unique active grant flow works
+
+[PASS] Player/race rules
+- Playable character profile is normalized to female.
+- Beastkin player creation uses female-only playable profile.
+- Yeti playable character uses the female-yeti concept.
+
+[PASS] Region lore separation
+- Each of the six regions has its own editable lore file under src/data/world/regions/.
+- Exact edit locations are documented in REGION_LORE_EDIT_LOCATIONS.md.
+
+[PASS] Underground development lock
+- src/data/world/undergroundDevelopment.ts:
+  enabled: false
+  status: IN_DEVELOPMENT
+- World pathing denies UNDERGROUND entry.
+
+[INFO] Full-project tsc
+The project directory does not contain installed npm dependencies (node_modules).
+Full `tsc --noEmit` therefore reports only missing external packages/runtime types such as:
+- react / react-dom
+- lucide-react / motion
+- vite / @vitejs/plugin-react / @tailwindcss/vite
+- express / dotenv / @google/genai
+- Node globals/types (process, path, __dirname)
+No additional internal patch TypeScript errors were observed in the full check.
+
+[INFO] Full Vite build
+Not executed because npm dependencies are not installed in this work environment.

@@ -1,0 +1,2861 @@
+PASS HELL has zero implemented tiles
+PASS UNDERGROUND is expanded into a giant maze
+PASS DEEP_UNDERGROUND is an even larger maze
+PASS 3 underground tiers defined
+PASS HELL marked unimplemented
+PASS GRANDIA underground village occupies 7 hexes
+PASS GRANDIA shallow boss/deep entry/deep boss exist
+PASS GRANDIA shallow boss links to deep entry
+PASS GRANDIA deep entry requires shallow boss clear flag
+PASS GRANDIA hell gate exists and requires deep boss flag
+PASS GRANDIA isolated sinkhole pocket is not reachable from main cave network
+PASS FOREZIN underground village occupies 7 hexes
+PASS FOREZIN shallow boss/deep entry/deep boss exist
+PASS FOREZIN shallow boss links to deep entry
+PASS FOREZIN deep entry requires shallow boss clear flag
+PASS FOREZIN hell gate exists and requires deep boss flag
+PASS FOREZIN isolated sinkhole pocket is not reachable from main cave network
+PASS SEIRE underground village occupies 7 hexes
+PASS SEIRE shallow boss/deep entry/deep boss exist
+PASS SEIRE shallow boss links to deep entry
+PASS SEIRE deep entry requires shallow boss clear flag
+PASS SEIRE hell gate exists and requires deep boss flag
+PASS SEIRE isolated sinkhole pocket is not reachable from main cave network
+PASS SANTIMAC underground village occupies 7 hexes
+PASS SANTIMAC shallow boss/deep entry/deep boss exist
+PASS SANTIMAC shallow boss links to deep entry
+PASS SANTIMAC deep entry requires shallow boss clear flag
+PASS SANTIMAC hell gate exists and requires deep boss flag
+PASS SANTIMAC isolated sinkhole pocket is not reachable from main cave network
+PASS PROSTI underground village occupies 7 hexes
+PASS PROSTI shallow boss/deep entry/deep boss exist
+PASS PROSTI shallow boss links to deep entry
+PASS PROSTI deep entry requires shallow boss clear flag
+PASS PROSTI hell gate exists and requires deep boss flag
+PASS PROSTI isolated sinkhole pocket is not reachable from main cave network
+PASS exactly 5 underground villages
+PASS abundant ore veins generated
+PASS 30 world dungeons generated
+PASS dungeon kinds 15 deep / 8 temple / 7 grand temple
+PASS dungeon sizes 14/9/5/2
+PASS all 30 dungeons placed on world map
+PASS dungeon_01_deep_dungeon tile count 49
+PASS dungeon_01_deep_dungeon has boss and loot room
+PASS dungeon_01_deep_dungeon has normal/adult trap placements
+PASS dungeon_01_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_01_deep_dungeon boss source monster is ELITE
+PASS dungeon_01_deep_dungeon layout deterministic
+PASS dungeon_02_deep_dungeon tile count 81
+PASS dungeon_02_deep_dungeon has boss and loot room
+PASS dungeon_02_deep_dungeon has normal/adult trap placements
+PASS dungeon_02_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_02_deep_dungeon boss source monster is ELITE
+PASS dungeon_02_deep_dungeon layout deterministic
+PASS dungeon_03_deep_dungeon tile count 121
+PASS dungeon_03_deep_dungeon has boss and loot room
+PASS dungeon_03_deep_dungeon has normal/adult trap placements
+PASS dungeon_03_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_03_deep_dungeon boss source monster is ELITE
+PASS dungeon_03_deep_dungeon layout deterministic
+PASS dungeon_04_deep_dungeon tile count 49
+PASS dungeon_04_deep_dungeon has boss and loot room
+PASS dungeon_04_deep_dungeon has normal/adult trap placements
+PASS dungeon_04_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_04_deep_dungeon boss source monster is ELITE
+PASS dungeon_04_deep_dungeon layout deterministic
+PASS dungeon_05_deep_dungeon tile count 81
+PASS dungeon_05_deep_dungeon has boss and loot room
+PASS dungeon_05_deep_dungeon has normal/adult trap placements
+PASS dungeon_05_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_05_deep_dungeon boss source monster is ELITE
+PASS dungeon_05_deep_dungeon layout deterministic
+PASS dungeon_06_deep_dungeon tile count 121
+PASS dungeon_06_deep_dungeon has boss and loot room
+PASS dungeon_06_deep_dungeon has normal/adult trap placements
+PASS dungeon_06_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_06_deep_dungeon boss source monster is ELITE
+PASS dungeon_06_deep_dungeon layout deterministic
+PASS dungeon_07_deep_dungeon tile count 49
+PASS dungeon_07_deep_dungeon has boss and loot room
+PASS dungeon_07_deep_dungeon has normal/adult trap placements
+PASS dungeon_07_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_07_deep_dungeon boss source monster is ELITE
+PASS dungeon_07_deep_dungeon layout deterministic
+PASS dungeon_08_deep_dungeon tile count 81
+PASS dungeon_08_deep_dungeon has boss and loot room
+PASS dungeon_08_deep_dungeon has normal/adult trap placements
+PASS dungeon_08_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_08_deep_dungeon boss source monster is ELITE
+PASS dungeon_08_deep_dungeon layout deterministic
+PASS dungeon_09_deep_dungeon tile count 225
+PASS dungeon_09_deep_dungeon has boss and loot room
+PASS dungeon_09_deep_dungeon has normal/adult trap placements
+PASS dungeon_09_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_09_deep_dungeon boss source monster is ELITE
+PASS dungeon_09_deep_dungeon layout deterministic
+PASS dungeon_10_deep_dungeon tile count 49
+PASS dungeon_10_deep_dungeon has boss and loot room
+PASS dungeon_10_deep_dungeon has normal/adult trap placements
+PASS dungeon_10_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_10_deep_dungeon boss source monster is ELITE
+PASS dungeon_10_deep_dungeon layout deterministic
+PASS dungeon_11_deep_dungeon tile count 81
+PASS dungeon_11_deep_dungeon has boss and loot room
+PASS dungeon_11_deep_dungeon has normal/adult trap placements
+PASS dungeon_11_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_11_deep_dungeon boss source monster is ELITE
+PASS dungeon_11_deep_dungeon layout deterministic
+PASS dungeon_12_deep_dungeon tile count 121
+PASS dungeon_12_deep_dungeon has boss and loot room
+PASS dungeon_12_deep_dungeon has normal/adult trap placements
+PASS dungeon_12_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_12_deep_dungeon boss source monster is ELITE
+PASS dungeon_12_deep_dungeon layout deterministic
+PASS dungeon_13_deep_dungeon tile count 49
+PASS dungeon_13_deep_dungeon has boss and loot room
+PASS dungeon_13_deep_dungeon has normal/adult trap placements
+PASS dungeon_13_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_13_deep_dungeon boss source monster is ELITE
+PASS dungeon_13_deep_dungeon layout deterministic
+PASS dungeon_14_deep_dungeon tile count 81
+PASS dungeon_14_deep_dungeon has boss and loot room
+PASS dungeon_14_deep_dungeon has normal/adult trap placements
+PASS dungeon_14_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_14_deep_dungeon boss source monster is ELITE
+PASS dungeon_14_deep_dungeon layout deterministic
+PASS dungeon_15_deep_dungeon tile count 121
+PASS dungeon_15_deep_dungeon has boss and loot room
+PASS dungeon_15_deep_dungeon has normal/adult trap placements
+PASS dungeon_15_deep_dungeon has door/button/altar gimmick tiles
+PASS dungeon_15_deep_dungeon boss source monster is ELITE
+PASS dungeon_15_deep_dungeon layout deterministic
+PASS dungeon_16_temple tile count 49
+PASS dungeon_16_temple has boss and loot room
+PASS dungeon_16_temple has normal/adult trap placements
+PASS dungeon_16_temple has door/button/altar gimmick tiles
+PASS dungeon_16_temple boss source monster is ELITE
+PASS dungeon_16_temple layout deterministic
+PASS dungeon_17_temple tile count 49
+PASS dungeon_17_temple has boss and loot room
+PASS dungeon_17_temple has normal/adult trap placements
+PASS dungeon_17_temple has door/button/altar gimmick tiles
+PASS dungeon_17_temple boss source monster is ELITE
+PASS dungeon_17_temple layout deterministic
+PASS dungeon_18_temple tile count 49
+PASS dungeon_18_temple has boss and loot room
+PASS dungeon_18_temple has normal/adult trap placements
+PASS dungeon_18_temple has door/button/altar gimmick tiles
+PASS dungeon_18_temple boss source monster is ELITE
+PASS dungeon_18_temple layout deterministic
+PASS dungeon_19_temple tile count 49
+PASS dungeon_19_temple has boss and loot room
+PASS dungeon_19_temple has normal/adult trap placements
+PASS dungeon_19_temple has door/button/altar gimmick tiles
+PASS dungeon_19_temple boss source monster is ELITE
+PASS dungeon_19_temple layout deterministic
+PASS dungeon_20_temple tile count 49
+PASS dungeon_20_temple has boss and loot room
+PASS dungeon_20_temple has normal/adult trap placements
+PASS dungeon_20_temple has door/button/altar gimmick tiles
+PASS dungeon_20_temple boss source monster is ELITE
+PASS dungeon_20_temple layout deterministic
+PASS dungeon_21_temple tile count 81
+PASS dungeon_21_temple has boss and loot room
+PASS dungeon_21_temple has normal/adult trap placements
+PASS dungeon_21_temple has door/button/altar gimmick tiles
+PASS dungeon_21_temple boss source monster is ELITE
+PASS dungeon_21_temple layout deterministic
+PASS dungeon_22_temple tile count 81
+PASS dungeon_22_temple has boss and loot room
+PASS dungeon_22_temple has normal/adult trap placements
+PASS dungeon_22_temple has door/button/altar gimmick tiles
+PASS dungeon_22_temple boss source monster is ELITE
+PASS dungeon_22_temple layout deterministic
+PASS dungeon_23_temple tile count 121
+PASS dungeon_23_temple has boss and loot room
+PASS dungeon_23_temple has normal/adult trap placements
+PASS dungeon_23_temple has door/button/altar gimmick tiles
+PASS dungeon_23_temple boss source monster is ELITE
+PASS dungeon_23_temple layout deterministic
+PASS dungeon_24_grand_temple tile count 49
+PASS dungeon_24_grand_temple has boss and loot room
+PASS dungeon_24_grand_temple has normal/adult trap placements
+PASS dungeon_24_grand_temple has door/button/altar gimmick tiles
+PASS dungeon_24_grand_temple boss source monster is ELITE
+PASS dungeon_24_grand_temple layout deterministic
+PASS dungeon_25_grand_temple tile count 49
+PASS dungeon_25_grand_temple has boss and loot room
+PASS dungeon_25_grand_temple has normal/adult trap placements
+PASS dungeon_25_grand_temple has door/button/altar gimmick tiles
+PASS dungeon_25_grand_temple boss source monster is ELITE
+PASS dungeon_25_grand_temple layout deterministic
+PASS dungeon_26_grand_temple tile count 49
+PASS dungeon_26_grand_temple has boss and loot room
+PASS dungeon_26_grand_temple has normal/adult trap placements
+PASS dungeon_26_grand_temple has door/button/altar gimmick tiles
+PASS dungeon_26_grand_temple boss source monster is ELITE
+PASS dungeon_26_grand_temple layout deterministic
+PASS dungeon_27_grand_temple tile count 49
+PASS dungeon_27_grand_temple has boss and loot room
+PASS dungeon_27_grand_temple has normal/adult trap placements
+PASS dungeon_27_grand_temple has door/button/altar gimmick tiles
+PASS dungeon_27_grand_temple boss source monster is ELITE
+PASS dungeon_27_grand_temple layout deterministic
+PASS dungeon_28_grand_temple tile count 81
+PASS dungeon_28_grand_temple has boss and loot room
+PASS dungeon_28_grand_temple has normal/adult trap placements
+PASS dungeon_28_grand_temple has door/button/altar gimmick tiles
+PASS dungeon_28_grand_temple boss source monster is ELITE
+PASS dungeon_28_grand_temple layout deterministic
+PASS dungeon_29_grand_temple tile count 81
+PASS dungeon_29_grand_temple has boss and loot room
+PASS dungeon_29_grand_temple has normal/adult trap placements
+PASS dungeon_29_grand_temple has door/button/altar gimmick tiles
+PASS dungeon_29_grand_temple boss source monster is ELITE
+PASS dungeon_29_grand_temple layout deterministic
+PASS dungeon_30_grand_temple tile count 225
+PASS dungeon_30_grand_temple has boss and loot room
+PASS dungeon_30_grand_temple has normal/adult trap placements
+PASS dungeon_30_grand_temple has door/button/altar gimmick tiles
+PASS dungeon_30_grand_temple boss source monster is ELITE
+PASS dungeon_30_grand_temple layout deterministic
+PASS 6 normal trap types
+PASS 5 adult trap slots
+PASS adult trap slots intentionally blank
+PASS 110 total monsters
+PASS 15 underground-only insect monsters
+PASS 20 monster-themed underground equipment items
+PASS ug_tentacle_sewer_sword registered in equipment database
+PASS ug_tentacle_sewer_sword source monster exists
+PASS ug_tentacle_sewer_sword illustration asset exists
+PASS ug_tentacle_sewer_sword illustration is valid SVG text
+PASS ug_tentacle_sewer_sword linked into source monster loot
+PASS ug_tentacle_root_chakram registered in equipment database
+PASS ug_tentacle_root_chakram source monster exists
+PASS ug_tentacle_root_chakram illustration asset exists
+PASS ug_tentacle_root_chakram illustration is valid SVG text
+PASS ug_tentacle_root_chakram linked into source monster loot
+PASS ug_tentacle_bluehole_staff registered in equipment database
+PASS ug_tentacle_bluehole_staff source monster exists
+PASS ug_tentacle_bluehole_staff illustration asset exists
+PASS ug_tentacle_bluehole_staff illustration is valid SVG text
+PASS ug_tentacle_bluehole_staff linked into source monster loot
+PASS ug_tentacle_sand_chest registered in equipment database
+PASS ug_tentacle_sand_chest source monster exists
+PASS ug_tentacle_sand_chest illustration asset exists
+PASS ug_tentacle_sand_chest illustration is valid SVG text
+PASS ug_tentacle_sand_chest linked into source monster loot
+PASS ug_tentacle_ice_ring registered in equipment database
+PASS ug_tentacle_ice_ring source monster exists
+PASS ug_tentacle_ice_ring illustration asset exists
+PASS ug_tentacle_ice_ring illustration is valid SVG text
+PASS ug_tentacle_ice_ring linked into source monster loot
+PASS ug_ironjaw_greatsword registered in equipment database
+PASS ug_ironjaw_greatsword source monster exists
+PASS ug_ironjaw_greatsword illustration asset exists
+PASS ug_ironjaw_greatsword illustration is valid SVG text
+PASS ug_ironjaw_greatsword linked into source monster loot
+PASS ug_rust_carabid_chest registered in equipment database
+PASS ug_rust_carabid_chest source monster exists
+PASS ug_rust_carabid_chest illustration asset exists
+PASS ug_rust_carabid_chest illustration is valid SVG text
+PASS ug_rust_carabid_chest linked into source monster loot
+PASS ug_lantern_roach_earring registered in equipment database
+PASS ug_lantern_roach_earring source monster exists
+PASS ug_lantern_roach_earring illustration asset exists
+PASS ug_lantern_roach_earring illustration is valid SVG text
+PASS ug_lantern_roach_earring linked into source monster loot
+PASS ug_root_mantis_daggers registered in equipment database
+PASS ug_root_mantis_daggers source monster exists
+PASS ug_root_mantis_daggers illustration asset exists
+PASS ug_root_mantis_daggers illustration is valid SVG text
+PASS ug_root_mantis_daggers linked into source monster loot
+PASS ug_mycelium_cricket_necklace registered in equipment database
+PASS ug_mycelium_cricket_necklace source monster exists
+PASS ug_mycelium_cricket_necklace illustration asset exists
+PASS ug_mycelium_cricket_necklace illustration is valid SVG text
+PASS ug_mycelium_cricket_necklace linked into source monster loot
+PASS ug_iron_ant_shield registered in equipment database
+PASS ug_iron_ant_shield source monster exists
+PASS ug_iron_ant_shield illustration asset exists
+PASS ug_iron_ant_shield illustration is valid SVG text
+PASS ug_iron_ant_shield linked into source monster loot
+PASS ug_diver_beetle_boots registered in equipment database
+PASS ug_diver_beetle_boots source monster exists
+PASS ug_diver_beetle_boots illustration asset exists
+PASS ug_diver_beetle_boots illustration is valid SVG text
+PASS ug_diver_beetle_boots linked into source monster loot
+PASS ug_bronze_earwig_spear registered in equipment database
+PASS ug_bronze_earwig_spear source monster exists
+PASS ug_bronze_earwig_spear illustration asset exists
+PASS ug_bronze_earwig_spear illustration is valid SVG text
+PASS ug_bronze_earwig_spear linked into source monster loot
+PASS ug_abyss_waterbug_cloak registered in equipment database
+PASS ug_abyss_waterbug_cloak source monster exists
+PASS ug_abyss_waterbug_cloak illustration asset exists
+PASS ug_abyss_waterbug_cloak illustration is valid SVG text
+PASS ug_abyss_waterbug_cloak linked into source monster loot
+PASS ug_obsidian_roach_gloves registered in equipment database
+PASS ug_obsidian_roach_gloves source monster exists
+PASS ug_obsidian_roach_gloves illustration asset exists
+PASS ug_obsidian_roach_gloves illustration is valid SVG text
+PASS ug_obsidian_roach_gloves linked into source monster loot
+PASS ug_ore_termite_bracelet registered in equipment database
+PASS ug_ore_termite_bracelet source monster exists
+PASS ug_ore_termite_bracelet illustration asset exists
+PASS ug_ore_termite_bracelet illustration is valid SVG text
+PASS ug_ore_termite_bracelet linked into source monster loot
+PASS ug_chasm_centipede_legs registered in equipment database
+PASS ug_chasm_centipede_legs source monster exists
+PASS ug_chasm_centipede_legs illustration asset exists
+PASS ug_chasm_centipede_legs illustration is valid SVG text
+PASS ug_chasm_centipede_legs linked into source monster loot
+PASS ug_crystal_beetle_helm registered in equipment database
+PASS ug_crystal_beetle_helm source monster exists
+PASS ug_crystal_beetle_helm illustration asset exists
+PASS ug_crystal_beetle_helm illustration is valid SVG text
+PASS ug_crystal_beetle_helm linked into source monster loot
+PASS ug_cave_moth_cloak registered in equipment database
+PASS ug_cave_moth_cloak source monster exists
+PASS ug_cave_moth_cloak illustration asset exists
+PASS ug_cave_moth_cloak illustration is valid SVG text
+PASS ug_cave_moth_cloak linked into source monster loot
+PASS ug_frost_spider_staff registered in equipment database
+PASS ug_frost_spider_staff source monster exists
+PASS ug_frost_spider_staff illustration asset exists
+PASS ug_frost_spider_staff illustration is valid SVG text
+PASS ug_frost_spider_staff linked into source monster loot
+PASS monster pool exists UNDERGROUND:-15:4
+PASS monster pool exists UNDERGROUND:-15:5
+PASS monster pool exists UNDERGROUND:-15:6
+PASS monster pool exists UNDERGROUND:-14:3
+PASS monster pool exists UNDERGROUND:-14:4
+PASS monster pool exists UNDERGROUND:-14:5
+PASS monster pool exists UNDERGROUND:-13:3
+PASS monster pool exists UNDERGROUND:-13:4
+PASS monster pool exists UNDERGROUND:-18:-2
+PASS monster pool exists UNDERGROUND:-18:-1
+PASS monster pool exists UNDERGROUND:-18:0
+PASS monster pool exists UNDERGROUND:-18:1
+PASS monster pool exists UNDERGROUND:-17:-3
+PASS monster pool exists UNDERGROUND:-17:-2
+PASS monster pool exists UNDERGROUND:-17:-1
+PASS monster pool exists UNDERGROUND:-17:0
+PASS monster pool exists UNDERGROUND:-17:1
+PASS monster pool exists UNDERGROUND:-16:-4
+PASS monster pool exists UNDERGROUND:-16:-3
+PASS monster pool exists UNDERGROUND:-16:-2
+PASS monster pool exists UNDERGROUND:-16:-1
+PASS monster pool exists UNDERGROUND:-16:0
+PASS monster pool exists UNDERGROUND:-16:1
+PASS monster pool exists UNDERGROUND:-15:-5
+PASS monster pool exists UNDERGROUND:-15:-4
+PASS monster pool exists UNDERGROUND:-15:-3
+PASS monster pool exists UNDERGROUND:-15:-2
+PASS monster pool exists UNDERGROUND:-15:-1
+PASS monster pool exists UNDERGROUND:-15:0
+PASS monster pool exists UNDERGROUND:-15:1
+PASS monster pool exists UNDERGROUND:-14:-5
+PASS monster pool exists UNDERGROUND:-14:-4
+PASS monster pool exists UNDERGROUND:-14:-3
+PASS monster pool exists UNDERGROUND:-14:-2
+PASS monster pool exists UNDERGROUND:-14:-1
+PASS monster pool exists UNDERGROUND:-14:0
+PASS monster pool exists UNDERGROUND:-13:-5
+PASS monster pool exists UNDERGROUND:-13:-4
+PASS monster pool exists UNDERGROUND:-13:-3
+PASS monster pool exists UNDERGROUND:-13:-2
+PASS monster pool exists UNDERGROUND:-13:-1
+PASS monster pool exists UNDERGROUND:-12:-5
+PASS monster pool exists UNDERGROUND:-12:-4
+PASS monster pool exists UNDERGROUND:-12:-3
+PASS monster pool exists UNDERGROUND:-12:-2
+PASS monster pool exists UNDERGROUND:-11:-2
+PASS monster pool exists UNDERGROUND:-11:-1
+PASS monster pool exists UNDERGROUND:-10:-3
+PASS monster pool exists UNDERGROUND:-10:-2
+PASS monster pool exists UNDERGROUND:-10:-1
+PASS monster pool exists UNDERGROUND:-9:-3
+PASS monster pool exists UNDERGROUND:-9:-2
+PASS monster pool exists UNDERGROUND:-8:-2
+PASS monster pool exists UNDERGROUND:-8:-1
+PASS monster pool exists UNDERGROUND:-13:6
+PASS monster pool exists UNDERGROUND:-13:7
+PASS monster pool exists UNDERGROUND:-12:5
+PASS monster pool exists UNDERGROUND:-12:6
+PASS monster pool exists UNDERGROUND:-12:7
+PASS monster pool exists UNDERGROUND:-11:2
+PASS monster pool exists UNDERGROUND:-11:3
+PASS monster pool exists UNDERGROUND:-11:4
+PASS monster pool exists UNDERGROUND:-11:5
+PASS monster pool exists UNDERGROUND:-11:6
+PASS monster pool exists UNDERGROUND:-11:7
+PASS monster pool exists UNDERGROUND:-10:1
+PASS monster pool exists UNDERGROUND:-10:2
+PASS monster pool exists UNDERGROUND:-10:3
+PASS monster pool exists UNDERGROUND:-10:4
+PASS monster pool exists UNDERGROUND:-10:5
+PASS monster pool exists UNDERGROUND:-10:6
+PASS monster pool exists UNDERGROUND:-10:7
+PASS monster pool exists UNDERGROUND:-9:1
+PASS monster pool exists UNDERGROUND:-9:2
+PASS monster pool exists UNDERGROUND:-9:3
+PASS monster pool exists UNDERGROUND:-9:4
+PASS monster pool exists UNDERGROUND:-9:5
+PASS monster pool exists UNDERGROUND:-9:6
+PASS monster pool exists UNDERGROUND:-8:1
+PASS monster pool exists UNDERGROUND:-8:2
+PASS monster pool exists UNDERGROUND:-8:3
+PASS monster pool exists UNDERGROUND:-8:4
+PASS monster pool exists UNDERGROUND:-8:5
+PASS monster pool exists UNDERGROUND:-7:1
+PASS monster pool exists UNDERGROUND:-7:2
+PASS monster pool exists UNDERGROUND:-7:3
+PASS monster pool exists UNDERGROUND:-7:4
+PASS monster pool exists UNDERGROUND:-8:0
+PASS monster pool exists UNDERGROUND:-9:0
+PASS monster pool exists UNDERGROUND:-10:0
+PASS monster pool exists UNDERGROUND:-7:-1
+PASS monster pool exists UNDERGROUND:-11:0
+PASS monster pool exists UNDERGROUND:-11:1
+PASS monster pool exists UNDERGROUND:-9:-4
+PASS monster pool exists UNDERGROUND:-9:-1
+PASS monster pool exists UNDERGROUND:-8:-4
+PASS monster pool exists UNDERGROUND:-8:-3
+PASS monster pool exists UNDERGROUND:-7:0
+PASS monster pool exists UNDERGROUND:-14:-6
+PASS monster pool exists UNDERGROUND:-13:-6
+PASS monster pool exists UNDERGROUND:-13:-7
+PASS monster pool exists UNDERGROUND:-14:-7
+PASS monster pool exists UNDERGROUND:-13:-8
+PASS monster pool exists UNDERGROUND:-12:-8
+PASS monster pool exists UNDERGROUND:-12:-7
+PASS monster pool exists UNDERGROUND:-15:-6
+PASS monster pool exists UNDERGROUND:-15:-7
+PASS monster pool exists UNDERGROUND:-14:-8
+PASS monster pool exists UNDERGROUND:-15:-8
+PASS monster pool exists UNDERGROUND:-14:-9
+PASS monster pool exists UNDERGROUND:-13:-9
+PASS monster pool exists UNDERGROUND:-12:-6
+PASS monster pool exists UNDERGROUND:-6:3
+PASS monster pool exists UNDERGROUND:-16:2
+PASS monster pool exists UNDERGROUND:-16:3
+PASS monster pool exists UNDERGROUND:-17:2
+PASS monster pool exists UNDERGROUND:-17:3
+PASS monster pool exists UNDERGROUND:-15:2
+PASS monster pool exists UNDERGROUND:-17:4
+PASS monster pool exists UNDERGROUND:-14:1
+PASS monster pool exists UNDERGROUND:-13:0
+PASS monster pool exists UNDERGROUND:-13:1
+PASS monster pool exists UNDERGROUND:-12:0
+PASS monster pool exists UNDERGROUND:-13:8
+PASS monster pool exists UNDERGROUND:-12:8
+PASS monster pool exists UNDERGROUND:-11:8
+PASS monster pool exists UNDERGROUND:-12:1
+PASS monster pool exists UNDERGROUND:-6:1
+PASS monster pool exists UNDERGROUND:-11:-7
+PASS monster pool exists UNDERGROUND:-19:-2
+PASS monster pool exists UNDERGROUND:-18:-3
+PASS monster pool exists UNDERGROUND:-18:2
+PASS monster pool exists UNDERGROUND:-18:3
+PASS monster pool exists UNDERGROUND:-18:4
+PASS monster pool exists UNDERGROUND:-6:2
+PASS monster pool exists UNDERGROUND:-14:7
+PASS monster pool exists UNDERGROUND:-14:8
+PASS monster pool exists UNDERGROUND:-15:8
+PASS monster pool exists UNDERGROUND:-15:9
+PASS monster pool exists UNDERGROUND:-14:9
+PASS monster pool exists UNDERGROUND:-14:10
+PASS monster pool exists UNDERGROUND:-14:11
+PASS monster pool exists UNDERGROUND:-15:11
+PASS monster pool exists UNDERGROUND:-16:12
+PASS monster pool exists UNDERGROUND:-17:12
+PASS monster pool exists UNDERGROUND:-16:11
+PASS monster pool exists UNDERGROUND:-17:11
+PASS monster pool exists UNDERGROUND:-16:10
+PASS monster pool exists UNDERGROUND:-15:10
+PASS monster pool exists UNDERGROUND:-16:13
+PASS monster pool exists UNDERGROUND:-17:13
+PASS monster pool exists UNDERGROUND:-15:12
+PASS monster pool exists UNDERGROUND:-10:-4
+PASS monster pool exists UNDERGROUND:-9:-5
+PASS monster pool exists UNDERGROUND:-11:-4
+PASS monster pool exists UNDERGROUND:-11:-5
+PASS monster pool exists UNDERGROUND:-11:-3
+PASS monster pool exists UNDERGROUND:-10:-5
+PASS monster pool exists UNDERGROUND:-17:5
+PASS monster pool exists UNDERGROUND:-17:6
+PASS monster pool exists UNDERGROUND:-18:6
+PASS monster pool exists UNDERGROUND:-18:7
+PASS monster pool exists UNDERGROUND:-17:7
+PASS monster pool exists UNDERGROUND:-17:8
+PASS monster pool exists UNDERGROUND:-17:9
+PASS monster pool exists UNDERGROUND:-17:10
+PASS monster pool exists UNDERGROUND:-17:14
+PASS monster pool exists UNDERGROUND:-18:14
+PASS monster pool exists UNDERGROUND:-19:3
+PASS monster pool exists UNDERGROUND:-19:4
+PASS monster pool exists UNDERGROUND:-18:5
+PASS monster pool exists UNDERGROUND:-19:7
+PASS monster pool exists UNDERGROUND:-19:8
+PASS monster pool exists UNDERGROUND:-18:8
+PASS monster pool exists UNDERGROUND:-18:9
+PASS monster pool exists UNDERGROUND:-18:10
+PASS monster pool exists UNDERGROUND:-19:10
+PASS monster pool exists UNDERGROUND:-19:11
+PASS monster pool exists UNDERGROUND:-18:11
+PASS monster pool exists UNDERGROUND:-18:12
+PASS monster pool exists UNDERGROUND:-18:13
+PASS monster pool exists UNDERGROUND:-19:14
+PASS monster pool exists UNDERGROUND:-20:14
+PASS monster pool exists UNDERGROUND:-19:13
+PASS monster pool exists UNDERGROUND:-20:13
+PASS monster pool exists UNDERGROUND:-11:-8
+PASS monster pool exists UNDERGROUND:-12:-9
+PASS monster pool exists UNDERGROUND:-11:-9
+PASS monster pool exists UNDERGROUND:-12:-10
+PASS monster pool exists UNDERGROUND:-11:-10
+PASS monster pool exists UNDERGROUND:-12:-1
+PASS monster pool exists UNDERGROUND:-12:9
+PASS monster pool exists UNDERGROUND:-13:9
+PASS monster pool exists DEEP_UNDERGROUND:-52:0
+PASS monster pool exists DEEP_UNDERGROUND:-52:1
+PASS monster pool exists DEEP_UNDERGROUND:-52:2
+PASS monster pool exists DEEP_UNDERGROUND:-52:3
+PASS monster pool exists DEEP_UNDERGROUND:-52:4
+PASS monster pool exists DEEP_UNDERGROUND:-51:-1
+PASS monster pool exists DEEP_UNDERGROUND:-51:0
+PASS monster pool exists DEEP_UNDERGROUND:-51:1
+PASS monster pool exists DEEP_UNDERGROUND:-51:2
+PASS monster pool exists DEEP_UNDERGROUND:-51:3
+PASS monster pool exists DEEP_UNDERGROUND:-51:4
+PASS monster pool exists DEEP_UNDERGROUND:-50:-2
+PASS monster pool exists DEEP_UNDERGROUND:-50:-1
+PASS monster pool exists DEEP_UNDERGROUND:-50:0
+PASS monster pool exists DEEP_UNDERGROUND:-50:1
+PASS monster pool exists DEEP_UNDERGROUND:-50:2
+PASS monster pool exists DEEP_UNDERGROUND:-50:3
+PASS monster pool exists DEEP_UNDERGROUND:-50:4
+PASS monster pool exists DEEP_UNDERGROUND:-49:-3
+PASS monster pool exists DEEP_UNDERGROUND:-49:-2
+PASS monster pool exists DEEP_UNDERGROUND:-49:-1
+PASS monster pool exists DEEP_UNDERGROUND:-49:0
+PASS monster pool exists DEEP_UNDERGROUND:-49:1
+PASS monster pool exists DEEP_UNDERGROUND:-49:2
+PASS monster pool exists DEEP_UNDERGROUND:-49:3
+PASS monster pool exists DEEP_UNDERGROUND:-49:4
+PASS monster pool exists DEEP_UNDERGROUND:-48:-4
+PASS monster pool exists DEEP_UNDERGROUND:-48:-3
+PASS monster pool exists DEEP_UNDERGROUND:-48:-2
+PASS monster pool exists DEEP_UNDERGROUND:-48:-1
+PASS monster pool exists DEEP_UNDERGROUND:-48:0
+PASS monster pool exists DEEP_UNDERGROUND:-48:1
+PASS monster pool exists DEEP_UNDERGROUND:-48:2
+PASS monster pool exists DEEP_UNDERGROUND:-48:3
+PASS monster pool exists DEEP_UNDERGROUND:-48:4
+PASS monster pool exists DEEP_UNDERGROUND:-47:-4
+PASS monster pool exists DEEP_UNDERGROUND:-47:-3
+PASS monster pool exists DEEP_UNDERGROUND:-47:-2
+PASS monster pool exists DEEP_UNDERGROUND:-47:-1
+PASS monster pool exists DEEP_UNDERGROUND:-47:0
+PASS monster pool exists DEEP_UNDERGROUND:-47:1
+PASS monster pool exists DEEP_UNDERGROUND:-47:2
+PASS monster pool exists DEEP_UNDERGROUND:-47:3
+PASS monster pool exists DEEP_UNDERGROUND:-46:-4
+PASS monster pool exists DEEP_UNDERGROUND:-46:-3
+PASS monster pool exists DEEP_UNDERGROUND:-46:-2
+PASS monster pool exists DEEP_UNDERGROUND:-46:-1
+PASS monster pool exists DEEP_UNDERGROUND:-46:0
+PASS monster pool exists DEEP_UNDERGROUND:-46:1
+PASS monster pool exists DEEP_UNDERGROUND:-46:2
+PASS monster pool exists DEEP_UNDERGROUND:-45:-4
+PASS monster pool exists DEEP_UNDERGROUND:-45:-3
+PASS monster pool exists DEEP_UNDERGROUND:-45:-2
+PASS monster pool exists DEEP_UNDERGROUND:-45:-1
+PASS monster pool exists DEEP_UNDERGROUND:-45:0
+PASS monster pool exists DEEP_UNDERGROUND:-45:1
+PASS monster pool exists DEEP_UNDERGROUND:-44:-4
+PASS monster pool exists DEEP_UNDERGROUND:-44:-3
+PASS monster pool exists DEEP_UNDERGROUND:-44:-2
+PASS monster pool exists DEEP_UNDERGROUND:-44:-1
+PASS monster pool exists DEEP_UNDERGROUND:-44:0
+PASS monster pool exists DEEP_UNDERGROUND:-52:5
+PASS monster pool exists DEEP_UNDERGROUND:-51:5
+PASS monster pool exists DEEP_UNDERGROUND:-51:6
+PASS monster pool exists DEEP_UNDERGROUND:-52:6
+PASS monster pool exists DEEP_UNDERGROUND:-53:6
+PASS monster pool exists DEEP_UNDERGROUND:-54:6
+PASS monster pool exists DEEP_UNDERGROUND:-55:6
+PASS monster pool exists DEEP_UNDERGROUND:-55:7
+PASS monster pool exists DEEP_UNDERGROUND:-54:5
+PASS monster pool exists DEEP_UNDERGROUND:-54:7
+PASS monster pool exists DEEP_UNDERGROUND:-53:5
+PASS monster pool exists DEEP_UNDERGROUND:-56:6
+PASS monster pool exists DEEP_UNDERGROUND:-57:6
+PASS monster pool exists DEEP_UNDERGROUND:-58:6
+PASS monster pool exists DEEP_UNDERGROUND:-59:6
+PASS monster pool exists DEEP_UNDERGROUND:-60:6
+PASS monster pool exists DEEP_UNDERGROUND:-61:6
+PASS monster pool exists DEEP_UNDERGROUND:-62:6
+PASS monster pool exists DEEP_UNDERGROUND:-44:1
+PASS monster pool exists DEEP_UNDERGROUND:-43:-1
+PASS monster pool exists DEEP_UNDERGROUND:-43:0
+PASS monster pool exists DEEP_UNDERGROUND:-42:-1
+PASS monster pool exists DEEP_UNDERGROUND:-52:-1
+PASS monster pool exists DEEP_UNDERGROUND:-53:-1
+PASS monster pool exists DEEP_UNDERGROUND:-54:-1
+PASS monster pool exists DEEP_UNDERGROUND:-55:-1
+PASS monster pool exists DEEP_UNDERGROUND:-56:-1
+PASS monster pool exists DEEP_UNDERGROUND:-56:0
+PASS monster pool exists DEEP_UNDERGROUND:-55:-2
+PASS monster pool exists DEEP_UNDERGROUND:-55:0
+PASS monster pool exists DEEP_UNDERGROUND:-54:-2
+PASS monster pool exists DEEP_UNDERGROUND:-57:-1
+PASS monster pool exists DEEP_UNDERGROUND:-58:-1
+PASS monster pool exists DEEP_UNDERGROUND:-51:-2
+PASS monster pool exists DEEP_UNDERGROUND:-52:-2
+PASS monster pool exists DEEP_UNDERGROUND:-53:-2
+PASS monster pool exists DEEP_UNDERGROUND:-56:-2
+PASS monster pool exists DEEP_UNDERGROUND:-57:-2
+PASS monster pool exists DEEP_UNDERGROUND:-43:-4
+PASS monster pool exists DEEP_UNDERGROUND:-43:-3
+PASS monster pool exists DEEP_UNDERGROUND:-49:-4
+PASS monster pool exists DEEP_UNDERGROUND:-48:-5
+PASS monster pool exists DEEP_UNDERGROUND:-47:-5
+PASS monster pool exists DEEP_UNDERGROUND:-50:-4
+PASS monster pool exists DEEP_UNDERGROUND:-51:-4
+PASS monster pool exists DEEP_UNDERGROUND:-52:-4
+PASS monster pool exists DEEP_UNDERGROUND:-53:-4
+PASS monster pool exists DEEP_UNDERGROUND:-54:-4
+PASS monster pool exists DEEP_UNDERGROUND:-54:-3
+PASS monster pool exists DEEP_UNDERGROUND:-53:-5
+PASS monster pool exists DEEP_UNDERGROUND:-53:-3
+PASS monster pool exists DEEP_UNDERGROUND:-52:-5
+PASS monster pool exists DEEP_UNDERGROUND:-55:-4
+PASS monster pool exists DEEP_UNDERGROUND:-53:0
+PASS monster pool exists DEEP_UNDERGROUND:-54:0
+PASS monster pool exists DEEP_UNDERGROUND:-57:0
+PASS monster pool exists DEEP_UNDERGROUND:-58:0
+PASS monster pool exists DEEP_UNDERGROUND:-59:0
+PASS monster pool exists DEEP_UNDERGROUND:-56:1
+PASS monster pool exists DEEP_UNDERGROUND:-55:1
+PASS monster pool exists DEEP_UNDERGROUND:-60:0
+PASS monster pool exists DEEP_UNDERGROUND:-61:0
+PASS monster pool exists DEEP_UNDERGROUND:-61:1
+PASS monster pool exists DEEP_UNDERGROUND:-60:-1
+PASS monster pool exists DEEP_UNDERGROUND:-60:1
+PASS monster pool exists DEEP_UNDERGROUND:-59:-1
+PASS monster pool exists DEEP_UNDERGROUND:-62:0
+PASS monster pool exists DEEP_UNDERGROUND:-63:0
+PASS monster pool exists DEEP_UNDERGROUND:-64:0
+PASS monster pool exists DEEP_UNDERGROUND:-65:0
+PASS monster pool exists DEEP_UNDERGROUND:-66:0
+PASS monster pool exists DEEP_UNDERGROUND:-53:1
+PASS monster pool exists DEEP_UNDERGROUND:-54:1
+PASS monster pool exists DEEP_UNDERGROUND:-56:2
+PASS monster pool exists DEEP_UNDERGROUND:-55:2
+PASS monster pool exists DEEP_UNDERGROUND:-57:1
+PASS monster pool exists DEEP_UNDERGROUND:-58:1
+PASS monster pool exists DEEP_UNDERGROUND:-59:1
+PASS monster pool exists DEEP_UNDERGROUND:-61:2
+PASS monster pool exists DEEP_UNDERGROUND:-60:2
+PASS monster pool exists DEEP_UNDERGROUND:-62:1
+PASS monster pool exists DEEP_UNDERGROUND:-63:1
+PASS monster pool exists DEEP_UNDERGROUND:-64:1
+PASS monster pool exists DEEP_UNDERGROUND:-65:1
+PASS monster pool exists DEEP_UNDERGROUND:-66:1
+PASS monster pool exists DEEP_UNDERGROUND:-66:2
+PASS monster pool exists DEEP_UNDERGROUND:-65:2
+PASS monster pool exists DEEP_UNDERGROUND:-53:2
+PASS monster pool exists DEEP_UNDERGROUND:-54:2
+PASS monster pool exists DEEP_UNDERGROUND:-57:2
+PASS monster pool exists DEEP_UNDERGROUND:-58:2
+PASS monster pool exists DEEP_UNDERGROUND:-59:2
+PASS monster pool exists DEEP_UNDERGROUND:-54:3
+PASS monster pool exists DEEP_UNDERGROUND:-53:3
+PASS monster pool exists DEEP_UNDERGROUND:-62:2
+PASS monster pool exists DEEP_UNDERGROUND:-63:2
+PASS monster pool exists DEEP_UNDERGROUND:-64:2
+PASS monster pool exists DEEP_UNDERGROUND:-64:3
+PASS monster pool exists DEEP_UNDERGROUND:-63:3
+PASS monster pool exists DEEP_UNDERGROUND:-55:-3
+PASS monster pool exists DEEP_UNDERGROUND:-58:-2
+PASS monster pool exists DEEP_UNDERGROUND:-59:-2
+PASS monster pool exists DEEP_UNDERGROUND:-60:-2
+PASS monster pool exists DEEP_UNDERGROUND:-61:-2
+PASS monster pool exists DEEP_UNDERGROUND:-50:-3
+PASS monster pool exists DEEP_UNDERGROUND:-49:-5
+PASS monster pool exists DEEP_UNDERGROUND:-50:-5
+PASS monster pool exists DEEP_UNDERGROUND:-51:-5
+PASS monster pool exists DEEP_UNDERGROUND:-54:-5
+PASS monster pool exists DEEP_UNDERGROUND:-55:-5
+PASS monster pool exists DEEP_UNDERGROUND:-56:-5
+PASS monster pool exists DEEP_UNDERGROUND:-57:-5
+PASS monster pool exists DEEP_UNDERGROUND:-57:-4
+PASS monster pool exists DEEP_UNDERGROUND:-56:-6
+PASS monster pool exists DEEP_UNDERGROUND:-56:-4
+PASS monster pool exists DEEP_UNDERGROUND:-55:-6
+PASS monster pool exists DEEP_UNDERGROUND:-58:-5
+PASS monster pool exists DEEP_UNDERGROUND:-59:-5
+PASS monster pool exists DEEP_UNDERGROUND:-60:-5
+PASS monster pool exists DEEP_UNDERGROUND:-61:-5
+PASS monster pool exists DEEP_UNDERGROUND:-61:-4
+PASS monster pool exists DEEP_UNDERGROUND:-61:-3
+PASS monster pool exists DEEP_UNDERGROUND:-51:-3
+PASS monster pool exists DEEP_UNDERGROUND:-52:-3
+PASS monster pool exists DEEP_UNDERGROUND:-56:-3
+PASS monster pool exists DEEP_UNDERGROUND:-57:-3
+PASS monster pool exists DEEP_UNDERGROUND:-58:-3
+PASS monster pool exists DEEP_UNDERGROUND:-59:-3
+PASS monster pool exists DEEP_UNDERGROUND:-61:-1
+PASS monster pool exists DEEP_UNDERGROUND:-43:-2
+PASS monster pool exists DEEP_UNDERGROUND:-42:-4
+PASS monster pool exists DEEP_UNDERGROUND:-41:-4
+PASS monster pool exists DEEP_UNDERGROUND:-41:-3
+PASS monster pool exists DEEP_UNDERGROUND:-40:-3
+PASS monster pool exists DEEP_UNDERGROUND:-40:-4
+PASS monster pool exists DEEP_UNDERGROUND:-39:-4
+PASS monster pool exists DEEP_UNDERGROUND:-39:-3
+PASS monster pool exists DEEP_UNDERGROUND:-42:-3
+PASS monster pool exists DEEP_UNDERGROUND:-42:-2
+PASS monster pool exists DEEP_UNDERGROUND:-41:-2
+PASS monster pool exists DEEP_UNDERGROUND:-40:-2
+PASS monster pool exists DEEP_UNDERGROUND:-39:-2
+PASS monster pool exists DEEP_UNDERGROUND:-38:-3
+PASS monster pool exists DEEP_UNDERGROUND:-37:-3
+PASS monster pool exists DEEP_UNDERGROUND:-36:-4
+PASS monster pool exists DEEP_UNDERGROUND:-36:-5
+PASS monster pool exists DEEP_UNDERGROUND:-35:-5
+PASS monster pool exists DEEP_UNDERGROUND:-37:-4
+PASS monster pool exists DEEP_UNDERGROUND:-38:-4
+PASS monster pool exists DEEP_UNDERGROUND:-45:-5
+PASS monster pool exists DEEP_UNDERGROUND:-44:-5
+PASS monster pool exists DEEP_UNDERGROUND:-47:4
+PASS monster pool exists DEEP_UNDERGROUND:-47:5
+PASS monster pool exists DEEP_UNDERGROUND:-48:5
+PASS monster pool exists DEEP_UNDERGROUND:-43:-5
+PASS monster pool exists DEEP_UNDERGROUND:-58:-4
+PASS monster pool exists DEEP_UNDERGROUND:-59:-4
+PASS monster pool exists DEEP_UNDERGROUND:-60:-4
+PASS monster pool exists DEEP_UNDERGROUND:-60:-3
+PASS monster pool exists DEEP_UNDERGROUND:-43:-6
+PASS monster pool exists DEEP_UNDERGROUND:-44:-6
+PASS monster pool exists DEEP_UNDERGROUND:-45:-6
+PASS monster pool exists DEEP_UNDERGROUND:-46:-6
+PASS monster pool exists DEEP_UNDERGROUND:-47:-6
+PASS monster pool exists DEEP_UNDERGROUND:-48:-6
+PASS monster pool exists DEEP_UNDERGROUND:-47:-7
+PASS monster pool exists DEEP_UNDERGROUND:-46:-7
+PASS monster pool exists DEEP_UNDERGROUND:-49:-6
+PASS monster pool exists DEEP_UNDERGROUND:-50:-6
+PASS monster pool exists DEEP_UNDERGROUND:-51:-6
+PASS monster pool exists DEEP_UNDERGROUND:-52:-6
+PASS monster pool exists DEEP_UNDERGROUND:-53:-6
+PASS monster pool exists DEEP_UNDERGROUND:-54:-6
+PASS monster pool exists DEEP_UNDERGROUND:-57:-6
+PASS monster pool exists DEEP_UNDERGROUND:-58:-6
+PASS monster pool exists DEEP_UNDERGROUND:-57:-7
+PASS monster pool exists DEEP_UNDERGROUND:-56:-7
+PASS monster pool exists DEEP_UNDERGROUND:-59:-6
+PASS monster pool exists DEEP_UNDERGROUND:-60:-6
+PASS monster pool exists DEEP_UNDERGROUND:-59:-7
+PASS monster pool exists DEEP_UNDERGROUND:-58:-8
+PASS monster pool exists DEEP_UNDERGROUND:-58:-7
+PASS monster pool exists DEEP_UNDERGROUND:-42:-5
+PASS monster pool exists DEEP_UNDERGROUND:-55:3
+PASS monster pool exists DEEP_UNDERGROUND:-56:3
+PASS monster pool exists DEEP_UNDERGROUND:-57:3
+PASS monster pool exists DEEP_UNDERGROUND:-58:3
+PASS monster pool exists DEEP_UNDERGROUND:-59:3
+PASS monster pool exists DEEP_UNDERGROUND:-60:3
+PASS monster pool exists DEEP_UNDERGROUND:-61:3
+PASS monster pool exists DEEP_UNDERGROUND:-61:4
+PASS monster pool exists DEEP_UNDERGROUND:-60:4
+PASS monster pool exists DEEP_UNDERGROUND:-62:3
+PASS monster pool exists DEEP_UNDERGROUND:-65:3
+PASS monster pool exists DEEP_UNDERGROUND:-66:3
+PASS monster pool exists DEEP_UNDERGROUND:-66:4
+PASS monster pool exists DEEP_UNDERGROUND:-65:4
+PASS monster pool exists DEEP_UNDERGROUND:-53:4
+PASS monster pool exists DEEP_UNDERGROUND:-55:5
+PASS monster pool exists DEEP_UNDERGROUND:-56:5
+PASS monster pool exists DEEP_UNDERGROUND:-57:5
+PASS monster pool exists DEEP_UNDERGROUND:-58:5
+PASS monster pool exists DEEP_UNDERGROUND:-59:5
+PASS monster pool exists DEEP_UNDERGROUND:-58:4
+PASS monster pool exists DEEP_UNDERGROUND:-57:4
+PASS monster pool exists DEEP_UNDERGROUND:-60:5
+PASS monster pool exists DEEP_UNDERGROUND:-61:5
+PASS monster pool exists DEEP_UNDERGROUND:-62:5
+PASS monster pool exists DEEP_UNDERGROUND:-63:5
+PASS monster pool exists DEEP_UNDERGROUND:-64:5
+PASS monster pool exists DEEP_UNDERGROUND:-65:5
+PASS monster pool exists DEEP_UNDERGROUND:-66:5
+PASS monster pool exists DEEP_UNDERGROUND:-54:4
+PASS monster pool exists DEEP_UNDERGROUND:-50:5
+PASS monster pool exists DEEP_UNDERGROUND:-55:4
+PASS monster pool exists DEEP_UNDERGROUND:-56:4
+PASS monster pool exists DEEP_UNDERGROUND:-59:4
+PASS monster pool exists DEEP_UNDERGROUND:-62:4
+PASS monster pool exists DEEP_UNDERGROUND:-63:4
+PASS monster pool exists DEEP_UNDERGROUND:-64:4
+PASS monster pool exists DEEP_UNDERGROUND:-50:6
+PASS monster pool exists DEEP_UNDERGROUND:-49:5
+PASS monster pool exists DEEP_UNDERGROUND:-51:7
+PASS monster pool exists DEEP_UNDERGROUND:-52:7
+PASS monster pool exists DEEP_UNDERGROUND:-53:7
+PASS monster pool exists DEEP_UNDERGROUND:-55:8
+PASS monster pool exists DEEP_UNDERGROUND:-54:8
+PASS monster pool exists DEEP_UNDERGROUND:-56:7
+PASS monster pool exists DEEP_UNDERGROUND:-57:7
+PASS monster pool exists DEEP_UNDERGROUND:-58:7
+PASS monster pool exists DEEP_UNDERGROUND:-59:7
+PASS monster pool exists DEEP_UNDERGROUND:-60:7
+PASS monster pool exists DEEP_UNDERGROUND:-60:8
+PASS monster pool exists DEEP_UNDERGROUND:-59:8
+PASS monster pool exists DEEP_UNDERGROUND:-61:7
+PASS monster pool exists DEEP_UNDERGROUND:-62:7
+PASS monster pool exists DEEP_UNDERGROUND:-63:7
+PASS monster pool exists DEEP_UNDERGROUND:-64:7
+PASS monster pool exists DEEP_UNDERGROUND:-65:7
+PASS monster pool exists DEEP_UNDERGROUND:-62:-1
+PASS monster pool exists DEEP_UNDERGROUND:-63:-1
+PASS monster pool exists DEEP_UNDERGROUND:-62:-2
+PASS monster pool exists DEEP_UNDERGROUND:-64:-1
+PASS monster pool exists DEEP_UNDERGROUND:-65:-1
+PASS monster pool exists DEEP_UNDERGROUND:-63:-2
+PASS monster pool exists DEEP_UNDERGROUND:-64:-2
+PASS monster pool exists DEEP_UNDERGROUND:-45:2
+PASS monster pool exists DEEP_UNDERGROUND:-46:3
+PASS monster pool exists DEEP_UNDERGROUND:-45:3
+PASS monster pool exists DEEP_UNDERGROUND:-44:2
+PASS monster pool exists DEEP_UNDERGROUND:-62:-3
+PASS monster pool exists DEEP_UNDERGROUND:-63:-3
+PASS monster pool exists UNDERGROUND:-9:-6
+PASS monster pool exists UNDERGROUND:-8:-7
+PASS monster pool exists UNDERGROUND:-8:-6
+PASS monster pool exists UNDERGROUND:-8:-5
+PASS monster pool exists UNDERGROUND:-7:-8
+PASS monster pool exists UNDERGROUND:-7:-7
+PASS monster pool exists UNDERGROUND:-7:-6
+PASS monster pool exists UNDERGROUND:-6:-8
+PASS monster pool exists UNDERGROUND:-6:-7
+PASS monster pool exists UNDERGROUND:-7:-10
+PASS monster pool exists UNDERGROUND:-6:-11
+PASS monster pool exists UNDERGROUND:-6:-10
+PASS monster pool exists UNDERGROUND:-5:-12
+PASS monster pool exists UNDERGROUND:-5:-11
+PASS monster pool exists UNDERGROUND:-5:-10
+PASS monster pool exists UNDERGROUND:-4:-13
+PASS monster pool exists UNDERGROUND:-4:-12
+PASS monster pool exists UNDERGROUND:-4:-11
+PASS monster pool exists UNDERGROUND:-4:-10
+PASS monster pool exists UNDERGROUND:-4:-9
+PASS monster pool exists UNDERGROUND:-4:-8
+PASS monster pool exists UNDERGROUND:-4:-7
+PASS monster pool exists UNDERGROUND:-3:-13
+PASS monster pool exists UNDERGROUND:-3:-12
+PASS monster pool exists UNDERGROUND:-3:-11
+PASS monster pool exists UNDERGROUND:-3:-10
+PASS monster pool exists UNDERGROUND:-3:-9
+PASS monster pool exists UNDERGROUND:-3:-8
+PASS monster pool exists UNDERGROUND:-2:-13
+PASS monster pool exists UNDERGROUND:-2:-12
+PASS monster pool exists UNDERGROUND:-2:-11
+PASS monster pool exists UNDERGROUND:-2:-10
+PASS monster pool exists UNDERGROUND:-2:-9
+PASS monster pool exists UNDERGROUND:-1:-13
+PASS monster pool exists UNDERGROUND:-1:-12
+PASS monster pool exists UNDERGROUND:-1:-11
+PASS monster pool exists UNDERGROUND:-1:-10
+PASS monster pool exists UNDERGROUND:-3:-7
+PASS monster pool exists UNDERGROUND:-2:-7
+PASS monster pool exists UNDERGROUND:-3:-6
+PASS monster pool exists UNDERGROUND:-2:-6
+PASS monster pool exists UNDERGROUND:-2:-5
+PASS monster pool exists UNDERGROUND:-3:-4
+PASS monster pool exists UNDERGROUND:-2:-4
+PASS monster pool exists UNDERGROUND:-1:-4
+PASS monster pool exists UNDERGROUND:-4:-6
+PASS monster pool exists UNDERGROUND:-4:-5
+PASS monster pool exists UNDERGROUND:-4:-4
+PASS monster pool exists UNDERGROUND:-3:-5
+PASS monster pool exists UNDERGROUND:-2:-8
+PASS monster pool exists UNDERGROUND:-1:-9
+PASS monster pool exists UNDERGROUND:-1:-8
+PASS monster pool exists UNDERGROUND:-1:-7
+PASS monster pool exists UNDERGROUND:-1:-6
+PASS monster pool exists UNDERGROUND:-1:-5
+PASS monster pool exists UNDERGROUND:0:-10
+PASS monster pool exists UNDERGROUND:0:-9
+PASS monster pool exists UNDERGROUND:0:-8
+PASS monster pool exists UNDERGROUND:0:-7
+PASS monster pool exists UNDERGROUND:0:-6
+PASS monster pool exists UNDERGROUND:0:-5
+PASS monster pool exists UNDERGROUND:1:-10
+PASS monster pool exists UNDERGROUND:1:-9
+PASS monster pool exists UNDERGROUND:1:-8
+PASS monster pool exists UNDERGROUND:1:-7
+PASS monster pool exists UNDERGROUND:1:-6
+PASS monster pool exists UNDERGROUND:2:-10
+PASS monster pool exists UNDERGROUND:2:-9
+PASS monster pool exists UNDERGROUND:2:-8
+PASS monster pool exists UNDERGROUND:2:-7
+PASS monster pool exists UNDERGROUND:-5:-4
+PASS monster pool exists UNDERGROUND:-5:-3
+PASS monster pool exists UNDERGROUND:-5:-2
+PASS monster pool exists UNDERGROUND:-5:-1
+PASS monster pool exists UNDERGROUND:-4:-3
+PASS monster pool exists UNDERGROUND:-4:-2
+PASS monster pool exists UNDERGROUND:-4:-1
+PASS monster pool exists UNDERGROUND:-3:-3
+PASS monster pool exists UNDERGROUND:-3:-2
+PASS monster pool exists UNDERGROUND:-3:-1
+PASS monster pool exists UNDERGROUND:-2:-3
+PASS monster pool exists UNDERGROUND:-2:-2
+PASS monster pool exists UNDERGROUND:-2:-1
+PASS monster pool exists UNDERGROUND:-1:-3
+PASS monster pool exists UNDERGROUND:-1:-2
+PASS monster pool exists UNDERGROUND:0:-4
+PASS monster pool exists UNDERGROUND:0:-3
+PASS monster pool exists UNDERGROUND:1:-5
+PASS monster pool exists UNDERGROUND:1:-4
+PASS monster pool exists UNDERGROUND:-4:-14
+PASS monster pool exists UNDERGROUND:-5:-13
+PASS monster pool exists UNDERGROUND:-5:-14
+PASS monster pool exists UNDERGROUND:-4:-15
+PASS monster pool exists UNDERGROUND:-3:-15
+PASS monster pool exists UNDERGROUND:-3:-14
+PASS monster pool exists UNDERGROUND:-6:-1
+PASS monster pool exists UNDERGROUND:-4:0
+PASS monster pool exists UNDERGROUND:-4:1
+PASS monster pool exists UNDERGROUND:-4:2
+PASS monster pool exists UNDERGROUND:-5:2
+PASS monster pool exists UNDERGROUND:-3:1
+PASS monster pool exists UNDERGROUND:-5:1
+PASS monster pool exists UNDERGROUND:-5:-5
+PASS monster pool exists UNDERGROUND:-5:-6
+PASS monster pool exists UNDERGROUND:-6:-5
+PASS monster pool exists UNDERGROUND:-6:-4
+PASS monster pool exists UNDERGROUND:-5:0
+PASS monster pool exists UNDERGROUND:2:-6
+PASS monster pool exists UNDERGROUND:0:-2
+PASS monster pool exists UNDERGROUND:-2:0
+PASS monster pool exists UNDERGROUND:-1:-1
+PASS monster pool exists UNDERGROUND:-1:0
+PASS monster pool exists UNDERGROUND:0:-13
+PASS monster pool exists UNDERGROUND:0:-12
+PASS monster pool exists UNDERGROUND:0:-11
+PASS monster pool exists UNDERGROUND:-3:0
+PASS monster pool exists UNDERGROUND:-6:-12
+PASS monster pool exists UNDERGROUND:-7:-12
+PASS monster pool exists UNDERGROUND:-8:-12
+PASS monster pool exists UNDERGROUND:-9:-12
+PASS monster pool exists UNDERGROUND:-9:-11
+PASS monster pool exists UNDERGROUND:-8:-13
+PASS monster pool exists UNDERGROUND:-8:-11
+PASS monster pool exists UNDERGROUND:-7:-13
+PASS monster pool exists UNDERGROUND:-8:-10
+PASS monster pool exists UNDERGROUND:-8:-9
+PASS monster pool exists UNDERGROUND:1:-11
+PASS monster pool exists UNDERGROUND:2:-11
+PASS monster pool exists UNDERGROUND:-7:-11
+PASS monster pool exists UNDERGROUND:-9:-10
+PASS monster pool exists UNDERGROUND:-9:-9
+PASS monster pool exists UNDERGROUND:-9:-8
+PASS monster pool exists UNDERGROUND:3:-11
+PASS monster pool exists UNDERGROUND:3:-12
+PASS monster pool exists UNDERGROUND:2:-12
+PASS monster pool exists UNDERGROUND:3:-13
+PASS monster pool exists UNDERGROUND:2:-13
+PASS monster pool exists UNDERGROUND:3:-14
+PASS monster pool exists UNDERGROUND:4:-14
+PASS monster pool exists UNDERGROUND:4:-13
+PASS monster pool exists DEEP_UNDERGROUND:-16:-42
+PASS monster pool exists DEEP_UNDERGROUND:-16:-41
+PASS monster pool exists DEEP_UNDERGROUND:-16:-40
+PASS monster pool exists DEEP_UNDERGROUND:-16:-39
+PASS monster pool exists DEEP_UNDERGROUND:-16:-38
+PASS monster pool exists DEEP_UNDERGROUND:-15:-43
+PASS monster pool exists DEEP_UNDERGROUND:-15:-42
+PASS monster pool exists DEEP_UNDERGROUND:-15:-41
+PASS monster pool exists DEEP_UNDERGROUND:-15:-40
+PASS monster pool exists DEEP_UNDERGROUND:-15:-39
+PASS monster pool exists DEEP_UNDERGROUND:-15:-38
+PASS monster pool exists DEEP_UNDERGROUND:-14:-44
+PASS monster pool exists DEEP_UNDERGROUND:-14:-43
+PASS monster pool exists DEEP_UNDERGROUND:-14:-42
+PASS monster pool exists DEEP_UNDERGROUND:-14:-41
+PASS monster pool exists DEEP_UNDERGROUND:-14:-40
+PASS monster pool exists DEEP_UNDERGROUND:-14:-39
+PASS monster pool exists DEEP_UNDERGROUND:-14:-38
+PASS monster pool exists DEEP_UNDERGROUND:-13:-45
+PASS monster pool exists DEEP_UNDERGROUND:-13:-44
+PASS monster pool exists DEEP_UNDERGROUND:-13:-43
+PASS monster pool exists DEEP_UNDERGROUND:-13:-42
+PASS monster pool exists DEEP_UNDERGROUND:-13:-41
+PASS monster pool exists DEEP_UNDERGROUND:-13:-40
+PASS monster pool exists DEEP_UNDERGROUND:-13:-39
+PASS monster pool exists DEEP_UNDERGROUND:-13:-38
+PASS monster pool exists DEEP_UNDERGROUND:-12:-46
+PASS monster pool exists DEEP_UNDERGROUND:-12:-45
+PASS monster pool exists DEEP_UNDERGROUND:-12:-44
+PASS monster pool exists DEEP_UNDERGROUND:-12:-43
+PASS monster pool exists DEEP_UNDERGROUND:-12:-42
+PASS monster pool exists DEEP_UNDERGROUND:-12:-41
+PASS monster pool exists DEEP_UNDERGROUND:-12:-40
+PASS monster pool exists DEEP_UNDERGROUND:-12:-39
+PASS monster pool exists DEEP_UNDERGROUND:-12:-38
+PASS monster pool exists DEEP_UNDERGROUND:-11:-46
+PASS monster pool exists DEEP_UNDERGROUND:-11:-45
+PASS monster pool exists DEEP_UNDERGROUND:-11:-44
+PASS monster pool exists DEEP_UNDERGROUND:-11:-43
+PASS monster pool exists DEEP_UNDERGROUND:-11:-42
+PASS monster pool exists DEEP_UNDERGROUND:-11:-41
+PASS monster pool exists DEEP_UNDERGROUND:-11:-40
+PASS monster pool exists DEEP_UNDERGROUND:-11:-39
+PASS monster pool exists DEEP_UNDERGROUND:-10:-46
+PASS monster pool exists DEEP_UNDERGROUND:-10:-45
+PASS monster pool exists DEEP_UNDERGROUND:-10:-44
+PASS monster pool exists DEEP_UNDERGROUND:-10:-43
+PASS monster pool exists DEEP_UNDERGROUND:-10:-42
+PASS monster pool exists DEEP_UNDERGROUND:-10:-41
+PASS monster pool exists DEEP_UNDERGROUND:-10:-40
+PASS monster pool exists DEEP_UNDERGROUND:-9:-46
+PASS monster pool exists DEEP_UNDERGROUND:-9:-45
+PASS monster pool exists DEEP_UNDERGROUND:-9:-44
+PASS monster pool exists DEEP_UNDERGROUND:-9:-43
+PASS monster pool exists DEEP_UNDERGROUND:-9:-42
+PASS monster pool exists DEEP_UNDERGROUND:-9:-41
+PASS monster pool exists DEEP_UNDERGROUND:-8:-46
+PASS monster pool exists DEEP_UNDERGROUND:-8:-45
+PASS monster pool exists DEEP_UNDERGROUND:-8:-44
+PASS monster pool exists DEEP_UNDERGROUND:-8:-43
+PASS monster pool exists DEEP_UNDERGROUND:-8:-42
+PASS monster pool exists DEEP_UNDERGROUND:-17:-40
+PASS monster pool exists DEEP_UNDERGROUND:-18:-40
+PASS monster pool exists DEEP_UNDERGROUND:-19:-40
+PASS monster pool exists DEEP_UNDERGROUND:-20:-40
+PASS monster pool exists DEEP_UNDERGROUND:-21:-40
+PASS monster pool exists DEEP_UNDERGROUND:-22:-40
+PASS monster pool exists DEEP_UNDERGROUND:-23:-40
+PASS monster pool exists DEEP_UNDERGROUND:-24:-40
+PASS monster pool exists DEEP_UNDERGROUND:-24:-39
+PASS monster pool exists DEEP_UNDERGROUND:-23:-41
+PASS monster pool exists DEEP_UNDERGROUND:-23:-39
+PASS monster pool exists DEEP_UNDERGROUND:-22:-41
+PASS monster pool exists DEEP_UNDERGROUND:-17:-41
+PASS monster pool exists DEEP_UNDERGROUND:-18:-41
+PASS monster pool exists DEEP_UNDERGROUND:-17:-42
+PASS monster pool exists DEEP_UNDERGROUND:-19:-41
+PASS monster pool exists DEEP_UNDERGROUND:-20:-41
+PASS monster pool exists DEEP_UNDERGROUND:-21:-41
+PASS monster pool exists DEEP_UNDERGROUND:-24:-41
+PASS monster pool exists DEEP_UNDERGROUND:-25:-41
+PASS monster pool exists DEEP_UNDERGROUND:-26:-41
+PASS monster pool exists DEEP_UNDERGROUND:-27:-41
+PASS monster pool exists DEEP_UNDERGROUND:-28:-41
+PASS monster pool exists DEEP_UNDERGROUND:-10:-47
+PASS monster pool exists DEEP_UNDERGROUND:-9:-48
+PASS monster pool exists DEEP_UNDERGROUND:-9:-47
+PASS monster pool exists DEEP_UNDERGROUND:-11:-47
+PASS monster pool exists DEEP_UNDERGROUND:-10:-48
+PASS monster pool exists DEEP_UNDERGROUND:-12:-47
+PASS monster pool exists DEEP_UNDERGROUND:-13:-47
+PASS monster pool exists DEEP_UNDERGROUND:-14:-47
+PASS monster pool exists DEEP_UNDERGROUND:-15:-47
+PASS monster pool exists DEEP_UNDERGROUND:-16:-47
+PASS monster pool exists DEEP_UNDERGROUND:-16:-46
+PASS monster pool exists DEEP_UNDERGROUND:-15:-48
+PASS monster pool exists DEEP_UNDERGROUND:-15:-46
+PASS monster pool exists DEEP_UNDERGROUND:-14:-48
+PASS monster pool exists DEEP_UNDERGROUND:-17:-47
+PASS monster pool exists DEEP_UNDERGROUND:-18:-47
+PASS monster pool exists DEEP_UNDERGROUND:-19:-47
+PASS monster pool exists DEEP_UNDERGROUND:-20:-47
+PASS monster pool exists DEEP_UNDERGROUND:-21:-47
+PASS monster pool exists DEEP_UNDERGROUND:-21:-46
+PASS monster pool exists DEEP_UNDERGROUND:-20:-48
+PASS monster pool exists DEEP_UNDERGROUND:-20:-46
+PASS monster pool exists DEEP_UNDERGROUND:-19:-48
+PASS monster pool exists DEEP_UNDERGROUND:-22:-47
+PASS monster pool exists DEEP_UNDERGROUND:-23:-47
+PASS monster pool exists DEEP_UNDERGROUND:-24:-47
+PASS monster pool exists DEEP_UNDERGROUND:-25:-47
+PASS monster pool exists DEEP_UNDERGROUND:-26:-46
+PASS monster pool exists DEEP_UNDERGROUND:-25:-46
+PASS monster pool exists DEEP_UNDERGROUND:-24:-48
+PASS monster pool exists DEEP_UNDERGROUND:-18:-42
+PASS monster pool exists DEEP_UNDERGROUND:-19:-42
+PASS monster pool exists DEEP_UNDERGROUND:-20:-42
+PASS monster pool exists DEEP_UNDERGROUND:-19:-43
+PASS monster pool exists DEEP_UNDERGROUND:-18:-43
+PASS monster pool exists DEEP_UNDERGROUND:-21:-42
+PASS monster pool exists DEEP_UNDERGROUND:-22:-42
+PASS monster pool exists DEEP_UNDERGROUND:-16:-43
+PASS monster pool exists DEEP_UNDERGROUND:-17:-43
+PASS monster pool exists DEEP_UNDERGROUND:-17:-44
+PASS monster pool exists DEEP_UNDERGROUND:-16:-44
+PASS monster pool exists DEEP_UNDERGROUND:-20:-43
+PASS monster pool exists DEEP_UNDERGROUND:-21:-43
+PASS monster pool exists DEEP_UNDERGROUND:-22:-43
+PASS monster pool exists DEEP_UNDERGROUND:-23:-43
+PASS monster pool exists DEEP_UNDERGROUND:-23:-42
+PASS monster pool exists DEEP_UNDERGROUND:-22:-44
+PASS monster pool exists DEEP_UNDERGROUND:-21:-44
+PASS monster pool exists DEEP_UNDERGROUND:-24:-43
+PASS monster pool exists DEEP_UNDERGROUND:-8:-48
+PASS monster pool exists DEEP_UNDERGROUND:-11:-48
+PASS monster pool exists DEEP_UNDERGROUND:-12:-48
+PASS monster pool exists DEEP_UNDERGROUND:-13:-48
+PASS monster pool exists DEEP_UNDERGROUND:-15:-44
+PASS monster pool exists DEEP_UNDERGROUND:-7:-45
+PASS monster pool exists DEEP_UNDERGROUND:-7:-44
+PASS monster pool exists DEEP_UNDERGROUND:-14:-45
+PASS monster pool exists DEEP_UNDERGROUND:-16:-45
+PASS monster pool exists DEEP_UNDERGROUND:-15:-45
+PASS monster pool exists DEEP_UNDERGROUND:-18:-44
+PASS monster pool exists DEEP_UNDERGROUND:-19:-44
+PASS monster pool exists DEEP_UNDERGROUND:-20:-44
+PASS monster pool exists DEEP_UNDERGROUND:-25:-40
+PASS monster pool exists DEEP_UNDERGROUND:-24:-42
+PASS monster pool exists DEEP_UNDERGROUND:-26:-40
+PASS monster pool exists DEEP_UNDERGROUND:-27:-40
+PASS monster pool exists DEEP_UNDERGROUND:-28:-40
+PASS monster pool exists DEEP_UNDERGROUND:-29:-40
+PASS monster pool exists DEEP_UNDERGROUND:-30:-40
+PASS monster pool exists DEEP_UNDERGROUND:-30:-39
+PASS monster pool exists DEEP_UNDERGROUND:-15:-37
+PASS monster pool exists DEEP_UNDERGROUND:-17:-39
+PASS monster pool exists DEEP_UNDERGROUND:-18:-39
+PASS monster pool exists DEEP_UNDERGROUND:-19:-39
+PASS monster pool exists DEEP_UNDERGROUND:-20:-39
+PASS monster pool exists DEEP_UNDERGROUND:-21:-39
+PASS monster pool exists DEEP_UNDERGROUND:-21:-38
+PASS monster pool exists DEEP_UNDERGROUND:-20:-38
+PASS monster pool exists DEEP_UNDERGROUND:-16:-36
+PASS monster pool exists DEEP_UNDERGROUND:-17:-35
+PASS monster pool exists DEEP_UNDERGROUND:-21:-45
+PASS monster pool exists DEEP_UNDERGROUND:-20:-45
+PASS monster pool exists DEEP_UNDERGROUND:-23:-44
+PASS monster pool exists DEEP_UNDERGROUND:-24:-44
+PASS monster pool exists DEEP_UNDERGROUND:-14:-46
+PASS monster pool exists DEEP_UNDERGROUND:-13:-46
+PASS monster pool exists DEEP_UNDERGROUND:-17:-45
+PASS monster pool exists DEEP_UNDERGROUND:-18:-45
+PASS monster pool exists DEEP_UNDERGROUND:-19:-45
+PASS monster pool exists DEEP_UNDERGROUND:-22:-45
+PASS monster pool exists DEEP_UNDERGROUND:-23:-45
+PASS monster pool exists DEEP_UNDERGROUND:-24:-45
+PASS monster pool exists DEEP_UNDERGROUND:-25:-45
+PASS monster pool exists DEEP_UNDERGROUND:-26:-45
+PASS monster pool exists DEEP_UNDERGROUND:-27:-45
+PASS monster pool exists DEEP_UNDERGROUND:-28:-44
+PASS monster pool exists DEEP_UNDERGROUND:-29:-43
+PASS monster pool exists DEEP_UNDERGROUND:-28:-43
+PASS monster pool exists DEEP_UNDERGROUND:-27:-44
+PASS monster pool exists DEEP_UNDERGROUND:-14:-37
+PASS monster pool exists DEEP_UNDERGROUND:-11:-38
+PASS monster pool exists DEEP_UNDERGROUND:-10:-38
+PASS monster pool exists DEEP_UNDERGROUND:-25:-44
+PASS monster pool exists DEEP_UNDERGROUND:-26:-44
+PASS monster pool exists DEEP_UNDERGROUND:-27:-43
+PASS monster pool exists DEEP_UNDERGROUND:-28:-42
+PASS monster pool exists DEEP_UNDERGROUND:-29:-42
+PASS monster pool exists DEEP_UNDERGROUND:-30:-41
+PASS monster pool exists DEEP_UNDERGROUND:-13:-37
+PASS monster pool exists DEEP_UNDERGROUND:-14:-36
+PASS monster pool exists DEEP_UNDERGROUND:-13:-36
+PASS monster pool exists DEEP_UNDERGROUND:-14:-35
+PASS monster pool exists DEEP_UNDERGROUND:-13:-35
+PASS monster pool exists DEEP_UNDERGROUND:-12:-37
+PASS monster pool exists DEEP_UNDERGROUND:-12:-36
+PASS monster pool exists DEEP_UNDERGROUND:-11:-36
+PASS monster pool exists DEEP_UNDERGROUND:-10:-36
+PASS monster pool exists DEEP_UNDERGROUND:-15:-36
+PASS monster pool exists DEEP_UNDERGROUND:-16:-35
+PASS monster pool exists DEEP_UNDERGROUND:-15:-35
+PASS monster pool exists DEEP_UNDERGROUND:-17:-36
+PASS monster pool exists DEEP_UNDERGROUND:-18:-36
+PASS monster pool exists DEEP_UNDERGROUND:-19:-36
+PASS monster pool exists DEEP_UNDERGROUND:-20:-36
+PASS monster pool exists DEEP_UNDERGROUND:-21:-36
+PASS monster pool exists DEEP_UNDERGROUND:-21:-35
+PASS monster pool exists DEEP_UNDERGROUND:-20:-37
+PASS monster pool exists DEEP_UNDERGROUND:-20:-35
+PASS monster pool exists DEEP_UNDERGROUND:-19:-37
+PASS monster pool exists DEEP_UNDERGROUND:-22:-36
+PASS monster pool exists DEEP_UNDERGROUND:-23:-36
+PASS monster pool exists DEEP_UNDERGROUND:-10:-39
+PASS monster pool exists DEEP_UNDERGROUND:-17:-38
+PASS monster pool exists DEEP_UNDERGROUND:-18:-38
+PASS monster pool exists DEEP_UNDERGROUND:-19:-38
+PASS monster pool exists DEEP_UNDERGROUND:-11:-37
+PASS monster pool exists DEEP_UNDERGROUND:-10:-37
+PASS monster pool exists DEEP_UNDERGROUND:-16:-37
+PASS monster pool exists DEEP_UNDERGROUND:-17:-37
+PASS monster pool exists DEEP_UNDERGROUND:-18:-37
+PASS monster pool exists DEEP_UNDERGROUND:-21:-37
+PASS monster pool exists DEEP_UNDERGROUND:-22:-37
+PASS monster pool exists DEEP_UNDERGROUND:-23:-37
+PASS monster pool exists DEEP_UNDERGROUND:-24:-37
+PASS monster pool exists DEEP_UNDERGROUND:-25:-37
+PASS monster pool exists DEEP_UNDERGROUND:-26:-37
+PASS monster pool exists DEEP_UNDERGROUND:-27:-37
+PASS monster pool exists DEEP_UNDERGROUND:-28:-37
+PASS monster pool exists DEEP_UNDERGROUND:-22:-38
+PASS monster pool exists DEEP_UNDERGROUND:-23:-38
+PASS monster pool exists DEEP_UNDERGROUND:-24:-38
+PASS monster pool exists DEEP_UNDERGROUND:-25:-38
+PASS monster pool exists DEEP_UNDERGROUND:-26:-38
+PASS monster pool exists DEEP_UNDERGROUND:-27:-38
+PASS monster pool exists DEEP_UNDERGROUND:-28:-38
+PASS monster pool exists DEEP_UNDERGROUND:-29:-38
+PASS monster pool exists DEEP_UNDERGROUND:-30:-38
+PASS monster pool exists DEEP_UNDERGROUND:-25:-43
+PASS monster pool exists DEEP_UNDERGROUND:-26:-43
+PASS monster pool exists DEEP_UNDERGROUND:-30:-42
+PASS monster pool exists DEEP_UNDERGROUND:-7:-46
+PASS monster pool exists DEEP_UNDERGROUND:-17:-46
+PASS monster pool exists DEEP_UNDERGROUND:-18:-46
+PASS monster pool exists DEEP_UNDERGROUND:-19:-46
+PASS monster pool exists DEEP_UNDERGROUND:-6:-45
+PASS monster pool exists DEEP_UNDERGROUND:-6:-47
+PASS monster pool exists DEEP_UNDERGROUND:-7:-47
+PASS monster pool exists DEEP_UNDERGROUND:-6:-48
+PASS monster pool exists DEEP_UNDERGROUND:-6:-46
+PASS monster pool exists DEEP_UNDERGROUND:-5:-48
+PASS monster pool exists DEEP_UNDERGROUND:-5:-47
+PASS monster pool exists DEEP_UNDERGROUND:-4:-48
+PASS monster pool exists DEEP_UNDERGROUND:-4:-47
+PASS monster pool exists DEEP_UNDERGROUND:-3:-47
+PASS monster pool exists DEEP_UNDERGROUND:-3:-46
+PASS monster pool exists DEEP_UNDERGROUND:-3:-45
+PASS monster pool exists DEEP_UNDERGROUND:-2:-45
+PASS monster pool exists DEEP_UNDERGROUND:-2:-44
+PASS monster pool exists DEEP_UNDERGROUND:-3:-44
+PASS monster pool exists DEEP_UNDERGROUND:-3:-43
+PASS monster pool exists DEEP_UNDERGROUND:-2:-43
+PASS monster pool exists DEEP_UNDERGROUND:-1:-45
+PASS monster pool exists DEEP_UNDERGROUND:-1:-44
+PASS monster pool exists DEEP_UNDERGROUND:-25:-42
+PASS monster pool exists DEEP_UNDERGROUND:-26:-42
+PASS monster pool exists DEEP_UNDERGROUND:-7:-43
+PASS monster pool exists DEEP_UNDERGROUND:-9:-40
+PASS monster pool exists DEEP_UNDERGROUND:-9:-39
+PASS monster pool exists DEEP_UNDERGROUND:-8:-41
+PASS monster pool exists DEEP_UNDERGROUND:-8:-40
+PASS monster pool exists DEEP_UNDERGROUND:-7:-41
+PASS monster pool exists DEEP_UNDERGROUND:-8:-39
+PASS monster pool exists DEEP_UNDERGROUND:-9:-38
+PASS monster pool exists DEEP_UNDERGROUND:-7:-40
+PASS monster pool exists DEEP_UNDERGROUND:-7:-39
+PASS monster pool exists DEEP_UNDERGROUND:-6:-41
+PASS monster pool exists DEEP_UNDERGROUND:-5:-41
+PASS monster pool exists DEEP_UNDERGROUND:-5:-40
+PASS monster pool exists DEEP_UNDERGROUND:-4:-40
+PASS monster pool exists DEEP_UNDERGROUND:-4:-39
+PASS monster pool exists DEEP_UNDERGROUND:-4:-38
+PASS monster pool exists DEEP_UNDERGROUND:-3:-38
+PASS monster pool exists DEEP_UNDERGROUND:-3:-37
+PASS monster pool exists DEEP_UNDERGROUND:-8:-38
+PASS monster pool exists DEEP_UNDERGROUND:-7:-38
+PASS monster pool exists DEEP_UNDERGROUND:-6:-40
+PASS monster pool exists DEEP_UNDERGROUND:-6:-39
+PASS monster pool exists DEEP_UNDERGROUND:-7:-37
+PASS monster pool exists DEEP_UNDERGROUND:-6:-37
+PASS monster pool exists DEEP_UNDERGROUND:-6:-36
+PASS monster pool exists DEEP_UNDERGROUND:-7:-36
+PASS monster pool exists DEEP_UNDERGROUND:-8:-36
+PASS monster pool exists DEEP_UNDERGROUND:-8:-35
+PASS monster pool exists DEEP_UNDERGROUND:-7:-35
+PASS monster pool exists DEEP_UNDERGROUND:-22:-39
+PASS monster pool exists DEEP_UNDERGROUND:-25:-39
+PASS monster pool exists DEEP_UNDERGROUND:-26:-39
+PASS monster pool exists DEEP_UNDERGROUND:-27:-39
+PASS monster pool exists DEEP_UNDERGROUND:-28:-39
+PASS monster pool exists DEEP_UNDERGROUND:-29:-39
+PASS monster pool exists DEEP_UNDERGROUND:-29:-37
+PASS monster pool exists DEEP_UNDERGROUND:-27:-42
+PASS monster pool exists UNDERGROUND:-10:10
+PASS monster pool exists UNDERGROUND:-10:11
+PASS monster pool exists UNDERGROUND:-9:9
+PASS monster pool exists UNDERGROUND:-9:10
+PASS monster pool exists UNDERGROUND:-9:11
+PASS monster pool exists UNDERGROUND:-8:8
+PASS monster pool exists UNDERGROUND:-8:9
+PASS monster pool exists UNDERGROUND:-8:10
+PASS monster pool exists UNDERGROUND:-8:11
+PASS monster pool exists UNDERGROUND:-7:7
+PASS monster pool exists UNDERGROUND:-7:8
+PASS monster pool exists UNDERGROUND:-7:9
+PASS monster pool exists UNDERGROUND:-7:10
+PASS monster pool exists UNDERGROUND:-7:11
+PASS monster pool exists UNDERGROUND:-6:7
+PASS monster pool exists UNDERGROUND:-6:8
+PASS monster pool exists UNDERGROUND:-6:9
+PASS monster pool exists UNDERGROUND:-6:10
+PASS monster pool exists UNDERGROUND:-8:7
+PASS monster pool exists UNDERGROUND:-7:6
+PASS monster pool exists UNDERGROUND:-9:7
+PASS monster pool exists UNDERGROUND:-9:8
+PASS monster pool exists UNDERGROUND:-8:6
+PASS monster pool exists UNDERGROUND:-10:8
+PASS monster pool exists UNDERGROUND:-11:9
+PASS monster pool exists UNDERGROUND:-12:10
+PASS monster pool exists UNDERGROUND:-11:10
+PASS monster pool exists UNDERGROUND:-10:9
+PASS monster pool exists UNDERGROUND:-8:13
+PASS monster pool exists UNDERGROUND:-8:14
+PASS monster pool exists UNDERGROUND:-7:13
+PASS monster pool exists UNDERGROUND:-7:14
+PASS monster pool exists UNDERGROUND:-6:12
+PASS monster pool exists UNDERGROUND:-6:13
+PASS monster pool exists UNDERGROUND:-6:14
+PASS monster pool exists UNDERGROUND:-5:11
+PASS monster pool exists UNDERGROUND:-5:12
+PASS monster pool exists UNDERGROUND:-5:13
+PASS monster pool exists UNDERGROUND:-5:14
+PASS monster pool exists UNDERGROUND:-4:8
+PASS monster pool exists UNDERGROUND:-4:9
+PASS monster pool exists UNDERGROUND:-4:10
+PASS monster pool exists UNDERGROUND:-4:11
+PASS monster pool exists UNDERGROUND:-4:12
+PASS monster pool exists UNDERGROUND:-4:13
+PASS monster pool exists UNDERGROUND:-3:8
+PASS monster pool exists UNDERGROUND:-3:9
+PASS monster pool exists UNDERGROUND:-3:10
+PASS monster pool exists UNDERGROUND:-3:11
+PASS monster pool exists UNDERGROUND:-3:12
+PASS monster pool exists UNDERGROUND:-2:8
+PASS monster pool exists UNDERGROUND:-2:9
+PASS monster pool exists UNDERGROUND:-2:10
+PASS monster pool exists UNDERGROUND:-2:11
+PASS monster pool exists UNDERGROUND:-2:12
+PASS monster pool exists UNDERGROUND:-1:10
+PASS monster pool exists UNDERGROUND:-1:11
+PASS monster pool exists UNDERGROUND:0:11
+PASS monster pool exists UNDERGROUND:1:11
+PASS monster pool exists UNDERGROUND:1:12
+PASS monster pool exists UNDERGROUND:2:11
+PASS monster pool exists UNDERGROUND:-2:13
+PASS monster pool exists UNDERGROUND:-2:14
+PASS monster pool exists UNDERGROUND:-1:12
+PASS monster pool exists UNDERGROUND:-1:13
+PASS monster pool exists UNDERGROUND:-1:14
+PASS monster pool exists UNDERGROUND:0:9
+PASS monster pool exists UNDERGROUND:0:10
+PASS monster pool exists UNDERGROUND:0:12
+PASS monster pool exists UNDERGROUND:0:13
+PASS monster pool exists UNDERGROUND:0:14
+PASS monster pool exists UNDERGROUND:1:8
+PASS monster pool exists UNDERGROUND:1:9
+PASS monster pool exists UNDERGROUND:1:10
+PASS monster pool exists UNDERGROUND:1:13
+PASS monster pool exists UNDERGROUND:1:14
+PASS monster pool exists UNDERGROUND:2:8
+PASS monster pool exists UNDERGROUND:2:9
+PASS monster pool exists UNDERGROUND:2:10
+PASS monster pool exists UNDERGROUND:2:12
+PASS monster pool exists UNDERGROUND:2:13
+PASS monster pool exists UNDERGROUND:3:8
+PASS monster pool exists UNDERGROUND:3:9
+PASS monster pool exists UNDERGROUND:3:10
+PASS monster pool exists UNDERGROUND:3:11
+PASS monster pool exists UNDERGROUND:3:12
+PASS monster pool exists UNDERGROUND:3:13
+PASS monster pool exists UNDERGROUND:3:14
+PASS monster pool exists UNDERGROUND:2:14
+PASS monster pool exists UNDERGROUND:2:15
+PASS monster pool exists UNDERGROUND:3:15
+PASS monster pool exists UNDERGROUND:3:16
+PASS monster pool exists UNDERGROUND:3:17
+PASS monster pool exists UNDERGROUND:3:18
+PASS monster pool exists UNDERGROUND:2:18
+PASS monster pool exists UNDERGROUND:2:19
+PASS monster pool exists UNDERGROUND:3:19
+PASS monster pool exists UNDERGROUND:3:20
+PASS monster pool exists UNDERGROUND:3:21
+PASS monster pool exists UNDERGROUND:3:22
+PASS monster pool exists UNDERGROUND:-9:14
+PASS monster pool exists UNDERGROUND:-9:15
+PASS monster pool exists UNDERGROUND:-8:15
+PASS monster pool exists UNDERGROUND:-6:15
+PASS monster pool exists UNDERGROUND:-6:16
+PASS monster pool exists UNDERGROUND:-6:17
+PASS monster pool exists UNDERGROUND:-7:17
+PASS monster pool exists UNDERGROUND:-7:18
+PASS monster pool exists UNDERGROUND:-6:18
+PASS monster pool exists UNDERGROUND:-5:16
+PASS monster pool exists UNDERGROUND:-5:17
+PASS monster pool exists UNDERGROUND:-6:19
+PASS monster pool exists UNDERGROUND:-1:8
+PASS monster pool exists UNDERGROUND:-1:7
+PASS monster pool exists UNDERGROUND:-1:9
+PASS monster pool exists UNDERGROUND:0:7
+PASS monster pool exists UNDERGROUND:0:8
+PASS monster pool exists UNDERGROUND:-2:15
+PASS monster pool exists UNDERGROUND:-1:15
+PASS monster pool exists UNDERGROUND:-1:16
+PASS monster pool exists UNDERGROUND:-1:17
+PASS monster pool exists UNDERGROUND:-1:18
+PASS monster pool exists UNDERGROUND:-2:18
+PASS monster pool exists UNDERGROUND:-2:19
+PASS monster pool exists UNDERGROUND:-1:19
+PASS monster pool exists UNDERGROUND:0:17
+PASS monster pool exists UNDERGROUND:0:18
+PASS monster pool exists UNDERGROUND:-1:20
+PASS monster pool exists UNDERGROUND:-1:21
+PASS monster pool exists UNDERGROUND:-1:22
+PASS monster pool exists UNDERGROUND:-2:22
+PASS monster pool exists UNDERGROUND:-2:23
+PASS monster pool exists UNDERGROUND:-1:23
+PASS monster pool exists UNDERGROUND:0:21
+PASS monster pool exists UNDERGROUND:0:22
+PASS monster pool exists UNDERGROUND:-1:24
+PASS monster pool exists UNDERGROUND:-3:14
+PASS monster pool exists UNDERGROUND:-4:14
+PASS monster pool exists UNDERGROUND:-4:15
+PASS monster pool exists UNDERGROUND:-3:13
+PASS monster pool exists UNDERGROUND:-3:15
+PASS monster pool exists UNDERGROUND:-2:17
+PASS monster pool exists UNDERGROUND:0:16
+PASS monster pool exists UNDERGROUND:-7:15
+PASS monster pool exists UNDERGROUND:-7:16
+PASS monster pool exists UNDERGROUND:-7:19
+PASS monster pool exists UNDERGROUND:-7:20
+PASS monster pool exists UNDERGROUND:-7:21
+PASS monster pool exists UNDERGROUND:-7:22
+PASS monster pool exists UNDERGROUND:-7:23
+PASS monster pool exists UNDERGROUND:-7:24
+PASS monster pool exists UNDERGROUND:-3:16
+PASS monster pool exists UNDERGROUND:-3:17
+PASS monster pool exists UNDERGROUND:-4:17
+PASS monster pool exists UNDERGROUND:-4:18
+PASS monster pool exists UNDERGROUND:-3:18
+PASS monster pool exists UNDERGROUND:-2:16
+PASS monster pool exists UNDERGROUND:2:16
+PASS monster pool exists UNDERGROUND:2:17
+PASS monster pool exists UNDERGROUND:1:17
+PASS monster pool exists UNDERGROUND:1:18
+PASS monster pool exists UNDERGROUND:-5:15
+PASS monster pool exists UNDERGROUND:-6:20
+PASS monster pool exists UNDERGROUND:-5:18
+PASS monster pool exists UNDERGROUND:-5:19
+PASS monster pool exists UNDERGROUND:1:19
+PASS monster pool exists UNDERGROUND:3:7
+PASS monster pool exists UNDERGROUND:3:6
+PASS monster pool exists UNDERGROUND:1:15
+PASS monster pool exists UNDERGROUND:1:16
+PASS monster pool exists UNDERGROUND:1:20
+PASS monster pool exists UNDERGROUND:1:21
+PASS monster pool exists UNDERGROUND:1:22
+PASS monster pool exists UNDERGROUND:2:20
+PASS monster pool exists UNDERGROUND:2:21
+PASS monster pool exists UNDERGROUND:1:23
+PASS monster pool exists UNDERGROUND:1:24
+PASS monster pool exists UNDERGROUND:1:25
+PASS monster pool exists UNDERGROUND:0:25
+PASS monster pool exists UNDERGROUND:0:26
+PASS monster pool exists UNDERGROUND:1:26
+PASS monster pool exists UNDERGROUND:2:24
+PASS monster pool exists UNDERGROUND:2:25
+PASS monster pool exists UNDERGROUND:1:27
+PASS monster pool exists UNDERGROUND:-3:7
+PASS monster pool exists UNDERGROUND:-2:6
+PASS monster pool exists UNDERGROUND:-1:5
+PASS monster pool exists UNDERGROUND:-1:4
+PASS monster pool exists UNDERGROUND:-2:4
+PASS monster pool exists UNDERGROUND:-2:5
+PASS monster pool exists UNDERGROUND:-1:3
+PASS monster pool exists UNDERGROUND:0:3
+PASS monster pool exists UNDERGROUND:0:4
+PASS monster pool exists UNDERGROUND:-3:5
+PASS monster pool exists UNDERGROUND:-3:4
+PASS monster pool exists UNDERGROUND:-4:4
+PASS monster pool exists UNDERGROUND:-5:4
+PASS monster pool exists UNDERGROUND:-5:5
+PASS monster pool exists UNDERGROUND:-4:3
+PASS monster pool exists UNDERGROUND:-4:5
+PASS monster pool exists UNDERGROUND:-3:3
+PASS monster pool exists UNDERGROUND:-4:6
+PASS monster pool exists UNDERGROUND:-4:7
+PASS monster pool exists UNDERGROUND:2:22
+PASS monster pool exists UNDERGROUND:2:23
+PASS monster pool exists UNDERGROUND:0:15
+PASS monster pool exists UNDERGROUND:0:19
+PASS monster pool exists UNDERGROUND:-1:25
+PASS monster pool exists UNDERGROUND:-1:26
+PASS monster pool exists UNDERGROUND:-1:27
+PASS monster pool exists UNDERGROUND:-2:27
+PASS monster pool exists UNDERGROUND:-3:27
+PASS monster pool exists UNDERGROUND:-2:26
+PASS monster pool exists UNDERGROUND:0:20
+PASS monster pool exists UNDERGROUND:0:24
+PASS monster pool exists UNDERGROUND:0:23
+PASS monster pool exists UNDERGROUND:0:27
+PASS monster pool exists UNDERGROUND:-2:7
+PASS monster pool exists UNDERGROUND:-3:6
+PASS monster pool exists UNDERGROUND:-1:6
+PASS monster pool exists UNDERGROUND:-4:16
+PASS monster pool exists UNDERGROUND:-3:19
+PASS monster pool exists UNDERGROUND:-4:19
+PASS monster pool exists UNDERGROUND:-4:20
+PASS monster pool exists UNDERGROUND:-3:20
+PASS monster pool exists UNDERGROUND:-3:21
+PASS monster pool exists UNDERGROUND:-3:22
+PASS monster pool exists UNDERGROUND:-2:20
+PASS monster pool exists UNDERGROUND:-2:21
+PASS monster pool exists UNDERGROUND:-2:24
+PASS monster pool exists UNDERGROUND:-2:25
+PASS monster pool exists UNDERGROUND:-5:20
+PASS monster pool exists UNDERGROUND:-5:21
+PASS monster pool exists UNDERGROUND:-5:22
+PASS monster pool exists UNDERGROUND:-5:23
+PASS monster pool exists UNDERGROUND:-5:24
+PASS monster pool exists UNDERGROUND:-5:25
+PASS monster pool exists UNDERGROUND:-5:26
+PASS monster pool exists UNDERGROUND:-5:27
+PASS monster pool exists UNDERGROUND:-6:27
+PASS monster pool exists UNDERGROUND:-4:26
+PASS monster pool exists UNDERGROUND:-4:27
+PASS monster pool exists UNDERGROUND:-9:13
+PASS monster pool exists UNDERGROUND:-10:13
+PASS monster pool exists UNDERGROUND:-3:23
+PASS monster pool exists UNDERGROUND:-4:21
+PASS monster pool exists UNDERGROUND:-3:24
+PASS monster pool exists UNDERGROUND:-3:25
+PASS monster pool exists UNDERGROUND:-3:26
+PASS monster pool exists UNDERGROUND:-8:16
+PASS monster pool exists UNDERGROUND:-8:23
+PASS monster pool exists UNDERGROUND:-8:24
+PASS monster pool exists UNDERGROUND:-6:22
+PASS monster pool exists UNDERGROUND:-6:23
+PASS monster pool exists UNDERGROUND:-7:25
+PASS monster pool exists UNDERGROUND:-7:26
+PASS monster pool exists UNDERGROUND:-7:27
+PASS monster pool exists UNDERGROUND:-4:22
+PASS monster pool exists UNDERGROUND:-4:23
+PASS monster pool exists DEEP_UNDERGROUND:-46:38
+PASS monster pool exists DEEP_UNDERGROUND:-46:39
+PASS monster pool exists DEEP_UNDERGROUND:-46:40
+PASS monster pool exists DEEP_UNDERGROUND:-46:41
+PASS monster pool exists DEEP_UNDERGROUND:-46:42
+PASS monster pool exists DEEP_UNDERGROUND:-45:37
+PASS monster pool exists DEEP_UNDERGROUND:-45:38
+PASS monster pool exists DEEP_UNDERGROUND:-45:39
+PASS monster pool exists DEEP_UNDERGROUND:-45:40
+PASS monster pool exists DEEP_UNDERGROUND:-45:41
+PASS monster pool exists DEEP_UNDERGROUND:-45:42
+PASS monster pool exists DEEP_UNDERGROUND:-44:36
+PASS monster pool exists DEEP_UNDERGROUND:-44:37
+PASS monster pool exists DEEP_UNDERGROUND:-44:38
+PASS monster pool exists DEEP_UNDERGROUND:-44:39
+PASS monster pool exists DEEP_UNDERGROUND:-44:40
+PASS monster pool exists DEEP_UNDERGROUND:-44:41
+PASS monster pool exists DEEP_UNDERGROUND:-44:42
+PASS monster pool exists DEEP_UNDERGROUND:-43:35
+PASS monster pool exists DEEP_UNDERGROUND:-43:36
+PASS monster pool exists DEEP_UNDERGROUND:-43:37
+PASS monster pool exists DEEP_UNDERGROUND:-43:38
+PASS monster pool exists DEEP_UNDERGROUND:-43:39
+PASS monster pool exists DEEP_UNDERGROUND:-43:40
+PASS monster pool exists DEEP_UNDERGROUND:-43:41
+PASS monster pool exists DEEP_UNDERGROUND:-43:42
+PASS monster pool exists DEEP_UNDERGROUND:-42:34
+PASS monster pool exists DEEP_UNDERGROUND:-42:35
+PASS monster pool exists DEEP_UNDERGROUND:-42:36
+PASS monster pool exists DEEP_UNDERGROUND:-42:37
+PASS monster pool exists DEEP_UNDERGROUND:-42:38
+PASS monster pool exists DEEP_UNDERGROUND:-42:39
+PASS monster pool exists DEEP_UNDERGROUND:-42:40
+PASS monster pool exists DEEP_UNDERGROUND:-42:41
+PASS monster pool exists DEEP_UNDERGROUND:-42:42
+PASS monster pool exists DEEP_UNDERGROUND:-41:34
+PASS monster pool exists DEEP_UNDERGROUND:-41:35
+PASS monster pool exists DEEP_UNDERGROUND:-41:36
+PASS monster pool exists DEEP_UNDERGROUND:-41:37
+PASS monster pool exists DEEP_UNDERGROUND:-41:38
+PASS monster pool exists DEEP_UNDERGROUND:-41:39
+PASS monster pool exists DEEP_UNDERGROUND:-41:40
+PASS monster pool exists DEEP_UNDERGROUND:-41:41
+PASS monster pool exists DEEP_UNDERGROUND:-40:34
+PASS monster pool exists DEEP_UNDERGROUND:-40:35
+PASS monster pool exists DEEP_UNDERGROUND:-40:36
+PASS monster pool exists DEEP_UNDERGROUND:-40:37
+PASS monster pool exists DEEP_UNDERGROUND:-40:38
+PASS monster pool exists DEEP_UNDERGROUND:-40:39
+PASS monster pool exists DEEP_UNDERGROUND:-40:40
+PASS monster pool exists DEEP_UNDERGROUND:-39:34
+PASS monster pool exists DEEP_UNDERGROUND:-39:35
+PASS monster pool exists DEEP_UNDERGROUND:-39:36
+PASS monster pool exists DEEP_UNDERGROUND:-39:37
+PASS monster pool exists DEEP_UNDERGROUND:-39:38
+PASS monster pool exists DEEP_UNDERGROUND:-39:39
+PASS monster pool exists DEEP_UNDERGROUND:-38:34
+PASS monster pool exists DEEP_UNDERGROUND:-38:35
+PASS monster pool exists DEEP_UNDERGROUND:-38:36
+PASS monster pool exists DEEP_UNDERGROUND:-38:37
+PASS monster pool exists DEEP_UNDERGROUND:-38:38
+PASS monster pool exists DEEP_UNDERGROUND:-47:39
+PASS monster pool exists DEEP_UNDERGROUND:-48:39
+PASS monster pool exists DEEP_UNDERGROUND:-49:39
+PASS monster pool exists DEEP_UNDERGROUND:-50:39
+PASS monster pool exists DEEP_UNDERGROUND:-50:40
+PASS monster pool exists DEEP_UNDERGROUND:-49:38
+PASS monster pool exists DEEP_UNDERGROUND:-49:40
+PASS monster pool exists DEEP_UNDERGROUND:-48:38
+PASS monster pool exists DEEP_UNDERGROUND:-51:39
+PASS monster pool exists DEEP_UNDERGROUND:-52:39
+PASS monster pool exists DEEP_UNDERGROUND:-53:39
+PASS monster pool exists DEEP_UNDERGROUND:-54:39
+PASS monster pool exists DEEP_UNDERGROUND:-55:39
+PASS monster pool exists DEEP_UNDERGROUND:-55:40
+PASS monster pool exists DEEP_UNDERGROUND:-54:38
+PASS monster pool exists DEEP_UNDERGROUND:-54:40
+PASS monster pool exists DEEP_UNDERGROUND:-53:38
+PASS monster pool exists DEEP_UNDERGROUND:-56:39
+PASS monster pool exists DEEP_UNDERGROUND:-57:39
+PASS monster pool exists DEEP_UNDERGROUND:-58:39
+PASS monster pool exists DEEP_UNDERGROUND:-59:39
+PASS monster pool exists DEEP_UNDERGROUND:-60:39
+PASS monster pool exists DEEP_UNDERGROUND:-60:40
+PASS monster pool exists DEEP_UNDERGROUND:-59:40
+PASS monster pool exists DEEP_UNDERGROUND:-44:35
+PASS monster pool exists DEEP_UNDERGROUND:-45:35
+PASS monster pool exists DEEP_UNDERGROUND:-46:35
+PASS monster pool exists DEEP_UNDERGROUND:-47:35
+PASS monster pool exists DEEP_UNDERGROUND:-48:35
+PASS monster pool exists DEEP_UNDERGROUND:-49:35
+PASS monster pool exists DEEP_UNDERGROUND:-50:35
+PASS monster pool exists DEEP_UNDERGROUND:-51:35
+PASS monster pool exists DEEP_UNDERGROUND:-52:35
+PASS monster pool exists DEEP_UNDERGROUND:-53:35
+PASS monster pool exists DEEP_UNDERGROUND:-54:35
+PASS monster pool exists DEEP_UNDERGROUND:-39:33
+PASS monster pool exists DEEP_UNDERGROUND:-38:33
+PASS monster pool exists DEEP_UNDERGROUND:-41:33
+PASS monster pool exists DEEP_UNDERGROUND:-40:33
+PASS monster pool exists DEEP_UNDERGROUND:-43:34
+PASS monster pool exists DEEP_UNDERGROUND:-44:34
+PASS monster pool exists DEEP_UNDERGROUND:-45:34
+PASS monster pool exists DEEP_UNDERGROUND:-46:34
+PASS monster pool exists DEEP_UNDERGROUND:-47:34
+PASS monster pool exists DEEP_UNDERGROUND:-46:33
+PASS monster pool exists DEEP_UNDERGROUND:-45:33
+PASS monster pool exists DEEP_UNDERGROUND:-48:34
+PASS monster pool exists DEEP_UNDERGROUND:-49:34
+PASS monster pool exists DEEP_UNDERGROUND:-50:34
+PASS monster pool exists DEEP_UNDERGROUND:-51:34
+PASS monster pool exists DEEP_UNDERGROUND:-52:34
+PASS monster pool exists DEEP_UNDERGROUND:-51:33
+PASS monster pool exists DEEP_UNDERGROUND:-50:33
+PASS monster pool exists DEEP_UNDERGROUND:-55:35
+PASS monster pool exists DEEP_UNDERGROUND:-56:35
+PASS monster pool exists DEEP_UNDERGROUND:-56:36
+PASS monster pool exists DEEP_UNDERGROUND:-55:34
+PASS monster pool exists DEEP_UNDERGROUND:-55:36
+PASS monster pool exists DEEP_UNDERGROUND:-54:34
+PASS monster pool exists DEEP_UNDERGROUND:-42:33
+PASS monster pool exists DEEP_UNDERGROUND:-42:32
+PASS monster pool exists DEEP_UNDERGROUND:-43:33
+PASS monster pool exists DEEP_UNDERGROUND:-43:32
+PASS monster pool exists DEEP_UNDERGROUND:-43:31
+PASS monster pool exists DEEP_UNDERGROUND:-44:31
+PASS monster pool exists DEEP_UNDERGROUND:-44:32
+PASS monster pool exists DEEP_UNDERGROUND:-43:30
+PASS monster pool exists DEEP_UNDERGROUND:-42:30
+PASS monster pool exists DEEP_UNDERGROUND:-42:31
+PASS monster pool exists DEEP_UNDERGROUND:-45:32
+PASS monster pool exists DEEP_UNDERGROUND:-39:32
+PASS monster pool exists DEEP_UNDERGROUND:-38:32
+PASS monster pool exists DEEP_UNDERGROUND:-41:32
+PASS monster pool exists DEEP_UNDERGROUND:-44:33
+PASS monster pool exists DEEP_UNDERGROUND:-47:33
+PASS monster pool exists DEEP_UNDERGROUND:-48:33
+PASS monster pool exists DEEP_UNDERGROUND:-47:32
+PASS monster pool exists DEEP_UNDERGROUND:-46:32
+PASS monster pool exists DEEP_UNDERGROUND:-49:33
+PASS monster pool exists DEEP_UNDERGROUND:-52:33
+PASS monster pool exists DEEP_UNDERGROUND:-53:33
+PASS monster pool exists DEEP_UNDERGROUND:-54:33
+PASS monster pool exists DEEP_UNDERGROUND:-55:33
+PASS monster pool exists DEEP_UNDERGROUND:-56:34
+PASS monster pool exists DEEP_UNDERGROUND:-57:35
+PASS monster pool exists DEEP_UNDERGROUND:-41:31
+PASS monster pool exists DEEP_UNDERGROUND:-41:30
+PASS monster pool exists DEEP_UNDERGROUND:-41:29
+PASS monster pool exists DEEP_UNDERGROUND:-41:28
+PASS monster pool exists DEEP_UNDERGROUND:-42:28
+PASS monster pool exists DEEP_UNDERGROUND:-43:28
+PASS monster pool exists DEEP_UNDERGROUND:-44:28
+PASS monster pool exists DEEP_UNDERGROUND:-45:28
+PASS monster pool exists DEEP_UNDERGROUND:-46:28
+PASS monster pool exists DEEP_UNDERGROUND:-46:29
+PASS monster pool exists DEEP_UNDERGROUND:-45:27
+PASS monster pool exists DEEP_UNDERGROUND:-45:29
+PASS monster pool exists DEEP_UNDERGROUND:-44:27
+PASS monster pool exists DEEP_UNDERGROUND:-47:28
+PASS monster pool exists DEEP_UNDERGROUND:-48:28
+PASS monster pool exists DEEP_UNDERGROUND:-49:28
+PASS monster pool exists DEEP_UNDERGROUND:-50:28
+PASS monster pool exists DEEP_UNDERGROUND:-51:29
+PASS monster pool exists DEEP_UNDERGROUND:-50:29
+PASS monster pool exists DEEP_UNDERGROUND:-49:27
+PASS monster pool exists DEEP_UNDERGROUND:-51:30
+PASS monster pool exists DEEP_UNDERGROUND:-52:31
+PASS monster pool exists DEEP_UNDERGROUND:-45:36
+PASS monster pool exists DEEP_UNDERGROUND:-46:36
+PASS monster pool exists DEEP_UNDERGROUND:-47:36
+PASS monster pool exists DEEP_UNDERGROUND:-48:36
+PASS monster pool exists DEEP_UNDERGROUND:-49:36
+PASS monster pool exists DEEP_UNDERGROUND:-50:36
+PASS monster pool exists DEEP_UNDERGROUND:-51:36
+PASS monster pool exists DEEP_UNDERGROUND:-46:37
+PASS monster pool exists DEEP_UNDERGROUND:-52:36
+PASS monster pool exists DEEP_UNDERGROUND:-53:36
+PASS monster pool exists DEEP_UNDERGROUND:-54:36
+PASS monster pool exists DEEP_UNDERGROUND:-57:36
+PASS monster pool exists DEEP_UNDERGROUND:-58:36
+PASS monster pool exists DEEP_UNDERGROUND:-40:30
+PASS monster pool exists DEEP_UNDERGROUND:-40:31
+PASS monster pool exists DEEP_UNDERGROUND:-39:31
+PASS monster pool exists DEEP_UNDERGROUND:-45:31
+PASS monster pool exists DEEP_UNDERGROUND:-46:31
+PASS monster pool exists DEEP_UNDERGROUND:-45:30
+PASS monster pool exists DEEP_UNDERGROUND:-44:30
+PASS monster pool exists DEEP_UNDERGROUND:-47:31
+PASS monster pool exists DEEP_UNDERGROUND:-48:31
+PASS monster pool exists DEEP_UNDERGROUND:-49:31
+PASS monster pool exists DEEP_UNDERGROUND:-50:31
+PASS monster pool exists DEEP_UNDERGROUND:-51:31
+PASS monster pool exists DEEP_UNDERGROUND:-51:32
+PASS monster pool exists DEEP_UNDERGROUND:-50:30
+PASS monster pool exists DEEP_UNDERGROUND:-50:32
+PASS monster pool exists DEEP_UNDERGROUND:-49:30
+PASS monster pool exists DEEP_UNDERGROUND:-53:31
+PASS monster pool exists DEEP_UNDERGROUND:-40:32
+PASS monster pool exists DEEP_UNDERGROUND:-48:32
+PASS monster pool exists DEEP_UNDERGROUND:-49:32
+PASS monster pool exists DEEP_UNDERGROUND:-52:32
+PASS monster pool exists DEEP_UNDERGROUND:-53:32
+PASS monster pool exists DEEP_UNDERGROUND:-54:32
+PASS monster pool exists DEEP_UNDERGROUND:-49:37
+PASS monster pool exists DEEP_UNDERGROUND:-48:37
+PASS monster pool exists DEEP_UNDERGROUND:-54:37
+PASS monster pool exists DEEP_UNDERGROUND:-53:37
+PASS monster pool exists DEEP_UNDERGROUND:-47:37
+PASS monster pool exists DEEP_UNDERGROUND:-47:38
+PASS monster pool exists DEEP_UNDERGROUND:-50:38
+PASS monster pool exists DEEP_UNDERGROUND:-51:38
+PASS monster pool exists DEEP_UNDERGROUND:-52:38
+PASS monster pool exists DEEP_UNDERGROUND:-55:38
+PASS monster pool exists DEEP_UNDERGROUND:-56:38
+PASS monster pool exists DEEP_UNDERGROUND:-57:38
+PASS monster pool exists DEEP_UNDERGROUND:-58:38
+PASS monster pool exists DEEP_UNDERGROUND:-59:38
+PASS monster pool exists DEEP_UNDERGROUND:-58:37
+PASS monster pool exists DEEP_UNDERGROUND:-57:37
+PASS monster pool exists DEEP_UNDERGROUND:-60:38
+PASS monster pool exists DEEP_UNDERGROUND:-37:36
+PASS monster pool exists DEEP_UNDERGROUND:-37:37
+PASS monster pool exists DEEP_UNDERGROUND:-36:36
+PASS monster pool exists DEEP_UNDERGROUND:-35:35
+PASS monster pool exists DEEP_UNDERGROUND:-35:34
+PASS monster pool exists DEEP_UNDERGROUND:-34:33
+PASS monster pool exists DEEP_UNDERGROUND:-33:32
+PASS monster pool exists DEEP_UNDERGROUND:-35:33
+PASS monster pool exists DEEP_UNDERGROUND:-34:32
+PASS monster pool exists DEEP_UNDERGROUND:-34:34
+PASS monster pool exists DEEP_UNDERGROUND:-33:33
+PASS monster pool exists DEEP_UNDERGROUND:-36:35
+PASS monster pool exists DEEP_UNDERGROUND:-37:35
+PASS monster pool exists DEEP_UNDERGROUND:-36:34
+PASS monster pool exists DEEP_UNDERGROUND:-36:33
+PASS monster pool exists DEEP_UNDERGROUND:-35:32
+PASS monster pool exists DEEP_UNDERGROUND:-35:36
+PASS monster pool exists DEEP_UNDERGROUND:-36:37
+PASS monster pool exists DEEP_UNDERGROUND:-37:38
+PASS monster pool exists DEEP_UNDERGROUND:-38:39
+PASS monster pool exists DEEP_UNDERGROUND:-37:39
+PASS monster pool exists DEEP_UNDERGROUND:-36:39
+PASS monster pool exists DEEP_UNDERGROUND:-37:40
+PASS monster pool exists DEEP_UNDERGROUND:-38:40
+PASS monster pool exists DEEP_UNDERGROUND:-39:40
+PASS monster pool exists DEEP_UNDERGROUND:-39:41
+PASS monster pool exists DEEP_UNDERGROUND:-40:41
+PASS monster pool exists DEEP_UNDERGROUND:-37:33
+PASS monster pool exists DEEP_UNDERGROUND:-37:32
+PASS monster pool exists DEEP_UNDERGROUND:-34:31
+PASS monster pool exists DEEP_UNDERGROUND:-33:31
+PASS monster pool exists DEEP_UNDERGROUND:-33:30
+PASS monster pool exists DEEP_UNDERGROUND:-34:30
+PASS monster pool exists DEEP_UNDERGROUND:-33:29
+PASS monster pool exists DEEP_UNDERGROUND:-34:29
+PASS monster pool exists DEEP_UNDERGROUND:-33:28
+PASS monster pool exists DEEP_UNDERGROUND:-32:28
+PASS monster pool exists DEEP_UNDERGROUND:-32:29
+PASS monster pool exists DEEP_UNDERGROUND:-34:28
+PASS monster pool exists DEEP_UNDERGROUND:-35:28
+PASS monster pool exists DEEP_UNDERGROUND:-36:28
+PASS monster pool exists DEEP_UNDERGROUND:-37:28
+PASS monster pool exists DEEP_UNDERGROUND:-37:29
+PASS monster pool exists DEEP_UNDERGROUND:-36:27
+PASS monster pool exists DEEP_UNDERGROUND:-36:29
+PASS monster pool exists DEEP_UNDERGROUND:-35:27
+PASS monster pool exists DEEP_UNDERGROUND:-38:28
+PASS monster pool exists DEEP_UNDERGROUND:-37:34
+PASS monster pool exists DEEP_UNDERGROUND:-36:32
+PASS monster pool exists DEEP_UNDERGROUND:-35:31
+PASS monster pool exists DEEP_UNDERGROUND:-36:31
+PASS monster pool exists DEEP_UNDERGROUND:-52:37
+PASS monster pool exists DEEP_UNDERGROUND:-51:40
+PASS monster pool exists DEEP_UNDERGROUND:-56:40
+PASS monster pool exists DEEP_UNDERGROUND:-50:37
+PASS monster pool exists DEEP_UNDERGROUND:-51:37
+PASS monster pool exists DEEP_UNDERGROUND:-55:37
+PASS monster pool exists DEEP_UNDERGROUND:-56:37
+PASS monster pool exists DEEP_UNDERGROUND:-41:42
+PASS monster pool exists DEEP_UNDERGROUND:-40:42
+PASS monster pool exists DEEP_UNDERGROUND:-40:43
+PASS monster pool exists DEEP_UNDERGROUND:-40:44
+PASS monster pool exists DEEP_UNDERGROUND:-41:43
+PASS monster pool exists DEEP_UNDERGROUND:-41:44
+PASS monster pool exists DEEP_UNDERGROUND:-39:42
+PASS monster pool exists DEEP_UNDERGROUND:-39:43
+PASS monster pool exists DEEP_UNDERGROUND:-42:43
+PASS monster pool exists DEEP_UNDERGROUND:-43:43
+PASS monster pool exists DEEP_UNDERGROUND:-44:43
+PASS monster pool exists DEEP_UNDERGROUND:-45:43
+PASS monster pool exists DEEP_UNDERGROUND:-46:43
+PASS monster pool exists DEEP_UNDERGROUND:-46:44
+PASS monster pool exists DEEP_UNDERGROUND:-45:44
+PASS monster pool exists DEEP_UNDERGROUND:-47:43
+PASS monster pool exists DEEP_UNDERGROUND:-48:43
+PASS monster pool exists DEEP_UNDERGROUND:-49:43
+PASS monster pool exists DEEP_UNDERGROUND:-50:43
+PASS monster pool exists DEEP_UNDERGROUND:-50:44
+PASS monster pool exists DEEP_UNDERGROUND:-49:42
+PASS monster pool exists DEEP_UNDERGROUND:-49:44
+PASS monster pool exists DEEP_UNDERGROUND:-48:42
+PASS monster pool exists DEEP_UNDERGROUND:-51:43
+PASS monster pool exists DEEP_UNDERGROUND:-52:43
+PASS monster pool exists DEEP_UNDERGROUND:-53:43
+PASS monster pool exists DEEP_UNDERGROUND:-54:43
+PASS monster pool exists DEEP_UNDERGROUND:-55:43
+PASS monster pool exists DEEP_UNDERGROUND:-56:43
+PASS monster pool exists DEEP_UNDERGROUND:-47:42
+PASS monster pool exists DEEP_UNDERGROUND:-50:42
+PASS monster pool exists DEEP_UNDERGROUND:-51:42
+PASS monster pool exists DEEP_UNDERGROUND:-50:41
+PASS monster pool exists DEEP_UNDERGROUND:-49:41
+PASS monster pool exists DEEP_UNDERGROUND:-52:42
+PASS monster pool exists DEEP_UNDERGROUND:-53:42
+PASS monster pool exists DEEP_UNDERGROUND:-54:42
+PASS monster pool exists DEEP_UNDERGROUND:-55:42
+PASS monster pool exists DEEP_UNDERGROUND:-47:44
+PASS monster pool exists DEEP_UNDERGROUND:-48:44
+PASS monster pool exists DEEP_UNDERGROUND:-48:45
+PASS monster pool exists DEEP_UNDERGROUND:-51:44
+PASS monster pool exists DEEP_UNDERGROUND:-52:44
+PASS monster pool exists DEEP_UNDERGROUND:-53:44
+PASS monster pool exists DEEP_UNDERGROUND:-54:44
+PASS monster pool exists DEEP_UNDERGROUND:-54:45
+PASS monster pool exists DEEP_UNDERGROUND:-53:45
+PASS monster pool exists DEEP_UNDERGROUND:-55:44
+PASS monster pool exists DEEP_UNDERGROUND:-56:44
+PASS monster pool exists DEEP_UNDERGROUND:-57:44
+PASS monster pool exists DEEP_UNDERGROUND:-47:41
+PASS monster pool exists DEEP_UNDERGROUND:-47:40
+PASS monster pool exists DEEP_UNDERGROUND:-48:41
+PASS monster pool exists DEEP_UNDERGROUND:-52:40
+PASS monster pool exists DEEP_UNDERGROUND:-38:41
+PASS monster pool exists DEEP_UNDERGROUND:-48:40
+PASS monster pool exists DEEP_UNDERGROUND:-53:40
+PASS monster pool exists DEEP_UNDERGROUND:-53:41
+PASS monster pool exists DEEP_UNDERGROUND:-52:41
+PASS monster pool exists DEEP_UNDERGROUND:-57:40
+PASS monster pool exists DEEP_UNDERGROUND:-58:40
+PASS monster pool exists DEEP_UNDERGROUND:-58:41
+PASS monster pool exists DEEP_UNDERGROUND:-57:41
+PASS monster pool exists DEEP_UNDERGROUND:-59:37
+PASS monster pool exists UNDERGROUND:4:2
+PASS monster pool exists UNDERGROUND:4:3
+PASS monster pool exists UNDERGROUND:4:4
+PASS monster pool exists UNDERGROUND:4:5
+PASS monster pool exists UNDERGROUND:5:1
+PASS monster pool exists UNDERGROUND:5:2
+PASS monster pool exists UNDERGROUND:5:3
+PASS monster pool exists UNDERGROUND:5:4
+PASS monster pool exists UNDERGROUND:6:2
+PASS monster pool exists UNDERGROUND:6:3
+PASS monster pool exists UNDERGROUND:6:4
+PASS monster pool exists UNDERGROUND:7:2
+PASS monster pool exists UNDERGROUND:7:3
+PASS monster pool exists UNDERGROUND:10:-1
+PASS monster pool exists UNDERGROUND:10:0
+PASS monster pool exists UNDERGROUND:10:1
+PASS monster pool exists UNDERGROUND:10:2
+PASS monster pool exists UNDERGROUND:11:-2
+PASS monster pool exists UNDERGROUND:11:-1
+PASS monster pool exists UNDERGROUND:11:0
+PASS monster pool exists UNDERGROUND:11:1
+PASS monster pool exists UNDERGROUND:11:2
+PASS monster pool exists UNDERGROUND:12:-3
+PASS monster pool exists UNDERGROUND:12:-2
+PASS monster pool exists UNDERGROUND:12:-1
+PASS monster pool exists UNDERGROUND:12:0
+PASS monster pool exists UNDERGROUND:12:1
+PASS monster pool exists UNDERGROUND:12:2
+PASS monster pool exists UNDERGROUND:13:-4
+PASS monster pool exists UNDERGROUND:13:-3
+PASS monster pool exists UNDERGROUND:13:-2
+PASS monster pool exists UNDERGROUND:13:-1
+PASS monster pool exists UNDERGROUND:13:0
+PASS monster pool exists UNDERGROUND:13:1
+PASS monster pool exists UNDERGROUND:13:2
+PASS monster pool exists UNDERGROUND:14:-4
+PASS monster pool exists UNDERGROUND:14:-3
+PASS monster pool exists UNDERGROUND:14:-2
+PASS monster pool exists UNDERGROUND:14:-1
+PASS monster pool exists UNDERGROUND:14:0
+PASS monster pool exists UNDERGROUND:14:1
+PASS monster pool exists UNDERGROUND:15:-4
+PASS monster pool exists UNDERGROUND:15:-3
+PASS monster pool exists UNDERGROUND:15:-2
+PASS monster pool exists UNDERGROUND:15:-1
+PASS monster pool exists UNDERGROUND:15:0
+PASS monster pool exists UNDERGROUND:16:-4
+PASS monster pool exists UNDERGROUND:16:-3
+PASS monster pool exists UNDERGROUND:16:-2
+PASS monster pool exists UNDERGROUND:16:-1
+PASS monster pool exists UNDERGROUND:13:3
+PASS monster pool exists UNDERGROUND:14:2
+PASS monster pool exists UNDERGROUND:12:3
+PASS monster pool exists UNDERGROUND:11:4
+PASS monster pool exists UNDERGROUND:12:4
+PASS monster pool exists UNDERGROUND:11:5
+PASS monster pool exists UNDERGROUND:12:5
+PASS monster pool exists UNDERGROUND:11:6
+PASS monster pool exists UNDERGROUND:12:6
+PASS monster pool exists UNDERGROUND:13:5
+PASS monster pool exists UNDERGROUND:11:7
+PASS monster pool exists UNDERGROUND:12:7
+PASS monster pool exists UNDERGROUND:13:4
+PASS monster pool exists UNDERGROUND:13:6
+PASS monster pool exists UNDERGROUND:13:7
+PASS monster pool exists UNDERGROUND:14:3
+PASS monster pool exists UNDERGROUND:14:4
+PASS monster pool exists UNDERGROUND:14:5
+PASS monster pool exists UNDERGROUND:14:6
+PASS monster pool exists UNDERGROUND:14:7
+PASS monster pool exists UNDERGROUND:15:1
+PASS monster pool exists UNDERGROUND:15:2
+PASS monster pool exists UNDERGROUND:15:3
+PASS monster pool exists UNDERGROUND:15:4
+PASS monster pool exists UNDERGROUND:15:5
+PASS monster pool exists UNDERGROUND:15:6
+PASS monster pool exists UNDERGROUND:16:1
+PASS monster pool exists UNDERGROUND:16:2
+PASS monster pool exists UNDERGROUND:16:3
+PASS monster pool exists UNDERGROUND:16:4
+PASS monster pool exists UNDERGROUND:16:5
+PASS monster pool exists UNDERGROUND:17:1
+PASS monster pool exists UNDERGROUND:17:2
+PASS monster pool exists UNDERGROUND:17:3
+PASS monster pool exists UNDERGROUND:17:4
+PASS monster pool exists UNDERGROUND:9:6
+PASS monster pool exists UNDERGROUND:9:7
+PASS monster pool exists UNDERGROUND:9:8
+PASS monster pool exists UNDERGROUND:9:9
+PASS monster pool exists UNDERGROUND:10:5
+PASS monster pool exists UNDERGROUND:10:6
+PASS monster pool exists UNDERGROUND:10:7
+PASS monster pool exists UNDERGROUND:10:8
+PASS monster pool exists UNDERGROUND:10:9
+PASS monster pool exists UNDERGROUND:11:8
+PASS monster pool exists UNDERGROUND:11:9
+PASS monster pool exists UNDERGROUND:12:8
+PASS monster pool exists UNDERGROUND:12:9
+PASS monster pool exists UNDERGROUND:13:8
+PASS monster pool exists UNDERGROUND:17:5
+PASS monster pool exists UNDERGROUND:16:6
+PASS monster pool exists UNDERGROUND:17:6
+PASS monster pool exists UNDERGROUND:18:4
+PASS monster pool exists UNDERGROUND:18:5
+PASS monster pool exists UNDERGROUND:17:7
+PASS monster pool exists UNDERGROUND:17:8
+PASS monster pool exists UNDERGROUND:17:9
+PASS monster pool exists UNDERGROUND:17:10
+PASS monster pool exists UNDERGROUND:17:11
+PASS monster pool exists UNDERGROUND:17:12
+PASS monster pool exists UNDERGROUND:17:13
+PASS monster pool exists UNDERGROUND:17:14
+PASS monster pool exists UNDERGROUND:17:15
+PASS monster pool exists UNDERGROUND:17:16
+PASS monster pool exists UNDERGROUND:17:17
+PASS monster pool exists UNDERGROUND:16:17
+PASS monster pool exists UNDERGROUND:16:18
+PASS monster pool exists UNDERGROUND:18:16
+PASS monster pool exists UNDERGROUND:19:15
+PASS monster pool exists UNDERGROUND:20:14
+PASS monster pool exists UNDERGROUND:19:14
+PASS monster pool exists UNDERGROUND:20:13
+PASS monster pool exists UNDERGROUND:21:13
+PASS monster pool exists UNDERGROUND:11:10
+PASS monster pool exists UNDERGROUND:11:11
+PASS monster pool exists UNDERGROUND:11:12
+PASS monster pool exists UNDERGROUND:10:12
+PASS monster pool exists UNDERGROUND:10:13
+PASS monster pool exists UNDERGROUND:11:13
+PASS monster pool exists UNDERGROUND:12:11
+PASS monster pool exists UNDERGROUND:12:12
+PASS monster pool exists UNDERGROUND:16:7
+PASS monster pool exists UNDERGROUND:16:8
+PASS monster pool exists UNDERGROUND:16:9
+PASS monster pool exists UNDERGROUND:16:10
+PASS monster pool exists UNDERGROUND:15:10
+PASS monster pool exists UNDERGROUND:15:11
+PASS monster pool exists UNDERGROUND:16:11
+PASS monster pool exists UNDERGROUND:16:12
+PASS monster pool exists UNDERGROUND:9:2
+PASS monster pool exists UNDERGROUND:9:3
+PASS monster pool exists UNDERGROUND:10:3
+PASS monster pool exists UNDERGROUND:10:4
+PASS monster pool exists UNDERGROUND:9:4
+PASS monster pool exists UNDERGROUND:9:5
+PASS monster pool exists UNDERGROUND:11:3
+PASS monster pool exists UNDERGROUND:10:10
+PASS monster pool exists UNDERGROUND:15:7
+PASS monster pool exists UNDERGROUND:15:8
+PASS monster pool exists UNDERGROUND:15:9
+PASS monster pool exists UNDERGROUND:14:10
+PASS monster pool exists UNDERGROUND:14:11
+PASS monster pool exists UNDERGROUND:15:12
+PASS monster pool exists UNDERGROUND:15:13
+PASS monster pool exists UNDERGROUND:12:10
+PASS monster pool exists UNDERGROUND:12:13
+PASS monster pool exists UNDERGROUND:12:14
+PASS monster pool exists UNDERGROUND:11:14
+PASS monster pool exists UNDERGROUND:11:15
+PASS monster pool exists UNDERGROUND:12:15
+PASS monster pool exists UNDERGROUND:13:13
+PASS monster pool exists UNDERGROUND:13:14
+PASS monster pool exists UNDERGROUND:12:16
+PASS monster pool exists UNDERGROUND:12:17
+PASS monster pool exists UNDERGROUND:12:18
+PASS monster pool exists UNDERGROUND:11:18
+PASS monster pool exists UNDERGROUND:11:19
+PASS monster pool exists UNDERGROUND:12:19
+PASS monster pool exists UNDERGROUND:13:17
+PASS monster pool exists UNDERGROUND:13:18
+PASS monster pool exists UNDERGROUND:12:20
+PASS monster pool exists UNDERGROUND:13:9
+PASS monster pool exists UNDERGROUND:14:8
+PASS monster pool exists UNDERGROUND:18:1
+PASS monster pool exists UNDERGROUND:18:2
+PASS monster pool exists UNDERGROUND:17:0
+PASS monster pool exists UNDERGROUND:16:0
+PASS monster pool exists UNDERGROUND:14:-5
+PASS monster pool exists UNDERGROUND:12:-4
+PASS monster pool exists UNDERGROUND:11:-4
+PASS monster pool exists UNDERGROUND:10:-4
+PASS monster pool exists UNDERGROUND:10:-3
+PASS monster pool exists UNDERGROUND:11:-5
+PASS monster pool exists UNDERGROUND:11:-3
+PASS monster pool exists UNDERGROUND:12:-5
+PASS monster pool exists UNDERGROUND:14:9
+PASS monster pool exists UNDERGROUND:14:12
+PASS monster pool exists UNDERGROUND:14:13
+PASS monster pool exists UNDERGROUND:14:14
+PASS monster pool exists UNDERGROUND:14:15
+PASS monster pool exists UNDERGROUND:14:16
+PASS monster pool exists UNDERGROUND:8:8
+PASS monster pool exists UNDERGROUND:10:11
+PASS monster pool exists UNDERGROUND:9:12
+PASS monster pool exists UNDERGROUND:9:13
+PASS monster pool exists UNDERGROUND:10:14
+PASS monster pool exists UNDERGROUND:10:15
+PASS monster pool exists UNDERGROUND:10:16
+PASS monster pool exists UNDERGROUND:9:16
+PASS monster pool exists UNDERGROUND:9:17
+PASS monster pool exists UNDERGROUND:10:17
+PASS monster pool exists UNDERGROUND:11:16
+PASS monster pool exists UNDERGROUND:18:3
+PASS monster pool exists UNDERGROUND:18:7
+PASS monster pool exists UNDERGROUND:18:8
+PASS monster pool exists UNDERGROUND:16:16
+PASS monster pool exists UNDERGROUND:8:5
+PASS monster pool exists UNDERGROUND:8:6
+PASS monster pool exists UNDERGROUND:13:10
+PASS monster pool exists UNDERGROUND:13:11
+PASS monster pool exists UNDERGROUND:13:12
+PASS monster pool exists UNDERGROUND:13:15
+PASS monster pool exists UNDERGROUND:8:9
+PASS monster pool exists UNDERGROUND:8:10
+PASS monster pool exists UNDERGROUND:9:10
+PASS monster pool exists UNDERGROUND:9:11
+PASS monster pool exists UNDERGROUND:8:13
+PASS monster pool exists UNDERGROUND:8:14
+PASS monster pool exists UNDERGROUND:9:14
+PASS monster pool exists UNDERGROUND:9:15
+PASS monster pool exists UNDERGROUND:11:17
+PASS monster pool exists UNDERGROUND:10:19
+PASS monster pool exists UNDERGROUND:10:20
+PASS monster pool exists UNDERGROUND:11:20
+PASS monster pool exists UNDERGROUND:9:0
+PASS monster pool exists UNDERGROUND:9:1
+PASS monster pool exists UNDERGROUND:9:-1
+PASS monster pool exists UNDERGROUND:8:0
+PASS monster pool exists UNDERGROUND:7:0
+PASS monster pool exists UNDERGROUND:8:-1
+PASS monster pool exists UNDERGROUND:13:-5
+PASS monster pool exists UNDERGROUND:13:-6
+PASS monster pool exists UNDERGROUND:14:-6
+PASS monster pool exists UNDERGROUND:15:-6
+PASS monster pool exists UNDERGROUND:8:7
+PASS monster pool exists UNDERGROUND:7:9
+PASS monster pool exists UNDERGROUND:6:9
+PASS monster pool exists UNDERGROUND:6:8
+PASS monster pool exists UNDERGROUND:7:7
+PASS monster pool exists UNDERGROUND:7:8
+PASS monster pool exists UNDERGROUND:6:10
+PASS monster pool exists UNDERGROUND:7:10
+PASS monster pool exists UNDERGROUND:7:11
+PASS monster pool exists UNDERGROUND:7:12
+PASS monster pool exists UNDERGROUND:7:13
+PASS monster pool exists UNDERGROUND:6:13
+PASS monster pool exists UNDERGROUND:6:14
+PASS monster pool exists UNDERGROUND:7:14
+PASS monster pool exists UNDERGROUND:8:12
+PASS monster pool exists UNDERGROUND:7:15
+PASS monster pool exists UNDERGROUND:7:16
+PASS monster pool exists UNDERGROUND:7:17
+PASS monster pool exists UNDERGROUND:6:17
+PASS monster pool exists UNDERGROUND:6:18
+PASS monster pool exists UNDERGROUND:7:18
+PASS monster pool exists UNDERGROUND:8:16
+PASS monster pool exists UNDERGROUND:8:17
+PASS monster pool exists UNDERGROUND:7:6
+PASS monster pool exists UNDERGROUND:8:4
+PASS monster pool exists UNDERGROUND:7:5
+PASS monster pool exists UNDERGROUND:6:6
+PASS monster pool exists UNDERGROUND:5:6
+PASS monster pool exists UNDERGROUND:4:7
+PASS monster pool exists UNDERGROUND:4:8
+PASS monster pool exists UNDERGROUND:4:9
+PASS monster pool exists UNDERGROUND:4:10
+PASS monster pool exists UNDERGROUND:10:-2
+PASS monster pool exists DEEP_UNDERGROUND:38:18
+PASS monster pool exists DEEP_UNDERGROUND:38:19
+PASS monster pool exists DEEP_UNDERGROUND:38:20
+PASS monster pool exists DEEP_UNDERGROUND:38:21
+PASS monster pool exists DEEP_UNDERGROUND:38:22
+PASS monster pool exists DEEP_UNDERGROUND:39:17
+PASS monster pool exists DEEP_UNDERGROUND:39:18
+PASS monster pool exists DEEP_UNDERGROUND:39:19
+PASS monster pool exists DEEP_UNDERGROUND:39:20
+PASS monster pool exists DEEP_UNDERGROUND:39:21
+PASS monster pool exists DEEP_UNDERGROUND:39:22
+PASS monster pool exists DEEP_UNDERGROUND:40:16
+PASS monster pool exists DEEP_UNDERGROUND:40:17
+PASS monster pool exists DEEP_UNDERGROUND:40:18
+PASS monster pool exists DEEP_UNDERGROUND:40:19
+PASS monster pool exists DEEP_UNDERGROUND:40:20
+PASS monster pool exists DEEP_UNDERGROUND:40:21
+PASS monster pool exists DEEP_UNDERGROUND:40:22
+PASS monster pool exists DEEP_UNDERGROUND:41:15
+PASS monster pool exists DEEP_UNDERGROUND:41:16
+PASS monster pool exists DEEP_UNDERGROUND:41:17
+PASS monster pool exists DEEP_UNDERGROUND:41:18
+PASS monster pool exists DEEP_UNDERGROUND:41:19
+PASS monster pool exists DEEP_UNDERGROUND:41:20
+PASS monster pool exists DEEP_UNDERGROUND:41:21
+PASS monster pool exists DEEP_UNDERGROUND:41:22
+PASS monster pool exists DEEP_UNDERGROUND:42:14
+PASS monster pool exists DEEP_UNDERGROUND:42:15
+PASS monster pool exists DEEP_UNDERGROUND:42:16
+PASS monster pool exists DEEP_UNDERGROUND:42:17
+PASS monster pool exists DEEP_UNDERGROUND:42:18
+PASS monster pool exists DEEP_UNDERGROUND:42:19
+PASS monster pool exists DEEP_UNDERGROUND:42:20
+PASS monster pool exists DEEP_UNDERGROUND:42:21
+PASS monster pool exists DEEP_UNDERGROUND:42:22
+PASS monster pool exists DEEP_UNDERGROUND:43:14
+PASS monster pool exists DEEP_UNDERGROUND:43:15
+PASS monster pool exists DEEP_UNDERGROUND:43:16
+PASS monster pool exists DEEP_UNDERGROUND:43:17
+PASS monster pool exists DEEP_UNDERGROUND:43:18
+PASS monster pool exists DEEP_UNDERGROUND:43:19
+PASS monster pool exists DEEP_UNDERGROUND:43:20
+PASS monster pool exists DEEP_UNDERGROUND:43:21
+PASS monster pool exists DEEP_UNDERGROUND:44:14
+PASS monster pool exists DEEP_UNDERGROUND:44:15
+PASS monster pool exists DEEP_UNDERGROUND:44:16
+PASS monster pool exists DEEP_UNDERGROUND:44:17
+PASS monster pool exists DEEP_UNDERGROUND:44:18
+PASS monster pool exists DEEP_UNDERGROUND:44:19
+PASS monster pool exists DEEP_UNDERGROUND:44:20
+PASS monster pool exists DEEP_UNDERGROUND:45:14
+PASS monster pool exists DEEP_UNDERGROUND:45:15
+PASS monster pool exists DEEP_UNDERGROUND:45:16
+PASS monster pool exists DEEP_UNDERGROUND:45:17
+PASS monster pool exists DEEP_UNDERGROUND:45:18
+PASS monster pool exists DEEP_UNDERGROUND:45:19
+PASS monster pool exists DEEP_UNDERGROUND:46:14
+PASS monster pool exists DEEP_UNDERGROUND:46:15
+PASS monster pool exists DEEP_UNDERGROUND:46:16
+PASS monster pool exists DEEP_UNDERGROUND:46:17
+PASS monster pool exists DEEP_UNDERGROUND:46:18
+PASS monster pool exists DEEP_UNDERGROUND:37:21
+PASS monster pool exists DEEP_UNDERGROUND:37:22
+PASS monster pool exists DEEP_UNDERGROUND:36:21
+PASS monster pool exists DEEP_UNDERGROUND:35:21
+PASS monster pool exists DEEP_UNDERGROUND:34:21
+PASS monster pool exists DEEP_UNDERGROUND:33:21
+PASS monster pool exists DEEP_UNDERGROUND:32:21
+PASS monster pool exists DEEP_UNDERGROUND:32:22
+PASS monster pool exists DEEP_UNDERGROUND:33:20
+PASS monster pool exists DEEP_UNDERGROUND:33:22
+PASS monster pool exists DEEP_UNDERGROUND:34:20
+PASS monster pool exists DEEP_UNDERGROUND:31:21
+PASS monster pool exists DEEP_UNDERGROUND:30:21
+PASS monster pool exists DEEP_UNDERGROUND:29:21
+PASS monster pool exists DEEP_UNDERGROUND:28:21
+PASS monster pool exists DEEP_UNDERGROUND:27:21
+PASS monster pool exists DEEP_UNDERGROUND:27:22
+PASS monster pool exists DEEP_UNDERGROUND:28:20
+PASS monster pool exists DEEP_UNDERGROUND:28:22
+PASS monster pool exists DEEP_UNDERGROUND:29:20
+PASS monster pool exists DEEP_UNDERGROUND:26:21
+PASS monster pool exists DEEP_UNDERGROUND:25:21
+PASS monster pool exists DEEP_UNDERGROUND:24:21
+PASS monster pool exists DEEP_UNDERGROUND:26:20
+PASS monster pool exists DEEP_UNDERGROUND:26:19
+PASS monster pool exists DEEP_UNDERGROUND:25:20
+PASS monster pool exists DEEP_UNDERGROUND:38:17
+PASS monster pool exists DEEP_UNDERGROUND:37:17
+PASS monster pool exists DEEP_UNDERGROUND:36:17
+PASS monster pool exists DEEP_UNDERGROUND:35:17
+PASS monster pool exists DEEP_UNDERGROUND:34:17
+PASS monster pool exists DEEP_UNDERGROUND:33:17
+PASS monster pool exists DEEP_UNDERGROUND:32:17
+PASS monster pool exists DEEP_UNDERGROUND:31:17
+PASS monster pool exists DEEP_UNDERGROUND:34:18
+PASS monster pool exists DEEP_UNDERGROUND:35:16
+PASS monster pool exists DEEP_UNDERGROUND:35:18
+PASS monster pool exists DEEP_UNDERGROUND:36:16
+PASS monster pool exists DEEP_UNDERGROUND:37:18
+PASS monster pool exists DEEP_UNDERGROUND:36:18
+PASS monster pool exists DEEP_UNDERGROUND:34:19
+PASS monster pool exists DEEP_UNDERGROUND:35:19
+PASS monster pool exists DEEP_UNDERGROUND:33:18
+PASS monster pool exists DEEP_UNDERGROUND:32:18
+PASS monster pool exists DEEP_UNDERGROUND:45:20
+PASS monster pool exists DEEP_UNDERGROUND:46:19
+PASS monster pool exists DEEP_UNDERGROUND:46:20
+PASS monster pool exists DEEP_UNDERGROUND:37:19
+PASS monster pool exists DEEP_UNDERGROUND:36:19
+PASS monster pool exists DEEP_UNDERGROUND:43:22
+PASS monster pool exists DEEP_UNDERGROUND:34:22
+PASS monster pool exists DEEP_UNDERGROUND:35:20
+PASS monster pool exists DEEP_UNDERGROUND:35:22
+PASS monster pool exists DEEP_UNDERGROUND:36:20
+PASS monster pool exists DEEP_UNDERGROUND:37:20
+PASS monster pool exists DEEP_UNDERGROUND:32:20
+PASS monster pool exists DEEP_UNDERGROUND:31:20
+PASS monster pool exists DEEP_UNDERGROUND:30:20
+PASS monster pool exists DEEP_UNDERGROUND:30:19
+PASS monster pool exists DEEP_UNDERGROUND:31:19
+PASS monster pool exists DEEP_UNDERGROUND:27:20
+PASS monster pool exists DEEP_UNDERGROUND:30:17
+PASS monster pool exists DEEP_UNDERGROUND:29:17
+PASS monster pool exists DEEP_UNDERGROUND:41:23
+PASS monster pool exists DEEP_UNDERGROUND:41:24
+PASS monster pool exists DEEP_UNDERGROUND:40:24
+PASS monster pool exists DEEP_UNDERGROUND:41:25
+PASS monster pool exists DEEP_UNDERGROUND:39:24
+PASS monster pool exists DEEP_UNDERGROUND:38:24
+PASS monster pool exists DEEP_UNDERGROUND:37:24
+PASS monster pool exists DEEP_UNDERGROUND:36:24
+PASS monster pool exists DEEP_UNDERGROUND:35:24
+PASS monster pool exists DEEP_UNDERGROUND:34:24
+PASS monster pool exists DEEP_UNDERGROUND:34:25
+PASS monster pool exists DEEP_UNDERGROUND:35:23
+PASS monster pool exists DEEP_UNDERGROUND:35:25
+PASS monster pool exists DEEP_UNDERGROUND:36:23
+PASS monster pool exists DEEP_UNDERGROUND:33:24
+PASS monster pool exists DEEP_UNDERGROUND:39:23
+PASS monster pool exists DEEP_UNDERGROUND:40:23
+PASS monster pool exists DEEP_UNDERGROUND:38:23
+PASS monster pool exists DEEP_UNDERGROUND:37:23
+PASS monster pool exists DEEP_UNDERGROUND:34:23
+PASS monster pool exists DEEP_UNDERGROUND:33:23
+PASS monster pool exists DEEP_UNDERGROUND:32:23
+PASS monster pool exists DEEP_UNDERGROUND:31:23
+PASS monster pool exists DEEP_UNDERGROUND:30:23
+PASS monster pool exists DEEP_UNDERGROUND:29:23
+PASS monster pool exists DEEP_UNDERGROUND:28:23
+PASS monster pool exists DEEP_UNDERGROUND:27:23
+PASS monster pool exists DEEP_UNDERGROUND:26:23
+PASS monster pool exists DEEP_UNDERGROUND:25:23
+PASS monster pool exists DEEP_UNDERGROUND:24:23
+PASS monster pool exists DEEP_UNDERGROUND:31:18
+PASS monster pool exists DEEP_UNDERGROUND:30:18
+PASS monster pool exists DEEP_UNDERGROUND:29:18
+PASS monster pool exists DEEP_UNDERGROUND:28:18
+PASS monster pool exists DEEP_UNDERGROUND:27:18
+PASS monster pool exists DEEP_UNDERGROUND:26:18
+PASS monster pool exists DEEP_UNDERGROUND:25:18
+PASS monster pool exists DEEP_UNDERGROUND:24:18
+PASS monster pool exists DEEP_UNDERGROUND:36:22
+PASS monster pool exists DEEP_UNDERGROUND:31:22
+PASS monster pool exists DEEP_UNDERGROUND:26:22
+PASS monster pool exists DEEP_UNDERGROUND:44:13
+PASS monster pool exists DEEP_UNDERGROUND:45:13
+PASS monster pool exists DEEP_UNDERGROUND:41:14
+PASS monster pool exists DEEP_UNDERGROUND:40:14
+PASS monster pool exists DEEP_UNDERGROUND:39:14
+PASS monster pool exists DEEP_UNDERGROUND:38:14
+PASS monster pool exists DEEP_UNDERGROUND:37:14
+PASS monster pool exists DEEP_UNDERGROUND:36:14
+PASS monster pool exists DEEP_UNDERGROUND:35:14
+PASS monster pool exists DEEP_UNDERGROUND:35:15
+PASS monster pool exists DEEP_UNDERGROUND:36:13
+PASS monster pool exists DEEP_UNDERGROUND:36:15
+PASS monster pool exists DEEP_UNDERGROUND:37:13
+PASS monster pool exists DEEP_UNDERGROUND:34:14
+PASS monster pool exists DEEP_UNDERGROUND:33:14
+PASS monster pool exists DEEP_UNDERGROUND:32:14
+PASS monster pool exists DEEP_UNDERGROUND:31:14
+PASS monster pool exists DEEP_UNDERGROUND:30:14
+PASS monster pool exists DEEP_UNDERGROUND:30:15
+PASS monster pool exists DEEP_UNDERGROUND:31:13
+PASS monster pool exists DEEP_UNDERGROUND:31:15
+PASS monster pool exists DEEP_UNDERGROUND:32:13
+PASS monster pool exists DEEP_UNDERGROUND:40:15
+PASS monster pool exists DEEP_UNDERGROUND:39:15
+PASS monster pool exists DEEP_UNDERGROUND:38:15
+PASS monster pool exists DEEP_UNDERGROUND:37:15
+PASS monster pool exists DEEP_UNDERGROUND:34:15
+PASS monster pool exists DEEP_UNDERGROUND:33:15
+PASS monster pool exists DEEP_UNDERGROUND:32:15
+PASS monster pool exists DEEP_UNDERGROUND:30:16
+PASS monster pool exists DEEP_UNDERGROUND:31:16
+PASS monster pool exists DEEP_UNDERGROUND:33:13
+PASS monster pool exists DEEP_UNDERGROUND:34:13
+PASS monster pool exists DEEP_UNDERGROUND:29:14
+PASS monster pool exists DEEP_UNDERGROUND:28:14
+PASS monster pool exists DEEP_UNDERGROUND:39:16
+PASS monster pool exists DEEP_UNDERGROUND:38:16
+PASS monster pool exists DEEP_UNDERGROUND:37:16
+PASS monster pool exists DEEP_UNDERGROUND:34:16
+PASS monster pool exists DEEP_UNDERGROUND:33:16
+PASS monster pool exists DEEP_UNDERGROUND:32:16
+PASS monster pool exists DEEP_UNDERGROUND:29:16
+PASS monster pool exists DEEP_UNDERGROUND:28:16
+PASS monster pool exists DEEP_UNDERGROUND:27:16
+PASS monster pool exists DEEP_UNDERGROUND:26:16
+PASS monster pool exists DEEP_UNDERGROUND:26:17
+PASS monster pool exists DEEP_UNDERGROUND:24:20
+PASS monster pool exists DEEP_UNDERGROUND:33:19
+PASS monster pool exists DEEP_UNDERGROUND:32:19
+PASS monster pool exists DEEP_UNDERGROUND:29:19
+PASS monster pool exists DEEP_UNDERGROUND:28:19
+PASS monster pool exists DEEP_UNDERGROUND:27:19
+PASS monster pool exists DEEP_UNDERGROUND:25:19
+PASS monster pool exists DEEP_UNDERGROUND:24:19
+PASS monster pool exists DEEP_UNDERGROUND:29:22
+PASS monster pool exists DEEP_UNDERGROUND:24:22
+PASS monster pool exists DEEP_UNDERGROUND:28:17
+PASS monster pool exists DEEP_UNDERGROUND:27:17
+PASS monster pool exists DEEP_UNDERGROUND:25:17
+PASS monster pool exists DEEP_UNDERGROUND:46:13
+PASS monster pool exists DEEP_UNDERGROUND:47:13
+PASS monster pool exists DEEP_UNDERGROUND:47:14
+PASS monster pool exists DEEP_UNDERGROUND:43:13
+PASS monster pool exists DEEP_UNDERGROUND:42:13
+PASS monster pool exists DEEP_UNDERGROUND:43:12
+PASS monster pool exists DEEP_UNDERGROUND:44:12
+PASS monster pool exists DEEP_UNDERGROUND:41:13
+PASS monster pool exists DEEP_UNDERGROUND:40:13
+PASS monster pool exists DEEP_UNDERGROUND:39:13
+PASS monster pool exists DEEP_UNDERGROUND:38:13
+PASS monster pool exists DEEP_UNDERGROUND:38:12
+PASS monster pool exists DEEP_UNDERGROUND:39:12
+PASS monster pool exists DEEP_UNDERGROUND:35:13
+PASS monster pool exists DEEP_UNDERGROUND:33:12
+PASS monster pool exists DEEP_UNDERGROUND:34:12
+PASS monster pool exists DEEP_UNDERGROUND:30:13
+PASS monster pool exists DEEP_UNDERGROUND:29:13
+PASS monster pool exists DEEP_UNDERGROUND:47:15
+PASS monster pool exists DEEP_UNDERGROUND:47:16
+PASS monster pool exists DEEP_UNDERGROUND:28:15
+PASS monster pool exists DEEP_UNDERGROUND:29:15
+PASS monster pool exists DEEP_UNDERGROUND:44:11
+PASS monster pool exists DEEP_UNDERGROUND:42:12
+PASS monster pool exists DEEP_UNDERGROUND:43:11
+PASS monster pool exists DEEP_UNDERGROUND:40:12
+PASS monster pool exists DEEP_UNDERGROUND:35:12
+PASS monster pool exists UNDERGROUND:8:-12
+PASS monster pool exists UNDERGROUND:8:-11
+PASS monster pool exists UNDERGROUND:9:-13
+PASS monster pool exists UNDERGROUND:9:-12
+PASS monster pool exists UNDERGROUND:9:-11
+PASS monster pool exists UNDERGROUND:10:-13
+PASS monster pool exists UNDERGROUND:10:-12
+PASS monster pool exists UNDERGROUND:8:-9
+PASS monster pool exists UNDERGROUND:8:-8
+PASS monster pool exists UNDERGROUND:8:-7
+PASS monster pool exists UNDERGROUND:8:-6
+PASS monster pool exists UNDERGROUND:9:-9
+PASS monster pool exists UNDERGROUND:9:-8
+PASS monster pool exists UNDERGROUND:9:-7
+PASS monster pool exists UNDERGROUND:9:-6
+PASS monster pool exists UNDERGROUND:10:-10
+PASS monster pool exists UNDERGROUND:10:-9
+PASS monster pool exists UNDERGROUND:10:-8
+PASS monster pool exists UNDERGROUND:10:-7
+PASS monster pool exists UNDERGROUND:10:-6
+PASS monster pool exists UNDERGROUND:11:-11
+PASS monster pool exists UNDERGROUND:11:-10
+PASS monster pool exists UNDERGROUND:11:-9
+PASS monster pool exists UNDERGROUND:11:-8
+PASS monster pool exists UNDERGROUND:11:-7
+PASS monster pool exists UNDERGROUND:11:-6
+PASS monster pool exists UNDERGROUND:12:-12
+PASS monster pool exists UNDERGROUND:12:-11
+PASS monster pool exists UNDERGROUND:12:-10
+PASS monster pool exists UNDERGROUND:12:-9
+PASS monster pool exists UNDERGROUND:12:-8
+PASS monster pool exists UNDERGROUND:12:-7
+PASS monster pool exists UNDERGROUND:13:-12
+PASS monster pool exists UNDERGROUND:13:-11
+PASS monster pool exists UNDERGROUND:13:-10
+PASS monster pool exists UNDERGROUND:13:-9
+PASS monster pool exists UNDERGROUND:13:-8
+PASS monster pool exists UNDERGROUND:14:-12
+PASS monster pool exists UNDERGROUND:14:-11
+PASS monster pool exists UNDERGROUND:14:-10
+PASS monster pool exists UNDERGROUND:14:-9
+PASS monster pool exists UNDERGROUND:7:-8
+PASS monster pool exists UNDERGROUND:6:-8
+PASS monster pool exists UNDERGROUND:5:-8
+PASS monster pool exists UNDERGROUND:5:-7
+PASS monster pool exists UNDERGROUND:4:-7
+PASS monster pool exists UNDERGROUND:4:-8
+PASS monster pool exists UNDERGROUND:3:-7
+PASS monster pool exists UNDERGROUND:3:-10
+PASS monster pool exists UNDERGROUND:3:-9
+PASS monster pool exists UNDERGROUND:3:-8
+PASS monster pool exists UNDERGROUND:4:-12
+PASS monster pool exists UNDERGROUND:4:-11
+PASS monster pool exists UNDERGROUND:4:-10
+PASS monster pool exists UNDERGROUND:4:-9
+PASS monster pool exists UNDERGROUND:5:-13
+PASS monster pool exists UNDERGROUND:5:-12
+PASS monster pool exists UNDERGROUND:5:-11
+PASS monster pool exists UNDERGROUND:5:-10
+PASS monster pool exists UNDERGROUND:5:-9
+PASS monster pool exists UNDERGROUND:6:-13
+PASS monster pool exists UNDERGROUND:6:-12
+PASS monster pool exists UNDERGROUND:6:-11
+PASS monster pool exists UNDERGROUND:6:-10
+PASS monster pool exists UNDERGROUND:6:-9
+PASS monster pool exists UNDERGROUND:7:-13
+PASS monster pool exists UNDERGROUND:7:-9
+PASS monster pool exists UNDERGROUND:2:-5
+PASS monster pool exists UNDERGROUND:3:-6
+PASS monster pool exists UNDERGROUND:3:-5
+PASS monster pool exists UNDERGROUND:4:-6
+PASS monster pool exists UNDERGROUND:4:-5
+PASS monster pool exists UNDERGROUND:5:-6
+PASS monster pool exists UNDERGROUND:6:-7
+PASS monster pool exists UNDERGROUND:4:-4
+PASS monster pool exists UNDERGROUND:4:-3
+PASS monster pool exists UNDERGROUND:4:-2
+PASS monster pool exists UNDERGROUND:4:-1
+PASS monster pool exists UNDERGROUND:13:-7
+PASS monster pool exists UNDERGROUND:14:-8
+PASS monster pool exists UNDERGROUND:12:-6
+PASS monster pool exists UNDERGROUND:9:-5
+PASS monster pool exists UNDERGROUND:10:-5
+PASS monster pool exists UNDERGROUND:7:-6
+PASS monster pool exists UNDERGROUND:7:-5
+PASS monster pool exists UNDERGROUND:7:-4
+PASS monster pool exists UNDERGROUND:7:-3
+PASS monster pool exists UNDERGROUND:8:-4
+PASS monster pool exists UNDERGROUND:8:-5
+PASS monster pool exists UNDERGROUND:9:-4
+PASS monster pool exists UNDERGROUND:8:-3
+PASS monster pool exists UNDERGROUND:15:-12
+PASS monster pool exists UNDERGROUND:16:-12
+PASS monster pool exists UNDERGROUND:14:-13
+PASS monster pool exists UNDERGROUND:14:-14
+PASS monster pool exists UNDERGROUND:13:-13
+PASS monster pool exists UNDERGROUND:15:-14
+PASS monster pool exists UNDERGROUND:15:-13
+PASS monster pool exists UNDERGROUND:15:-10
+PASS monster pool exists UNDERGROUND:15:-9
+PASS monster pool exists UNDERGROUND:14:-7
+PASS monster pool exists UNDERGROUND:15:-8
+PASS monster pool exists UNDERGROUND:5:-14
+PASS monster pool exists UNDERGROUND:6:-15
+PASS monster pool exists UNDERGROUND:7:-16
+PASS monster pool exists UNDERGROUND:6:-16
+PASS monster pool exists UNDERGROUND:7:-17
+PASS monster pool exists UNDERGROUND:7:-15
+PASS monster pool exists UNDERGROUND:8:-17
+PASS monster pool exists UNDERGROUND:8:-16
+PASS monster pool exists UNDERGROUND:7:-18
+PASS monster pool exists UNDERGROUND:3:-4
+PASS monster pool exists UNDERGROUND:3:-3
+PASS monster pool exists UNDERGROUND:3:-2
+PASS monster pool exists UNDERGROUND:3:-1
+PASS monster pool exists UNDERGROUND:2:-1
+PASS monster pool exists UNDERGROUND:2:0
+PASS monster pool exists UNDERGROUND:2:-2
+PASS monster pool exists UNDERGROUND:5:-3
+PASS monster pool exists UNDERGROUND:5:-2
+PASS monster pool exists UNDERGROUND:6:-6
+PASS monster pool exists UNDERGROUND:6:-5
+PASS monster pool exists UNDERGROUND:6:-4
+PASS monster pool exists UNDERGROUND:6:-3
+PASS monster pool exists UNDERGROUND:6:-2
+PASS monster pool exists UNDERGROUND:2:-4
+PASS monster pool exists UNDERGROUND:1:-3
+PASS monster pool exists UNDERGROUND:2:-3
+PASS monster pool exists UNDERGROUND:1:0
+PASS monster pool exists UNDERGROUND:1:-1
+PASS monster pool exists UNDERGROUND:0:0
+PASS monster pool exists UNDERGROUND:5:-5
+PASS monster pool exists UNDERGROUND:5:-4
+PASS monster pool exists UNDERGROUND:16:-10
+PASS monster pool exists UNDERGROUND:17:-11
+PASS monster pool exists UNDERGROUND:17:-10
+PASS monster pool exists UNDERGROUND:18:-11
+PASS monster pool exists UNDERGROUND:19:-12
+PASS monster pool exists UNDERGROUND:6:-14
+PASS monster pool exists UNDERGROUND:7:-14
+PASS monster pool exists UNDERGROUND:8:-14
+PASS monster pool exists UNDERGROUND:8:-15
+PASS monster pool exists UNDERGROUND:9:-15
+PASS monster pool exists UNDERGROUND:9:-16
+PASS monster pool exists UNDERGROUND:10:-16
+PASS monster pool exists UNDERGROUND:10:-15
+PASS monster pool exists UNDERGROUND:7:-7
+PASS monster pool exists UNDERGROUND:12:-13
+PASS monster pool exists UNDERGROUND:12:-14
+PASS monster pool exists UNDERGROUND:12:-15
+PASS monster pool exists UNDERGROUND:13:-15
+PASS monster pool exists UNDERGROUND:13:-14
+PASS monster pool exists DEEP_UNDERGROUND:26:-38
+PASS monster pool exists DEEP_UNDERGROUND:26:-37
+PASS monster pool exists DEEP_UNDERGROUND:26:-36
+PASS monster pool exists DEEP_UNDERGROUND:26:-35
+PASS monster pool exists DEEP_UNDERGROUND:26:-34
+PASS monster pool exists DEEP_UNDERGROUND:27:-39
+PASS monster pool exists DEEP_UNDERGROUND:27:-38
+PASS monster pool exists DEEP_UNDERGROUND:27:-37
+PASS monster pool exists DEEP_UNDERGROUND:27:-36
+PASS monster pool exists DEEP_UNDERGROUND:27:-35
+PASS monster pool exists DEEP_UNDERGROUND:27:-34
+PASS monster pool exists DEEP_UNDERGROUND:28:-40
+PASS monster pool exists DEEP_UNDERGROUND:28:-39
+PASS monster pool exists DEEP_UNDERGROUND:28:-38
+PASS monster pool exists DEEP_UNDERGROUND:28:-37
+PASS monster pool exists DEEP_UNDERGROUND:28:-36
+PASS monster pool exists DEEP_UNDERGROUND:28:-35
+PASS monster pool exists DEEP_UNDERGROUND:28:-34
+PASS monster pool exists DEEP_UNDERGROUND:29:-41
+PASS monster pool exists DEEP_UNDERGROUND:29:-40
+PASS monster pool exists DEEP_UNDERGROUND:29:-39
+PASS monster pool exists DEEP_UNDERGROUND:29:-38
+PASS monster pool exists DEEP_UNDERGROUND:29:-37
+PASS monster pool exists DEEP_UNDERGROUND:29:-36
+PASS monster pool exists DEEP_UNDERGROUND:29:-35
+PASS monster pool exists DEEP_UNDERGROUND:29:-34
+PASS monster pool exists DEEP_UNDERGROUND:30:-42
+PASS monster pool exists DEEP_UNDERGROUND:30:-41
+PASS monster pool exists DEEP_UNDERGROUND:30:-40
+PASS monster pool exists DEEP_UNDERGROUND:30:-39
+PASS monster pool exists DEEP_UNDERGROUND:30:-38
+PASS monster pool exists DEEP_UNDERGROUND:30:-37
+PASS monster pool exists DEEP_UNDERGROUND:30:-36
+PASS monster pool exists DEEP_UNDERGROUND:30:-35
+PASS monster pool exists DEEP_UNDERGROUND:30:-34
+PASS monster pool exists DEEP_UNDERGROUND:31:-42
+PASS monster pool exists DEEP_UNDERGROUND:31:-41
+PASS monster pool exists DEEP_UNDERGROUND:31:-40
+PASS monster pool exists DEEP_UNDERGROUND:31:-39
+PASS monster pool exists DEEP_UNDERGROUND:31:-38
+PASS monster pool exists DEEP_UNDERGROUND:31:-37
+PASS monster pool exists DEEP_UNDERGROUND:31:-36
+PASS monster pool exists DEEP_UNDERGROUND:31:-35
+PASS monster pool exists DEEP_UNDERGROUND:32:-42
+PASS monster pool exists DEEP_UNDERGROUND:32:-41
+PASS monster pool exists DEEP_UNDERGROUND:32:-40
+PASS monster pool exists DEEP_UNDERGROUND:32:-39
+PASS monster pool exists DEEP_UNDERGROUND:32:-38
+PASS monster pool exists DEEP_UNDERGROUND:32:-37
+PASS monster pool exists DEEP_UNDERGROUND:32:-36
+PASS monster pool exists DEEP_UNDERGROUND:33:-42
+PASS monster pool exists DEEP_UNDERGROUND:33:-41
+PASS monster pool exists DEEP_UNDERGROUND:33:-40
+PASS monster pool exists DEEP_UNDERGROUND:33:-39
+PASS monster pool exists DEEP_UNDERGROUND:33:-38
+PASS monster pool exists DEEP_UNDERGROUND:33:-37
+PASS monster pool exists DEEP_UNDERGROUND:34:-42
+PASS monster pool exists DEEP_UNDERGROUND:34:-41
+PASS monster pool exists DEEP_UNDERGROUND:34:-40
+PASS monster pool exists DEEP_UNDERGROUND:34:-39
+PASS monster pool exists DEEP_UNDERGROUND:34:-38
+PASS monster pool exists DEEP_UNDERGROUND:25:-37
+PASS monster pool exists DEEP_UNDERGROUND:25:-36
+PASS monster pool exists DEEP_UNDERGROUND:24:-37
+PASS monster pool exists DEEP_UNDERGROUND:23:-37
+PASS monster pool exists DEEP_UNDERGROUND:22:-37
+PASS monster pool exists DEEP_UNDERGROUND:21:-37
+PASS monster pool exists DEEP_UNDERGROUND:20:-37
+PASS monster pool exists DEEP_UNDERGROUND:19:-37
+PASS monster pool exists DEEP_UNDERGROUND:18:-37
+PASS monster pool exists DEEP_UNDERGROUND:17:-37
+PASS monster pool exists DEEP_UNDERGROUND:16:-37
+PASS monster pool exists DEEP_UNDERGROUND:15:-37
+PASS monster pool exists DEEP_UNDERGROUND:15:-36
+PASS monster pool exists DEEP_UNDERGROUND:16:-38
+PASS monster pool exists DEEP_UNDERGROUND:16:-36
+PASS monster pool exists DEEP_UNDERGROUND:17:-38
+PASS monster pool exists DEEP_UNDERGROUND:14:-37
+PASS monster pool exists DEEP_UNDERGROUND:13:-37
+PASS monster pool exists DEEP_UNDERGROUND:12:-37
+PASS monster pool exists DEEP_UNDERGROUND:12:-36
+PASS monster pool exists DEEP_UNDERGROUND:28:-41
+PASS monster pool exists DEEP_UNDERGROUND:27:-41
+PASS monster pool exists DEEP_UNDERGROUND:26:-41
+PASS monster pool exists DEEP_UNDERGROUND:25:-41
+PASS monster pool exists DEEP_UNDERGROUND:24:-41
+PASS monster pool exists DEEP_UNDERGROUND:23:-41
+PASS monster pool exists DEEP_UNDERGROUND:23:-40
+PASS monster pool exists DEEP_UNDERGROUND:24:-42
+PASS monster pool exists DEEP_UNDERGROUND:24:-40
+PASS monster pool exists DEEP_UNDERGROUND:25:-42
+PASS monster pool exists DEEP_UNDERGROUND:22:-41
+PASS monster pool exists DEEP_UNDERGROUND:27:-40
+PASS monster pool exists DEEP_UNDERGROUND:26:-40
+PASS monster pool exists DEEP_UNDERGROUND:25:-40
+PASS monster pool exists DEEP_UNDERGROUND:22:-40
+PASS monster pool exists DEEP_UNDERGROUND:21:-40
+PASS monster pool exists DEEP_UNDERGROUND:20:-40
+PASS monster pool exists DEEP_UNDERGROUND:19:-40
+PASS monster pool exists DEEP_UNDERGROUND:18:-40
+PASS monster pool exists DEEP_UNDERGROUND:18:-39
+PASS monster pool exists DEEP_UNDERGROUND:19:-41
+PASS monster pool exists DEEP_UNDERGROUND:19:-39
+PASS monster pool exists DEEP_UNDERGROUND:20:-41
+PASS monster pool exists DEEP_UNDERGROUND:17:-40
+PASS monster pool exists DEEP_UNDERGROUND:16:-40
+PASS monster pool exists DEEP_UNDERGROUND:15:-40
+PASS monster pool exists DEEP_UNDERGROUND:14:-40
+PASS monster pool exists DEEP_UNDERGROUND:13:-39
+PASS monster pool exists DEEP_UNDERGROUND:14:-39
+PASS monster pool exists DEEP_UNDERGROUND:15:-41
+PASS monster pool exists DEEP_UNDERGROUND:26:-39
+PASS monster pool exists DEEP_UNDERGROUND:25:-39
+PASS monster pool exists DEEP_UNDERGROUND:24:-39
+PASS monster pool exists DEEP_UNDERGROUND:23:-39
+PASS monster pool exists DEEP_UNDERGROUND:22:-39
+PASS monster pool exists DEEP_UNDERGROUND:21:-39
+PASS monster pool exists DEEP_UNDERGROUND:20:-39
+PASS monster pool exists DEEP_UNDERGROUND:25:-38
+PASS monster pool exists DEEP_UNDERGROUND:24:-38
+PASS monster pool exists DEEP_UNDERGROUND:23:-38
+PASS monster pool exists DEEP_UNDERGROUND:22:-38
+PASS monster pool exists DEEP_UNDERGROUND:21:-38
+PASS monster pool exists DEEP_UNDERGROUND:20:-38
+PASS monster pool exists DEEP_UNDERGROUND:19:-38
+PASS monster pool exists DEEP_UNDERGROUND:18:-38
+PASS monster pool exists DEEP_UNDERGROUND:24:-36
+PASS monster pool exists DEEP_UNDERGROUND:23:-36
+PASS monster pool exists DEEP_UNDERGROUND:22:-36
+PASS monster pool exists DEEP_UNDERGROUND:21:-36
+PASS monster pool exists DEEP_UNDERGROUND:21:-35
+PASS monster pool exists DEEP_UNDERGROUND:22:-35
+PASS monster pool exists DEEP_UNDERGROUND:20:-36
+PASS monster pool exists DEEP_UNDERGROUND:19:-36
+PASS monster pool exists DEEP_UNDERGROUND:18:-36
+PASS monster pool exists DEEP_UNDERGROUND:17:-36
+PASS monster pool exists DEEP_UNDERGROUND:16:-35
+PASS monster pool exists DEEP_UNDERGROUND:17:-35
+PASS monster pool exists DEEP_UNDERGROUND:14:-36
+PASS monster pool exists DEEP_UNDERGROUND:17:-39
+PASS monster pool exists DEEP_UNDERGROUND:33:-36
+PASS monster pool exists DEEP_UNDERGROUND:32:-35
+PASS monster pool exists DEEP_UNDERGROUND:31:-34
+PASS monster pool exists DEEP_UNDERGROUND:32:-34
+PASS monster pool exists DEEP_UNDERGROUND:33:-35
+PASS monster pool exists DEEP_UNDERGROUND:25:-35
+PASS monster pool exists DEEP_UNDERGROUND:24:-35
+PASS monster pool exists DEEP_UNDERGROUND:23:-35
+PASS monster pool exists DEEP_UNDERGROUND:20:-35
+PASS monster pool exists DEEP_UNDERGROUND:29:-33
+PASS monster pool exists DEEP_UNDERGROUND:30:-33
+PASS monster pool exists DEEP_UNDERGROUND:28:-33
+PASS monster pool exists DEEP_UNDERGROUND:27:-33
+PASS monster pool exists DEEP_UNDERGROUND:26:-33
+PASS monster pool exists DEEP_UNDERGROUND:26:-32
+PASS monster pool exists DEEP_UNDERGROUND:27:-32
+PASS monster pool exists DEEP_UNDERGROUND:25:-33
+PASS monster pool exists DEEP_UNDERGROUND:24:-33
+PASS monster pool exists DEEP_UNDERGROUND:33:-34
+PASS monster pool exists DEEP_UNDERGROUND:34:-34
+PASS monster pool exists DEEP_UNDERGROUND:33:-33
+PASS monster pool exists DEEP_UNDERGROUND:32:-33
+PASS monster pool exists DEEP_UNDERGROUND:31:-33
+PASS monster pool exists DEEP_UNDERGROUND:31:-32
+PASS monster pool exists DEEP_UNDERGROUND:32:-32
+PASS monster pool exists DEEP_UNDERGROUND:15:-38
+PASS monster pool exists DEEP_UNDERGROUND:14:-38
+PASS monster pool exists DEEP_UNDERGROUND:13:-38
+PASS monster pool exists DEEP_UNDERGROUND:12:-38
+PASS monster pool exists DEEP_UNDERGROUND:18:-41
+PASS monster pool exists DEEP_UNDERGROUND:16:-39
+PASS monster pool exists DEEP_UNDERGROUND:15:-39
+PASS monster pool exists DEEP_UNDERGROUND:35:-41
+PASS monster pool exists DEEP_UNDERGROUND:35:-42
+PASS monster pool exists DEEP_UNDERGROUND:36:-42
+PASS monster pool exists DEEP_UNDERGROUND:28:-42
+PASS monster pool exists DEEP_UNDERGROUND:29:-42
+PASS monster pool exists DEEP_UNDERGROUND:35:-40
+PASS monster pool exists DEEP_UNDERGROUND:37:-43
+PASS monster pool exists DEEP_UNDERGROUND:36:-43
+PASS monster pool exists DEEP_UNDERGROUND:13:-36
+PASS monster pool exists DEEP_UNDERGROUND:12:-35
+PASS monster pool exists DEEP_UNDERGROUND:13:-35
+PASS monster pool exists DEEP_UNDERGROUND:12:-34
+PASS monster pool exists DEEP_UNDERGROUND:34:-37
+PASS monster pool exists DEEP_UNDERGROUND:34:-36
+PASS monster pool exists DEEP_UNDERGROUND:35:-39
+PASS monster pool exists DEEP_UNDERGROUND:36:-40
+PASS monster pool exists DEEP_UNDERGROUND:37:-40
+PASS monster pool exists DEEP_UNDERGROUND:38:-40
+PASS monster pool exists DEEP_UNDERGROUND:38:-41
+PASS monster pool exists DEEP_UNDERGROUND:38:-42
+PASS monster pool exists DEEP_UNDERGROUND:37:-42
+PASS monster pool exists DEEP_UNDERGROUND:37:-41
+PASS monster pool exists DEEP_UNDERGROUND:38:-43
+PASS monster pool exists DEEP_UNDERGROUND:39:-43
+PASS monster pool exists DEEP_UNDERGROUND:39:-42
+PASS monster pool exists DEEP_UNDERGROUND:39:-41
+PASS monster pool exists DEEP_UNDERGROUND:37:-39
+PASS monster pool exists DEEP_UNDERGROUND:36:-38
+PASS monster pool exists DEEP_UNDERGROUND:33:-43
+PASS monster pool exists DEEP_UNDERGROUND:34:-43
+PASS monster pool exists DEEP_UNDERGROUND:33:-44
+PASS monster pool exists DEEP_UNDERGROUND:33:-45
+PASS monster pool exists DEEP_UNDERGROUND:33:-46
+PASS monster pool exists DEEP_UNDERGROUND:32:-46
+PASS monster pool exists DEEP_UNDERGROUND:31:-46
+PASS monster pool exists DEEP_UNDERGROUND:31:-45
+PASS monster pool exists DEEP_UNDERGROUND:32:-47
+PASS monster pool exists DEEP_UNDERGROUND:32:-45
+PASS monster pool exists DEEP_UNDERGROUND:33:-47
+PASS monster pool exists DEEP_UNDERGROUND:30:-46
+PASS monster pool exists DEEP_UNDERGROUND:35:-43
+PASS monster pool exists DEEP_UNDERGROUND:34:-44
+PASS monster pool exists DEEP_UNDERGROUND:34:-45
+PASS monster pool exists DEEP_UNDERGROUND:30:-45
+PASS monster pool exists DEEP_UNDERGROUND:29:-45
+PASS monster pool exists DEEP_UNDERGROUND:28:-45
+PASS monster pool exists DEEP_UNDERGROUND:27:-45
+PASS monster pool exists DEEP_UNDERGROUND:26:-45
+PASS monster pool exists DEEP_UNDERGROUND:26:-44
+PASS monster pool exists DEEP_UNDERGROUND:27:-46
+PASS monster pool exists DEEP_UNDERGROUND:27:-44
+PASS monster pool exists DEEP_UNDERGROUND:28:-46
+PASS monster pool exists DEEP_UNDERGROUND:32:-43
+PASS monster pool exists DEEP_UNDERGROUND:32:-44
+PASS monster pool exists DEEP_UNDERGROUND:31:-44
+PASS monster pool exists DEEP_UNDERGROUND:30:-44
+PASS monster pool exists DEEP_UNDERGROUND:24:-34
+PASS monster pool exists DEEP_UNDERGROUND:23:-33
+PASS monster pool exists DEEP_UNDERGROUND:23:-32
+PASS monster pool exists DEEP_UNDERGROUND:23:-31
+PASS monster pool exists DEEP_UNDERGROUND:23:-30
+PASS monster pool exists DEEP_UNDERGROUND:24:-31
+PASS monster pool exists DEEP_UNDERGROUND:22:-31
+PASS monster pool exists DEEP_UNDERGROUND:21:-31
+PASS monster pool exists DEEP_UNDERGROUND:21:-30
+PASS monster pool exists DEEP_UNDERGROUND:22:-32
+PASS monster pool exists DEEP_UNDERGROUND:22:-30
+PASS monster pool exists DEEP_UNDERGROUND:20:-31
+PASS monster pool exists DEEP_UNDERGROUND:19:-31
+PASS monster pool exists DEEP_UNDERGROUND:18:-31
+PASS monster pool exists DEEP_UNDERGROUND:17:-31
+PASS monster pool exists DEEP_UNDERGROUND:16:-31
+PASS monster pool exists DEEP_UNDERGROUND:16:-30
+PASS monster pool exists DEEP_UNDERGROUND:17:-32
+PASS monster pool exists DEEP_UNDERGROUND:17:-30
+PASS monster pool exists DEEP_UNDERGROUND:18:-32
+PASS monster pool exists DEEP_UNDERGROUND:15:-31
+PASS monster pool exists DEEP_UNDERGROUND:14:-31
+PASS monster pool exists DEEP_UNDERGROUND:13:-31
+PASS monster pool exists DEEP_UNDERGROUND:12:-31
+PASS monster pool exists DEEP_UNDERGROUND:12:-32
+PASS monster pool exists DEEP_UNDERGROUND:12:-30
+PASS monster pool exists DEEP_UNDERGROUND:13:-32
+PASS monster pool exists DEEP_UNDERGROUND:25:-34
+PASS monster pool exists DEEP_UNDERGROUND:24:-32
+PASS monster pool exists DEEP_UNDERGROUND:15:-30
+PASS monster pool exists DEEP_UNDERGROUND:16:-32
+PASS monster pool exists DEEP_UNDERGROUND:12:-29
+PASS monster pool exists DEEP_UNDERGROUND:28:-32
+PASS monster pool exists DEEP_UNDERGROUND:27:-31
+PASS monster pool exists DEEP_UNDERGROUND:28:-31
+PASS monster pool exists DEEP_UNDERGROUND:29:-32
+PASS monster pool exists DEEP_UNDERGROUND:30:-43
+PASS monster pool exists DEEP_UNDERGROUND:31:-43
+PASS monster pool exists DEEP_UNDERGROUND:36:-41
+PASS monster pool exists DEEP_UNDERGROUND:21:-41
+PASS monster pool exists DEEP_UNDERGROUND:36:-39
+PASS monster pool exists DEEP_UNDERGROUND:35:-38
+PASS monster pool exists DEEP_UNDERGROUND:29:-43
+
+{
+  "pass": 2822,
+  "fail": 0,
+  "total": 2822,
+  "layers": {
+    "SURFACE": 875,
+    "UNDERWATER": 153,
+    "DEEP_SEA": 105,
+    "SKY": 875,
+    "CELESTIAL": 475,
+    "UNDERGROUND": 1011,
+    "DEEP_UNDERGROUND": 1484
+  },
+  "dungeons": 30,
+  "sizeCounts": {
+    "SMALL": 14,
+    "MEDIUM": 9,
+    "LARGE": 5,
+    "MEGA": 2
+  },
+  "kindCounts": {
+    "DEEP_DUNGEON": 15,
+    "TEMPLE": 8,
+    "GRAND_TEMPLE": 7
+  },
+  "monsters": 110,
+  "insects": 15,
+  "equipment": 20,
+  "oreVeins": 194,
+  "villages": 5,
+  "worldTiles": 4978
+}
+
+TYPE CHECK
+- Core TypeScript subset compile: PASS
+- Full-project tsc in this container reports only missing external dependencies (react/vite/express/@google/genai/node typings).
+- Non-dependency/internal TypeScript errors after filtering: 0
+- Dungeon per-ID persistent record fields added: PlayerState.dungeonRecords

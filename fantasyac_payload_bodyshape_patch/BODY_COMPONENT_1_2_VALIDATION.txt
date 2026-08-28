@@ -1,0 +1,20 @@
+판타지악 내부 상태 컴포넌트 1·2 패치 검증
+
+[PASS] 삽화 슬롯 총수: 30
+[PASS] 고유 slotId: 30 / 중복 0
+[PASS] imageSrc 빈 슬롯: 30 / 30
+[PASS] COMPARTMENT_1 = 15칸
+[PASS] COMPARTMENT_2 = 15칸
+[PASS] 5단계 = TRACE / LOW / MEDIUM / HIGH / SATURATED
+[PASS] 3계열 = MATERIAL / EGG / PARASITE
+[PASS] 출처 메타데이터 타입 추가
+[PASS] Gemini payloadEvents sourceName/sourceType 전달
+[PASS] sourceId 기반 개체별 분리 누적
+[PASS] 출처 미지정 감소 시 오래된 항목 우선 감소
+[PASS] 구 세이브 필드 optional — 마이그레이션 파손 없음
+[PASS] core TypeScript 검사: types.ts + bodyPayloadPresentation.ts + gameEngine.ts 오류 0
+[PASS] InternalStatusModal.tsx transpile 진단 0
+
+주의:
+전체 프로젝트 tsc는 현재 작업 폴더에 node_modules가 없어 React/Vite/Express 등 외부 모듈 missing 오류가 발생합니다.
+이번 변경 파일 자체의 core TypeScript 검사 및 TSX 구문 검사는 통과했습니다.

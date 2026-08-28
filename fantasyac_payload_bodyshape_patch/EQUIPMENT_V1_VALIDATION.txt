@@ -1,0 +1,18 @@
+판타지악 v1.0 장비 시스템 검증 결과
+===================================
+Assertions passed: 442
+Equipment: 400 total / 150 new in v1.0 expansion
+Unique equipment IDs: 400/400
+Unique equipment names: 400/400
+Equipment tiers: T1-T12 all covered
+Equipment slots: all 13 slots covered
+Sets: 24 sets, all 5-piece with cumulative 2/3/4 runtime traits
+Hidden pair synergies: 12/12 equippable and resolvable
+Skill enhancers: 40/40 reference current active skills
+Legendary v1.0 weapons: 30/30 have active runtime special effects
+Accuracy/evasion: independent accuracy contribution validated
+MISS vs EVADE: deterministic distinction validated
+Core TypeScript compilation: PASS
+TS/TSX syntax parse: 79 files / 0 diagnostics
+Full-project semantic scan: no new semantic error after excluding missing environment dependencies
+Images generated: 0

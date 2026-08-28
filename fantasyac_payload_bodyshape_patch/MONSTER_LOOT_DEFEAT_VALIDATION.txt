@@ -1,0 +1,56 @@
+판타지악 v1 몬스터·전리품·패배 후 인카운터 패치 검증
+========================================================
+
+[핵심 데이터]
+- 기존 몬스터: 18종
+- 현재 몬스터: 90종 (정확히 5배)
+- 지역별 몬스터: 그란디아/세이레/포레진/산티맥/프로스티/스크로제 각 15종
+- Race 상위 분류: HUMANOID 24 / ABERRANT 66
+- 몬스터 전리품 프로필: 90개
+- 몬스터 고유 제작재료: 90개
+- 부활의 물약: 1개
+- 실제 장비 DB: 400종, 몬스터별 2~3개 실제 장비 드랍 후보 연결
+- 섹터 인카운터 프로필: 30개
+- 실제 월드 Hex: 2,483칸
+- 검증된 region/layer/terrain/sector 조합: 54개, 미커버 0개
+
+[컴파일]
+- 몬스터/전리품/패배처리/섹터/월드맵/전투보상 핵심 TypeScript 모듈 독립 컴파일: PASS
+- 프로젝트 전체 tsc: 현재 실행 환경에 react, react/jsx-runtime, lucide-react, express, vite, @google/genai, @types/node 등이 설치되어 있지 않아 외부 의존성 탐색 오류 발생
+- 이번 패치 핵심 .ts 모듈 내부 컴파일 오류: 확인되지 않음
+- 신규 React UI 파일에서 확인된 오류는 모두 위 외부 React/lucide 타입 미설치에 따른 모듈 탐색 오류
+
+[런타임 단언 테스트]
+- 총 1,823 assertions: PASS
+- 몬스터 90종/ID 중복 없음: PASS
+- 지역별 15종: PASS
+- HUMANOID 24 / ABERRANT 66: PASS
+- 90개 전리품 프로필과 90개 고유 재료 연결: PASS
+- 모든 장비 드랍 후보가 실제 400장비 DB에 존재: PASS
+- 모든 몬스터 sectorId가 실제 섹터에 존재: PASS
+- 30개 섹터 모두 몬스터 풀 보유: PASS
+- 실제 Hex에서 사용하는 지형/섹터 조합 54개 모두 몬스터 후보 존재: PASS
+- 인간형 패배 인카운터 분기: PASS
+- 이형 패배 인카운터 분기: PASS
+- 일반전 사망 + 부활의 물약: 사용 가능: PASS
+- 엘리트 전투 패배: 건너뛰기 및 부활 물약 금지: PASS
+- 패배/도주 시 이미 처치한 적만 EXP/루피/전리품 결산: PASS
+- 강제 드랍 테스트에서 실제 EQUIPMENT 항목 획득: PASS
+- 부활의 물약 희귀 드랍 경로: PASS
+
+[패배 처리 규칙]
+- 일반전: 패배 후 Race에 따른 확률적 후속 인카운터 가능
+- 후속 인카운터가 사망이면 부활의 물약 선택 가능(보유 시)
+- 부활 물약은 전투 중 부활이 아니며, 전투 결과는 DEFEAT로 유지
+- 부활 후 HP 35%, 정신력 최소 25%, 게임 시간 +60분
+- 엘리트/보스/지역보스 포함 전투는 패배 후 전투 건너뛰기와 부활 물약 사용 불가
+
+[편집 위치]
+- 몬스터: src/data/world/monsterData.ts
+- 전리품/EXP/장비 드랍: src/data/world/monsterLootSystem.ts
+- 재료/부활 물약: src/data/world/monsterLootItems.ts
+- 지역/섹터 인카운터: src/data/world/sectorEncounters.ts
+- 패배 후 인카운터: src/data/world/defeatEncounterSystem.ts
+- 전투 보상 계산: src/combat/battleEngine.ts
+- 결산 표시/패배·부활 흐름: src/App.tsx
+- 패배 UI: src/components/DefeatEncounterModal.tsx, src/components/GameOverModal.tsx

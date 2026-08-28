@@ -1,0 +1,20 @@
+판타지악 전투 전면 개편 검증 결과
+================================
+
+- CTB current actor: PASS
+- 12-entry timeline: PASS
+- manual action = exactly 1 CTB action: PASS
+- actionDelay preview ordering: PASS
+- item action = exactly 1 CTB action: PASS
+- item consumption result: PASS
+- self-heal item effect: PASS
+- faster AI boss can act first: PASS
+- automatic AI action plan: PASS
+- automatic action = exactly 1 CTB action: PASS
+- active skill presentation coverage: 40 / 40
+- runtime assertions: 132 / 132 PASS
+- src TS/TSX syntax errors: 0
+- core combat TypeScript check: PASS
+- CombatScreen TypeScript check with external UI stubs: PASS
+
+Note: npm dependencies could not be installed in the execution environment, so a real Vite production build was not run here.

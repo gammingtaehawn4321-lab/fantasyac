@@ -1,0 +1,24 @@
+판타지악 v2.0.5 심화 전직 확장 검증
+
+[PASS] 핵심 runtime TypeScript 컴파일 (tsconfig.life-travel.json)
+[PASS] 전체 TypeScript 검사에서 외부 패키지 미설치 관련 오류를 제외한 프로젝트 내부 타입 오류 0
+[PASS] 전사 심화 목록에서 마법검사 제거
+[PASS] 마법사 심화 목록에 마법검사 이동
+[PASS] 도적 심화에 씨프 추가
+[PASS] 성직자 심화에 홀리나이트 추가
+[PASS] 무희 심화에 변기 추가
+[PASS] 씨프 전직 시 전용 스킬 3종 지급 및 전투 Actor 등록
+[PASS] 마법검사 전직 시 전용 스킬 3종 지급 및 전투 Actor 등록
+[PASS] 홀리나이트 전직 시 전용 스킬 3종 지급 및 전투 Actor 등록
+[PASS] 변기 전직 시 전용 스킬 3종 지급 및 전투 Actor 등록
+[PASS] 심화 전직 statBonuses 실제 전투 반영
+[PASS] 심화 전직 고유 패시브 stat/trait 실제 전투 반영
+[PASS] 씨프 약탈 표식 실제 VULNERABLE/명중 감소 적용
+[PASS] 마법검사 마력검 피해/자가 강화/방벽 적용
+[PASS] 홀리나이트 성광의 심판 도발 확정 적용
+[PASS] 홀리나이트 수호 성역 광역 보호막 적용
+[PASS] 변기 지원 집중이 실제 동료에게만 적용
+[PASS] 변기 지원 과부하가 플레이어를 제외하고 동료 전체에만 적용
+[PASS] 변기 전력 지원 초강화 및 사용자 페널티 적용
+[PASS] COMPANION 타깃 UI/전투 타깃 해석 연결
+[PASS] 변기 직업/스킬 설명 및 연출용 본문 공란 유지

@@ -1,0 +1,36 @@
+FANTASYAC CTB / COST / ELEMENT COMBAT PATCH VALIDATION
+=======================================================
+
+Core combat/data TypeScript semantic compile: PASS
+Full src TS/TSX syntax transpile check (--noCheck): PASS
+
+CTB frequency (speed 120 : 60 => 8 : 4 in 12 predicted actions): PASS
+Action Delay predicted-time preview: PASS
+Stable tie-break determinism: PASS
+Battle init -> AI drive -> player input stop: PASS
+
+Battle start COST = 10: PASS
+Own-turn start COST +5: PASS
+Skill COST consumption: PASS
+Legacy MP not consumed by normal skill COST: PASS
+Cooldown register + own-turn decrement: PASS
+
+DoT/regen own-turn-start timing: PASS
+Buff/debuff own-turn-end duration timing: PASS
+Self-buff immediate-duration-loss prevention: PASS
+
+Element resistance / weakness calculation path: PASS
+Elemental penetration calculation path: PASS
+Element damage bonus calculation path: PASS
+Equipment -> element resistance/damage bonus pipeline: PASS
+Physical / magic penetration separation: PASS
+
+Critical chance final-damage path: PASS
+Critical damage multiplier final-damage path: PASS
+Equipment critical chance/damage integration: PASS
+
+Active skills smoke tested: 40/40 PASS
+Non-damage skill self-damage regression: 0
+
+NOTE:
+A full Vite production build was not executed because this extracted working copy has no installed node_modules and dependency installation was unavailable in the validation environment. Core patched modules were semantically compiled with TypeScript 5.8.3, and the complete src tree passed a TypeScript/TSX syntax transpile check.

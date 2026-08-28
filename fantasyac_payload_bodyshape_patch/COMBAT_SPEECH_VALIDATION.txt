@@ -1,0 +1,7 @@
+PASS 22/22
+events=23
+set_refs=24 (normal=20, dancer_blank=4)
+female_high_desire_blank=true
+dancer_adult_blank=true
+dancer_set_refs_blank=true
+core_typecheck=PASS

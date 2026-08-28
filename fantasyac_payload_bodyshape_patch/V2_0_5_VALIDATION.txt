@@ -1,0 +1,24 @@
+판타지악 v2.0.5 검증 결과
+
+[고유 퀘스트]
+- CHARACTER_QUEST_COUNT_V205 = 31: PASS
+- 비악랄 신규 인물 31명 customQuestIds 1개씩: PASS
+- villainous 신규 인물 14명 customQuestIds 빈 배열 유지: PASS
+- 모든 신규 customQuestId가 QUEST_DATABASE에서 해석됨: PASS
+- 신규 채집 목표 itemId가 LIFE_MATERIAL_META에 존재: PASS
+- 루시아 퀘스트 제안 -> 수락 -> 역참 2회 -> 보고 -> 완료 런타임: PASS
+- 기존 user_encounter_slot_01~05 enabled=false 유지: PASS
+
+[버그 수정]
+- 동료 4명 활성 상태에서 5번째 활성화 방지: PASS
+- 활성 동료 해제 가능: PASS
+- 비행정 연료 MAX 상태에서 연료 아이템 미소모: PASS
+- 역참 인카운터 ENCOUNTER_STARTED -> ACTIVE: PASS
+- ENCOUNTER_RESOLVED -> activeEncounterId 해제 및 RESOLVED: PASS
+
+[컴파일/문법]
+- tsc -p tsconfig.life-runtime.json: PASS
+- src/App.tsx TypeScript transpile syntax: PASS
+- src/components/CompanionsTab.tsx TypeScript transpile syntax: PASS
+- server.ts TypeScript transpile syntax: PASS
+- 전체 npm 의존성 기반 Vite build는 압축본에 node_modules가 없어 이 환경에서 미실행.

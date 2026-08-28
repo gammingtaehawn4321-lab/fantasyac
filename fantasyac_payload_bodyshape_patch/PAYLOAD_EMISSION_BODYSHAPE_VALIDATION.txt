@@ -1,0 +1,55 @@
+판타지악 내용물/몬스터 배출량/체형 패치 검증
+
+[구조]
+- 현재 RegionalMonsterDefinition: 120종
+- MONSTER_PAYLOAD_AMOUNT_BY_MONSTER: 120종
+- 누락: 0
+- 추가 오염 ID: 0
+- 모든 몬스터 초기 A/B/C 개별값: 'basic'
+
+[상속]
+- HUMANOID SMALL: 5
+- HUMANOID MEDIUM: 7
+- HUMANOID LARGE: 10
+- ABERRANT 현재 사용 세부분류 기본값 누락: 0
+- 개별 숫자 override -> 숫자 우선 확인
+- 다시 'basic' -> 상위 기본값 복귀 확인
+
+[런타임 표본]
+- grandia_road_bandit / A / basic -> 7
+- scroze_birdkin_outlaw / A / basic -> 7
+- grandia_grass_wolf / A / basic -> 8
+- grandia_stoneborer / B / basic -> 8
+- grandia_sewer_slime / C / basic -> 8
+- santimac_mine_golem / A / basic -> 0
+- grandia_road_bandit A를 9로 임시 override -> 9
+- 다시 basic -> 7
+
+[삽화 슬롯]
+- COMPARTMENT_1: 15
+- COMPARTMENT_2: 15
+- 총합: 30
+- 중복 내부 슬롯 ID: 0
+- UI 내부 슬롯 ID 노출: 없음
+- 실제 imageSrc: 전부 공란 유지
+
+[USER_TODO]
+- 내용물 A/B/C displayName: 3/3 공란
+- 내용물 A/B/C amountLabel: 3/3 공란
+- 내용물 A/B/C unit: 3/3 공란
+- 내용물 A/B/C geminiReference: 3/3 공란
+- 가슴 Gemini 참조: 3/3 공란
+- 엉덩이 Gemini 참조: 3/3 공란
+- 공란 reference는 Gemini 프롬프트에서 제외
+
+[출처]
+- 사건 ID UI 표시: 없음
+- sourceId/sourceSpeciesId UI 직접 표시: 없음
+- 고유 인물: sourceName 우선
+- 일반 몬스터: 세부종 한국어 이름 우선
+- 같은 세부종: UI 합산 / 동일 payloadFamilyKey 계열
+
+[컴파일]
+- core data + gameEngine TypeScript: PASS
+- CharacterCreationModal + InternalStatusModal TSX (external module stubs): PASS
+- server.ts (external module stubs): PASS

@@ -1,0 +1,42 @@
+판타지악 v2.0.5 용족 시스템 검증
+=================================
+
+Core TypeScript compilation: PASS
+Runtime assertions: 23 / 23 PASS
+
+[종족]
+- DRAGONKIN UI 표기 = 용족: PASS
+- 시작 가능 지역 6/6: PASS
+- 선택 지역의 기존 운명 사용 가능: PASS
+- 신규 캐릭터 종족 스킬 2종 지급: PASS
+- dragonkinState 기본값 {hunterThreat:10,hunterEncounterCount:0}: PASS
+
+[전직]
+- 일반 직업 선택 차단: PASS
+- 비용족의 용제 선택 차단: PASS (정적 규칙 포함)
+- 용제 선택 성공: PASS
+- 용제 전용 스킬 3종 지급: PASS
+- 용제 심화 전직 없음: PASS
+
+[사냥꾼 시스템]
+- 전용 인카운터 7종: PASS
+- 전용 적 10종: PASS
+- 일반 지역 몬스터 풀에서 DRAGONKIN_ONLY 제외: PASS
+- 비용족 전용 여행 판정 미발생: PASS
+- 사냥 이벤트 누적/위협도 증가: PASS
+- 지역별 전용 적 풀: PASS
+  * 그란디아: 용흔 추적사 / 용혈 공명견
+  * 세이레: 용각 채취자
+  * 포레진: 용맥 봉인술사 / 용맥 억제기
+  * 산티맥: 봉인망 포획꾼 / 용족 포획 골렘
+  * 프로스티: 쇄룡 기사
+  * 스크로제: 쇄룡 발리스타 / 비늘 공명 드론
+
+[서사 참조]
+- 기본 세계관 참조 존재: PASS
+- 7개 전용 인카운터 참조 존재: PASS
+- USER_TODO 3종 기본 공란: PASS
+- USER_TODO 공란 상태 Gemini 참조 제외: PASS
+
+사용자 편집 위치:
+src/data/dragonkin/dragonkinNarrativeReferences.ts

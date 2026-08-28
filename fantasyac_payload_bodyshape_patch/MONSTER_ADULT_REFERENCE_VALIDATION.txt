@@ -1,0 +1,17 @@
+판타지악 몬스터 성인 참조/빈 인카운터 패치 검증
+
+- 몬스터 개별 참조 슬롯: 95/95
+- 세부분류 참조 슬롯: 20/20
+- 상위 Race 참조 슬롯: 2/2
+- 사용자 작성용 빈 인카운터: 5/5
+- 초기 몬스터 참조 내용: 전부 빈 문자열
+- 폴백 우선순위: MONSTER > SUBTYPE > CATEGORY > NONE
+- 신체 나이 18세 미만: server.ts에서 성인 참조 전체 차단
+- 직전 전투 몬스터 문맥: dialogueCount 기준 4로그 유지
+- 텍스트 내 몬스터 이름/ID 감지: 연결됨
+- 빈 인카운터 초기 상태: enabled=false
+- 인카운터 sceneReference: activeEncounterId를 통해 Gemini 내부 참고자료로 연결
+- 인카운터 rewards: ENCOUNTER_RESOLVED 시 grantQuestRewards로 자동 지급
+- 핵심 TypeScript subset compile: PASS
+- 폴백 런타임 단언: 9/9 PASS
+- 전체 tsc: 내부 구문/타입 추가 오류 없음; node_modules 미설치에 따른 외부 모듈 탐색 오류만 존재

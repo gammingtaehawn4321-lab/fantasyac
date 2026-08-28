@@ -1,0 +1,6 @@
+{
+  "name": "판타지악",
+  "description": "Gemini AI가 게임 마스터(GM)가 되어 스토리를 이끌어가는 정통 다크 판타지 텍스트 RPG 웹앱",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,65 @@
+FANTASYAC WORLD MAP VISUAL PATCH VALIDATION
+===========================================
+
+RESULT: PASS
+
+Map size
+- Previous Hex count: 1,655
+- Current Hex count: 2,483
+- Ratio: 1.5003x
+- SURFACE: 875
+- SKY: 875
+- CELESTIAL: 475
+- UNDERWATER: 153
+- DEEP_SEA: 105
+- UNDERGROUND: 0 (IN_DEVELOPMENT)
+
+Major city footprints
+- THE_PELLESS: 19 Hex
+- SKY_CITY: 19 Hex
+- AQUARIA: 19 Hex
+- REMUSIAN: 19 Hex
+- DESERT_ALTO: 19 Hex
+- ABELLA: 19 Hex dynamic footprint
+
+Village footprints
+- All configured villages/settlements: 7 Hex each (minimum requested: 3)
+
+Future underground hooks / map features
+- MINE: 5
+- CANYON: 4
+- SINKHOLE: 5
+- DUNGEON_RESERVED: 7
+- RESOURCE: 2
+- ENEMY_OUTPOST: 2
+- Tiles with undergroundHookId: 21
+
+Connectivity
+- SURFACE layer graph: connected
+- SKY layer graph: connected
+- CELESTIAL layer graph: connected
+- UNDERWATER layer graph: connected
+- DEEP_SEA layer graph: connected
+- Major surface settlement route test: PASS
+- Prosti summit <-> SKY vertical link: present
+- Surface/underwater/deep sea vertical links: present
+- SKY <-> CELESTIAL vertical links: present
+
+Encounter isolation
+- Sector encounter profiles: 30
+- Every static tile sectorId has a matching profile: PASS
+- Unique encounterKey count: 2,483 / 2,483
+- Cross-sector event sample test: PASS
+- Dynamic Abella sector override: PASS
+
+Rules
+- Human/non-elf blocked from Desert Alto city footprint without access flag: PASS
+- Elf allowed into Desert Alto: PASS
+- UNDERGROUND has zero tiles and remains locked: PASS
+
+Visual implementation
+- No generated raster map/image assets used.
+- Terrain/structures/features rendered as inline SVG vector art.
+- Roads and river connections rendered across neighboring Hex edges.
+- Full TS core compilation (types + monster + sector + world map): PASS
+- Whole-project TypeScript check: only expected missing external dependencies (react/lucide/vite/express/@google/genai/node types) in this environment; no additional map-patch type errors observed.

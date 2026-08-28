@@ -1,0 +1,16 @@
+{
+  "checks": 1220,
+  "monsterCount": 95,
+  "totalHex": 2852,
+  "undergroundHex": 369,
+  "byRegion": {
+    "GRANDIA": 87,
+    "FOREZIN": 78,
+    "SEIRE": 57,
+    "SANTIMAC": 81,
+    "PROSTI": 66
+  },
+  "entrances": 19,
+  "profiles": 15,
+  "deepHooks": 5
+}

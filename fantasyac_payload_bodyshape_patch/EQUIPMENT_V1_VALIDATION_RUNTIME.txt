@@ -1,0 +1,7 @@
+Assertions passed: 442
+Equipment: 400 total / 150 new in v1.0 expansion
+Sets: 24 sets, all 5-piece with cumulative 2/3/4 traits
+Hidden pair synergies: 12
+Skill enhancers: 40; legendary weapons with active special effect: 30/30
+Accuracy/evasion: independent accuracy contribution + EVADE/MISS distinction validated
+No image assets generated.
